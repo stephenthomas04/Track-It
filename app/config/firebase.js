@@ -1,4 +1,4 @@
-import Environment from "../config/environment";
+import Environment from "./enviroment";
 import * as firebase from "firebase";
 firebase.initializeApp({
   apiKey: Environment["FIREBASE_API_KEY"],
@@ -6,7 +6,6 @@ firebase.initializeApp({
   databaseURL: Environment["FIREBASE_DATABASE_URL"],
   projectId: Environment["FIREBASE_PROJECT_ID"],
   storageBucket: Environment["FIREBASE_STORAGE_BUCKET"],
-  messagingSenderId: Environment["FIREBASE_MESSAGING_SENDER_ID"]
+  messagingSenderId: Environment["FIREBASE_MESSAGING_SENDER_ID"],
 });
 export default firebase;
-
