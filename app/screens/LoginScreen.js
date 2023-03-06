@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
+import colors from '../config/colors';
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -13,6 +14,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
+;
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -84,11 +87,12 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "white",
+    backgroundColor: colors.primaryGreen,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
+    borderRadius: 20,
+    marginTop: 15,
+    height:50,
   },
   buttonContainer: {
     width: "60%",
@@ -97,16 +101,18 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: colors.primaryDarkGreen,
     width: "100%",
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 20,
+    borderColor: colors.secondaryGreen,
+    borderWidth: 2,
     alignItems: "center",
   },
   buttonOutline: {
     backgroundColor: "white",
     marginTop: 5,
-    borderColor: "#0782F9",
+    borderColor: colors.primaryDarkGreen,
     borderWidth: 2,
   },
   buttonText: {
@@ -115,7 +121,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "#0782F9",
+    color: colors.primaryDarkGreen,
     fontWeight: "700",
     fontSize: 16,
   },
