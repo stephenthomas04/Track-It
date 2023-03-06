@@ -4,7 +4,7 @@
     "slug": "Track-It",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/icon.png",
+    "icon": "./app/assets/trackIt.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./app/assets/splash.png",
