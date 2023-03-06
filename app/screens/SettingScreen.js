@@ -15,7 +15,7 @@ const SettingScreen = () => {
           <Text style={styles.title}>Settings</Text>
           <View style={styles.container2}>
             <Switch style= {styles.switchStyle}
-            trackColor={{false: '#767577', true: '#81b0ff'}}
+            trackColor={{false: colors.primarySwitchOff, true: colors.primaryGreen}}
             thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}

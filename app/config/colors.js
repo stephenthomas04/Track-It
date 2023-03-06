@@ -10,7 +10,7 @@ export default {
       secondaryDarkGreen: "#A0CFB5",
      
     
-    
+      primarySwitchOff: "#797979",
     //Text Colors
       
       blackTextColor: "#1E1E1lE",
