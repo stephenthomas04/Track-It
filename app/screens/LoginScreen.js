@@ -57,6 +57,10 @@ const LoginScreen = () => {
     
 
       <View style={styles.inputContainer}>
+        <Image
+          style={styles.imageStyles}
+          source={require('../assets/trackIt.jpg')}
+        />
         <TextInput
           placeholder="Email"
           value={email}
@@ -138,5 +142,10 @@ const styles = StyleSheet.create({
     color: colors.primaryDarkGreen,
     fontWeight: "700",
     fontSize: 16,
+  },
+  imageStyles:{
+    width: "10%",
+    height: "10%",
+    justifyContent: "center",
   },
 });

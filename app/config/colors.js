@@ -4,6 +4,7 @@ export default {
     
       primaryGreen: "#AFF4C6",
       primaryDarkGreen: "#14AE5C",
+      primaryButtonGreen: "#83B494",
       
       
       secondaryGreen: "#83B494",
