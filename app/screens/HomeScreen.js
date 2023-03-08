@@ -1,11 +1,13 @@
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { getAuth } from "firebase/auth";
 import { auth, firebase } from "../firebase";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const user = firebase.auth().currentUser;
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   const handleSignOut = () => {
     auth

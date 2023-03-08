@@ -53,10 +53,6 @@ const LoginScreen = () => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.inputContainer}>
-        <Image
-          style={styles.imageStyles}
-          source={require("../assets/trackIt.jpg")}
-        />
         <TextInput
           placeholder="Email"
           value={email}
