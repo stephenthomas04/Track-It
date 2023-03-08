@@ -3,7 +3,6 @@ import colors from "../config/colors";
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -15,7 +14,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { StyleSheet } from '../config/styles';
+import { StyleSheet } from "../config/styles";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
