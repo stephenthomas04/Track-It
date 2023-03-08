@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import colors from '../config/colors';
+import colors from "../config/colors";
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -15,8 +15,6 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-;
-
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,14 +23,14 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigation.replace("Home")
+        navigation.replace("Home");
       }
-    })
+    });
 
-    return unsubscribe
-  }, [])
+    return unsubscribe;
+  }, []);
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -54,12 +52,10 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-    
-
       <View style={styles.inputContainer}>
         <Image
           style={styles.imageStyles}
-          source={require('../assets/trackIt.jpg')}
+          source={require("../assets/trackIt.jpg")}
         />
         <TextInput
           placeholder="Email"
@@ -96,7 +92,7 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:colors.primaryGreen,
+    backgroundColor: colors.primaryGreen,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -110,7 +106,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 20,
     marginTop: 15,
-    height:50,
+    height: 50,
   },
   buttonContainer: {
     width: "60%",
@@ -143,7 +139,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
-  imageStyles:{
+  imageStyles: {
     width: "10%",
     height: "10%",
     justifyContent: "center",
