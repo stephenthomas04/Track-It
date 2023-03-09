@@ -14,7 +14,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { StyleSheet } from "../config/styles";
+import { globalStyle } from "../config/globalStyle";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -52,32 +52,32 @@ const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={StyleSheet.container} behavior="padding">
-      <View style={StyleSheet.inputContainer}>
+    <KeyboardAvoidingView style={Styles.container} behavior="padding">
+      <View style={globalStyle.inputContainer}>
         <TextInput
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
-          style={StyleSheet.input}
+          style={globalStyle.input}
         />
         <TextInput
           placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
-          style={StyleSheet.input}
+          style={globalStyle.input}
           secureTextEntry
         />
       </View>
 
-      <View style={StyleSheet.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={StyleSheet.button}>
-          <Text style={StyleSheet.buttonText}>Login</Text>
+      <View style={globalStyle.buttonContainer}>
+        <TouchableOpacity onPress={handleLogin} style={globalStyle.button}>
+          <Text style={globalStyle.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={handleSignUp}
-          style={[StyleSheet.button, StyleSheet.buttonOutline]}
+          style={[globalStyle.button, globalStyle.buttonOutline]}
         >
-          <Text style={StyleSheet.buttonOutlineText}>Register</Text>
+          <Text style={globalStyle.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
