@@ -21,10 +21,24 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={globalStyle.container}>
+    <View style={[globalStyle.container,
+      {
+        flexDirection: "column",
+        height:"30%",
+
+      },
+    ]}>
+      <View style={globalStyle.subContainer}>
+        <Text style={globalStyle.title}>Welcome back, "Name"</Text>
+      </View>
       {/* <Text>Email: {user.email}</Text> */}
-      <Text>Welcome to Track-It!</Text>
-      <TouchableOpacity onPress={handleSignOut} style={globalStyle.button}>
+      
+
+      <TouchableOpacity onPress={handleSignOut} style={[globalStyle.button,
+      {
+          marginTop: "5%",
+      },
+    ]}>
         <Text style={globalStyle.buttonText}>Sign out</Text>
       </TouchableOpacity>
     </View>

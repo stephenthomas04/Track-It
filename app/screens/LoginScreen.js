@@ -52,7 +52,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={Styles.container} behavior="padding">
+    <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
       <View style={globalStyle.inputContainer}>
         <TextInput
           placeholder="Email"
