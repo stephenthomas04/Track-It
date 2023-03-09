@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import StyleSheet from '../config/styles';
+import globalStyle from "../config/globalStyle";
 
-const HomeScreen = () => {
+const RecentDataScreen = () => {
   const navigation = useNavigation();
 
   const handleSignOut = () => {
@@ -16,17 +16,17 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyle.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity
         onPress={handleSignOut}
-        style={StyleSheet.button}
+        style={globalStyle.button}
       >
-        <Text style={styles.buttonText}>Sign out</Text>
+        <Text style={globalStyle.buttonText}>Sign out</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default HomeScreen;
+export default RecentDataScreen;
 

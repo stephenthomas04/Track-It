@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import colors from "../config/colors"
-import styles from '../config/styles';
+import globalStyle from '../config/globalStyle';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-    <Text style = {styles.title}>Sign Up Screen</Text>
+    <View style={globalStyle.container}>
+    <Text style = {globalStyle.title}>Sign Up Screen</Text>
       <Text>Email:</Text>
       <TouchableOpacity
         onPress={console.log}
-        style={styles.button}
+        style={globalStyle.button}
       >
-        <Text style={styles.buttonText}>Sign Up</Text>
+        <Text style={globalStyle.buttonText}>Sign Up</Text>
       </TouchableOpacity>
     </View>
   );
