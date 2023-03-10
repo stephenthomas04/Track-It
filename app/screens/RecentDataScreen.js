@@ -6,15 +6,6 @@ import globalStyle from "../config/globalStyle";
 const RecentDataScreen = () => {
   const navigation = useNavigation();
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigation.replace("Login");
-      })
-      .catch((error) => alert(error.message));
-  };
-
   return (
     <View style={globalStyle.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
