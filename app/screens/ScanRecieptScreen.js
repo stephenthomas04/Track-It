@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import globalStyle from "../config/globalStyle";
 
-const HomeScreen = () => {
+const ScanRecieptScreen = () => {
   const navigation = useNavigation();
 
   const handleSignOut = () => {
@@ -28,4 +28,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default ScanRecieptScreen;

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet,Alert, Text, TouchableOpacity, View } from "react-native";
 import { getAuth } from "firebase/auth";
 import { auth, firebase } from "../firebase";
 
@@ -24,19 +24,28 @@ const HomeScreen = () => {
     <View style={[globalStyle.container,
       {
         flexDirection: "column",
-        height:"30%",
+        
 
       },
     ]}>
-      <View style={globalStyle.subContainer}>
-        <Text style={globalStyle.title}>Welcome back, "Name"</Text>
-      </View>
+      
+        <Text style={[globalStyle.title,
+        {
+          marginTop:"5%",
+
+
+        }]}>Welcome back</Text>
+
+        <Text style={globalStyle.subHeading}>
+          Here's how your financials are shaping up
+        </Text>
+      
       {/* <Text>Email: {user.email}</Text> */}
       
 
       <TouchableOpacity onPress={handleSignOut} style={[globalStyle.button,
       {
-          marginTop: "5%",
+          marginTop: "125%",
       },
     ]}>
         <Text style={globalStyle.buttonText}>Sign out</Text>

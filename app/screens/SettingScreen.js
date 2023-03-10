@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, {useState} from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { auth } from "../firebase";
 import colors from "../config/colors";
 import globalStyle from "../config/globalStyle";
 

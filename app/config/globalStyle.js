@@ -4,12 +4,6 @@ import { StyleSheet } from 'react-native';
 
 const globalStyle=StyleSheet.create({
   container: {
-    flex: 0.5,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  subContainer: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -20,8 +14,14 @@ const globalStyle=StyleSheet.create({
   },
   title: {
     color: colors.darkGreenTextColor,
-    padding: 15, 
-    fontSize: 24,
+    padding: 10, 
+    fontSize: 28,
+    marginBottom: 10,
+  },
+  subHeading: {
+    colors: colors.greenTextColor,
+    padding: 5,
+    fontSize: 18, 
   },
   inputContainer: {
     width: "80%",

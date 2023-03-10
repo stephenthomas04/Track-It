@@ -7,18 +7,10 @@ import globalStyle from "../config/globalStyle";
 const AllRecieptScreen = () => {
   const navigation = useNavigation();
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigation.replace("Login");
-      })
-      .catch((error) => alert(error.message));
-  };
-
   return (
     <View style={globalStyle.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
+      
       <TouchableOpacity
         onPress={handleSignOut}
         style={globalStyle.button}
