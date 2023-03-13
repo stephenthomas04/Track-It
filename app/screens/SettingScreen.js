@@ -1,4 +1,5 @@
-import { useNavigation } from "@react-navigation/core";
+
+import { useNavigation } from "@react-navigation/core"
 import React, {useState} from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import colors from "../config/colors";
