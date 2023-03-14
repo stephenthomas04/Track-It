@@ -3,6 +3,7 @@ import colors from "../config/colors";
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -13,8 +14,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
-import { globalStyle } from "../config/globalStyle";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -52,32 +51,32 @@ const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
-      <View style={globalStyle.inputContainer}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
-          style={globalStyle.input}
+          style={styles.input}
         />
         <TextInput
           placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
-          style={globalStyle.input}
+          style={styles.input}
           secureTextEntry
         />
       </View>
 
-      <View style={globalStyle.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={globalStyle.button}>
-          <Text style={globalStyle.buttonText}>Login</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={handleLogin} style={styles.button}>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={handleSignUp}
-          style={[globalStyle.button, globalStyle.buttonOutline]}
+          style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={globalStyle.buttonOutlineText}>Register</Text>
+          <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -85,3 +84,60 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.primaryGreen,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  inputContainer: {
+    width: "80%",
+  },
+  input: {
+    backgroundColor: colors.greyTextColor,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 20,
+    marginTop: 15,
+    height: 50,
+  },
+  buttonContainer: {
+    width: "60%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 40,
+  },
+  button: {
+    backgroundColor: colors.primaryDarkGreen,
+    width: "100%",
+    padding: 15,
+    borderRadius: 20,
+    borderColor: colors.secondaryGreen,
+    borderWidth: 2,
+    alignItems: "center",
+  },
+  buttonOutline: {
+    backgroundColor: "white",
+    marginTop: 5,
+    borderColor: colors.primaryDarkGreen,
+    borderWidth: 2,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  buttonOutlineText: {
+    color: colors.primaryDarkGreen,
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  imageStyles: {
+    width: "10%",
+    height: "10%",
+    justifyContent: "center",
+  },
+});

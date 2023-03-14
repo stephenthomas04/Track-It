@@ -21,34 +21,11 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={[globalStyle.container,
-      {
-        flexDirection: "column",
-        
-
-      },
-    ]}>
-      
-        <Text style={[globalStyle.title,
-        {
-          marginTop:"5%",
-
-
-        }]}>Welcome back</Text>
-
-        <Text style={globalStyle.subHeading}>
-          Here's how your financials are shaping up
-        </Text>
-      
-      {/* <Text>Email: {user.email}</Text> */}
-      
-
-      <TouchableOpacity onPress={handleSignOut} style={[globalStyle.button,
-      {
-          marginTop: "125%",
-      },
-    ]}>
-        <Text style={globalStyle.buttonText}>Sign out</Text>
+    <View style={styles.container}>
+      <Text>Email: {user.email}</Text>
+      <Text>Welcome to Track-It!</Text>
+      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
+        <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
     </View>
   );
