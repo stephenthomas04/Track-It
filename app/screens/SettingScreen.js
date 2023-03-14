@@ -14,7 +14,7 @@ const SettingScreen = () => {
       <View style={globalStyle.container}>
         <View style={globalStyle.container}>
           <Text style={globalStyle.title}>Settings</Text>
-          <View style={globalStyle.container2}>
+          <View style={globalStyle.container}>
             <Switch style= {globalStyle.switchStyle}
             trackColor={{false: colors.primarySwitchOff, true: colors.primaryGreen}}
             thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}

@@ -4,6 +4,8 @@ import { StyleSheet } from 'react-native';
 
 const globalStyle=StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: colors.backgroundColor,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -24,7 +26,7 @@ const globalStyle=StyleSheet.create({
     fontSize: 18, 
   },
   inputContainer: {
-    width: "80%",
+    width: "75%",
   },
   input: {
     backgroundColor: colors.greyTextColor,

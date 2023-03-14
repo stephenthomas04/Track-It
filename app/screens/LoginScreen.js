@@ -15,6 +15,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
+import globalStyle from "../config/globalStyle";
+
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,8 +53,8 @@ const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <View style={styles.inputContainer}>
+    <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
+      <View style={globalStyle.inputContainer}>
         <TextInput
           placeholder="Email"
           value={email}
@@ -86,16 +88,6 @@ const LoginScreen = () => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.primaryGreen,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  inputContainer: {
-    width: "80%",
-  },
   input: {
     backgroundColor: colors.greyTextColor,
     paddingHorizontal: 15,
