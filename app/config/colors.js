@@ -6,6 +6,7 @@ export default {
       primaryDarkGreen: "#14AE5C",
       primaryButtonGreen: "#83B494",
       
+      //Secondaries
       
       secondaryGreen: "#83B494",
       secondaryDarkGreen: "#A0CFB5",
@@ -19,4 +20,8 @@ export default {
       greenTextColor: "#14AE5C",
       darkGreenTextColor: "#0E733D",
       
+    //Background Colors
+
+    whiteBackgroundColor: "#FFFF",
+
     };

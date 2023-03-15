@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Image,
 } from "react-native";
 import {
   getAuth,
@@ -54,31 +55,39 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
+        <Image 
+        style={globalStyle.imageStyles}
+        source={require("../assets/trackIt.png")
+        }
+        />
+          
+        
+
       <View style={globalStyle.inputContainer}>
         <TextInput
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
-          style={styles.input}
+          style={globalStyle.input}
         />
         <TextInput
           placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
-          style={styles.input}
+          style={globalStyle.input}
           secureTextEntry
         />
       </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+      <View style={globalStyle.buttonContainer}>
+        <TouchableOpacity onPress={handleLogin} style={globalStyle.button}>
+          <Text style={globalStyle.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
+          style={[globalStyle.button, globalStyle.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+          <Text style={globalStyle.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -87,49 +96,3 @@ const LoginScreen = () => {
 
 export default LoginScreen;
 
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: colors.greyTextColor,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 20,
-    marginTop: 15,
-    height: 50,
-  },
-  buttonContainer: {
-    width: "60%",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 40,
-  },
-  button: {
-    backgroundColor: colors.primaryDarkGreen,
-    width: "100%",
-    padding: 15,
-    borderRadius: 20,
-    borderColor: colors.secondaryGreen,
-    borderWidth: 2,
-    alignItems: "center",
-  },
-  buttonOutline: {
-    backgroundColor: "white",
-    marginTop: 5,
-    borderColor: colors.primaryDarkGreen,
-    borderWidth: 2,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "700",
-    fontSize: 16,
-  },
-  buttonOutlineText: {
-    color: colors.primaryDarkGreen,
-    fontWeight: "700",
-    fontSize: 16,
-  },
-  imageStyles: {
-    width: "10%",
-    height: "10%",
-    justifyContent: "center",
-  },
-});

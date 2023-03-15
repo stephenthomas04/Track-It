@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 const globalStyle=StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.backgroundColor,
+    backgroundColor: colors.whiteBackgroundColor,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -27,6 +27,7 @@ const globalStyle=StyleSheet.create({
   },
   inputContainer: {
     width: "75%",
+    backgroundColor: colors.whiteBackgroundColor,
   },
   input: {
     backgroundColor: colors.greyTextColor,
@@ -44,7 +45,7 @@ const globalStyle=StyleSheet.create({
   },
   button: {
     backgroundColor: colors.primaryDarkGreen,
-    width: "60%",
+    width: "100%",
     padding: 15,
     borderRadius: 20,
     borderColor: colors.secondaryGreen,
@@ -68,9 +69,11 @@ const globalStyle=StyleSheet.create({
     fontSize: 16,
   },
   imageStyles:{
-    width: "10%",
-    height: "10%",
+    width: "30%",
+    height: "30%",
     justifyContent: "center",
+    marginBottom: "5%",
+    
   },
 
 
