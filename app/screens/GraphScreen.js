@@ -1,7 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import globalStyle from "../config/globalStyle";
+import { StyleSheet, Text, View , Dimensions} from "react-native";
 
+
+import globalStyle from "../config/globalStyle";
+import colors from "../config/colors";
 import {LineChart,
     BarChart, 
     PieChart, 
@@ -10,10 +12,10 @@ import {LineChart,
     StackedBarChart} from "react-native-chart-kit";
 
 
-export default function App(){
+  const GraphScreen = () => {
     return(
         <View style={globalStyle.container}>
-            <Text></Text>
+            <Text style={globalStyle.subHeading}>Spending over the last 6 months</Text>
             <StatusBar style="auto"/>
             <LineChart
     data={{
@@ -21,9 +23,9 @@ export default function App(){
       datasets: [
         {
           data: [
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
+            Math.random() * 10,   //REPLACE THIS WITH ACTUAL USER DATA
+            Math.random() * 10,
+            Math.random() * 10,
             Math.random() * 100,
             Math.random() * 100,
             Math.random() * 100
@@ -37,9 +39,9 @@ export default function App(){
     yAxisSuffix="k"
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
-      backgroundColor: "#e26a00",
-      backgroundGradientFrom: "#fb8c00",
-      backgroundGradientTo: "#ffa726",
+      backgroundColor: colors.primaryGreen,
+      backgroundGradientFrom: colors.secondaryDarkGreen,
+      backgroundGradientTo: colors.secondaryGreen,
       decimalPlaces: 2, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -49,7 +51,7 @@ export default function App(){
       propsForDots: {
         r: "6",
         strokeWidth: "2",
-        stroke: "#ffa726"
+        stroke: colors.darkGreenTextColor
       }
     }}
     bezier
@@ -63,3 +65,4 @@ export default function App(){
     );
 }
   
+export default GraphScreen;
