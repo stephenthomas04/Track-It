@@ -23,7 +23,15 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const auth = getAuth();
 
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
   const navigation = useNavigation();
+
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -55,13 +63,10 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
-        <Image 
+      <Image
         style={globalStyle.imageStyles}
-        source={require("../assets/trackIt.png")
-        }
-        />
-          
-        
+        source={require("../assets/trackIt.png")}
+      />
 
       <View style={globalStyle.inputContainer}>
         <TextInput
@@ -95,4 +100,3 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
-
