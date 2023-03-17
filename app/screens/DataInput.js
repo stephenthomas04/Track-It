@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Button } from "react-native";
 
+import globalStyle from "../config/globalStyle";
+
 const DataInput = () => {
   const [storeName, setStoreName] = useState("");
   const [totalPrice, setTotalPrice] = useState("");
@@ -33,27 +35,27 @@ const DataInput = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyle.container}>
       <TextInput
-        style={styles.input}
+        style={globalStyle.input}
         onChangeText={handleInput1Change}
         value={setStoreName}
         placeholder="Store"
       />
       <TextInput
-        style={styles.input}
+        style={globalStyle.input}
         onChangeText={handleInput2Change}
         value={setTotalPrice}
         placeholder="Price"
       />
       <TextInput
-        style={styles.input}
+        style={globalStyle.input}
         onChangeText={handleInput3Change}
         value={setAddress}
         placeholder="Address"
       />
       <TextInput
-        style={styles.input}
+        style={globalStyle.input}
         onChangeText={handleInput4Change}
         value={setDate}
         placeholder="Date"

@@ -4,6 +4,7 @@ import { StyleSheet, Text, View , Dimensions} from "react-native";
 
 import globalStyle from "../config/globalStyle";
 import colors from "../config/colors";
+
 import {LineChart,
     BarChart, 
     PieChart, 

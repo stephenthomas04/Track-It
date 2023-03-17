@@ -16,9 +16,9 @@ const globalStyle=StyleSheet.create({
   },
   title: {
     color: colors.darkGreenTextColor,
-    padding: 10, 
+    padding: "5%", 
     fontSize: 28,
-    marginBottom: 10,
+    marginBottom: "5%",
   },
   subHeading: {
     colors: colors.greenTextColor,
@@ -26,22 +26,24 @@ const globalStyle=StyleSheet.create({
     fontSize: 18, 
   },
   inputContainer: {
+    padding: "5%",
     width: "75%",
     backgroundColor: colors.whiteBackgroundColor,
   },
   input: {
     backgroundColor: colors.greyTextColor,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 20,
-    marginTop: 15,
+    paddingHorizontal: "3%",
+    paddingVertical: "2%",
+    borderRadius: "20%",
+    marginTop: "7%",
     height:50,
   },
   buttonContainer: {
     width: "60%",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: "10%",
+    marginBottom: "25%"
   },
   button: {
     backgroundColor: colors.primaryDarkGreen,
