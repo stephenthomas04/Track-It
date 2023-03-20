@@ -11,6 +11,9 @@ import DataInput from "./app/screens/DataInput";
 import { FontAwesome } from "@expo/vector-icons";
 import SettingScreen from "./app/screens/SettingScreen";
 import SignupScreen from "./app/screens/SignupScreen";
+import colors from "./app/config/colors";
+
+
 
 
 const Stack = createNativeStackNavigator();
@@ -45,7 +48,7 @@ function RouteName() {
         headerShown: true,
 
         drawerStyle: {
-          backgroundColor: "#c6cbef",
+          backgroundColor: colors.primaryButtonGreen,
           width: 240,
         },
       }}
@@ -64,7 +67,7 @@ function RouteName() {
         component={GraphScreen}
         options={{
           drawerIcon: () => (
-            <FontAwesome name="gear" size={24} color="black" />
+            <FontAwesome name="info-circle" size={24} color="black" />
           ),
         }}
       />
@@ -82,7 +85,7 @@ function RouteName() {
         component={SettingScreen}
         options={{
           drawerIcon: () => (
-            <FontAwesome name="info-circle" size={24} color = "tomato" />
+            <FontAwesome name="gear" size={24} color = "black"/>
           ),
         }}
       />
