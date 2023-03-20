@@ -1,11 +1,15 @@
-import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Button } from "react-native";
 import { getAuth } from "firebase/auth";
 import { auth, firebase } from "../firebase";
 import globalStyle from "../config/globalStyle";
 
-const HomeScreen = () => {
+
+import { useNavigation } from "@react-navigation/native";
+import Constants from "expo-constants";
+
+function HomeScreen(){
+  
   const navigation = useNavigation();
   const auth = getAuth();
   const user = auth.currentUser;
@@ -20,6 +24,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Button title="Open Drawer" onPress={() => navigation.openDrawer()} />
       <Text>Email: {user.email}</Text>
       <Text>Welcome to Track-It!</Text>
       <TouchableOpacity onPress={handleSignOut} style={globalStyle.button}>
