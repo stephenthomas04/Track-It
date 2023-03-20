@@ -1,20 +1,96 @@
-import * as React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import colors from "../config/colors"
-import globalStyle from '../config/globalStyle';
+import { useNavigation } from "@react-navigation/core";
+import colors from "../config/colors";
+import React, { useEffect, useState } from "react";
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Image,
+  Button,
+} from "react-native";
 
-export default function App() {
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+import globalStyle from "../config/globalStyle";
+
+const SignupScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const auth = getAuth();
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  const navigation = useNavigation();
+
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigation.replace("Home");
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const handleSignUp = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log("Registered with:", user.email);
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  
+
   return (
-    <View style={globalStyle.container}>
-    <Text style = {globalStyle.title}>Sign Up Screen</Text>
-      <Text>Email:</Text>
-      <TouchableOpacity
-        onPress={console.log}
-        style={globalStyle.button}
-      >
-        <Text style={globalStyle.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+    <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
 
+      <Text>
+        REGISTER TO TRACK-IT
+
+      </Text>
+    
+      <View style={globalStyle.inputContainer}>
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          style={globalStyle.input}
+        />
+        <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          style={globalStyle.input}
+          secureTextEntry
+        />
+      </View>
+
+      <View style={globalStyle.buttonContainer}>
+        <TouchableOpacity
+          onPress={handleSignUp}
+          style={[globalStyle.button, globalStyle.buttonOutline]}
+        >
+          <Text style={globalStyle.buttonOutlineText}>Register</Text>
+  
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
+  );
+};
+
+export default SignupScreen;

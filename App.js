@@ -10,6 +10,8 @@ import GraphScreen from "./app/screens/GraphScreen";
 import DataInput from "./app/screens/DataInput";
 import { FontAwesome } from "@expo/vector-icons";
 import SettingScreen from "./app/screens/SettingScreen";
+import SignupScreen from "./app/screens/SignupScreen";
+
 
 const Stack = createNativeStackNavigator();
 
