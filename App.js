@@ -4,12 +4,12 @@ import { StyleSheet, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./app/screens/LoginScreen";
 import HomeScreen from "./app/screens/HomeScreen";
-import Settings from "./app/screens/Settings";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import GraphScreen from "./app/screens/GraphScreen";
 import DataInput from "./app/screens/DataInput";
 import { FontAwesome } from "@expo/vector-icons";
+import SettingScreen from "./app/screens/SettingScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -77,7 +77,7 @@ function RouteName() {
       />
       <Drawer.Screen
         name="Settings"
-        component={Settings}
+        component={SettingScreen}
         options={{
           drawerIcon: () => (
             <FontAwesome name="info-circle" size={24} color = "tomato" />

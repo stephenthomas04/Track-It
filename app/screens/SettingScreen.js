@@ -1,36 +1,22 @@
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
 
-import { useNavigation } from "@react-navigation/core"
-import React, {useState} from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import colors from "../config/colors";
-import globalStyle from "../config/globalStyle";
 
-const SettingScreen = () => {
-    const navigation = useNavigation();
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  //This is just a basic skeleton this is just so that I remember about swithces, and more
-    return (
-      <View style={globalStyle.container}>
-        <View style={globalStyle.container}>
-          <Text style={globalStyle.title}>Settings</Text>
-          <View style={globalStyle.container}>
-            <Switch style= {globalStyle.switchStyle}
-            trackColor={{false: colors.primarySwitchOff, true: colors.primaryGreen}}
-            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-            />
-         </View>
+export default function SettingScreen() {
+  return (
+    <View style={styles.container}>
+      <Text>Settings</Text>
+    </View>
+  );
+}
 
-        </View>
-      </View>
-    );
-    
-  };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   
-  export default SettingScreen;
-  
- 
-  
+});
+
