@@ -47,7 +47,7 @@ const globalStyle=StyleSheet.create({
   },
   button: {
     backgroundColor: colors.primaryDarkGreen,
-    width: "100%",
+    width: "60%",
     padding: 15,
     borderRadius: 20,
     borderColor: colors.secondaryGreen,
