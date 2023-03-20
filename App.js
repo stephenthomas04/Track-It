@@ -28,7 +28,7 @@ function App() {
           name="Login"
           component={LoginScreen}
         />
-        <Stack.Screen name="Home" component={RouteName} />
+        <Stack.Screen  options={{ headerShown: false }} name="Home" component={RouteName} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -37,7 +37,7 @@ function App() {
 function RouteName() {
   return (
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen options={{ headerShown: false }}  name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications" component={Settings} />
         <Drawer.Screen name="Account" component={Account} />
         <Drawer.Screen name="Information" component={Information} />
