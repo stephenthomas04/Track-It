@@ -15,7 +15,7 @@ export default {
       primarySwitchOff: "#797979",
     //Text Colors
       
-      blackTextColor: "#FFFFF",
+      blackTextColor: "#000",
       greyTextColor: "#98C9A9",
       greenTextColor: "#14AE5C",
       darkGreenTextColor: "#0E733D",

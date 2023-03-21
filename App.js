@@ -45,12 +45,10 @@ function RouteName() {
         drawerPosition: "left",
         swipeEdgeWidth: 500,
         drawerHideStatusBarOnOpen: true,
-        headerShown: true,
-        drawerActiveTintColor: colors.blackTextColor,
-        drawerActiveBackgroundColor: colors.primaryButtonGreen,
-  
-      
-
+        headerShown: true,  
+        drawerActiveTintColor: colors.greenTextColor,
+        drawerInactiveTintColor: "#ff0000",
+    
         headerStyle: {
           backgroundColor: colors.primaryButtonGreen ,
         },
