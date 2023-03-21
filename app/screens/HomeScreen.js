@@ -4,9 +4,11 @@ import { getAuth } from "firebase/auth";
 import { auth, firebase } from "../firebase";
 import globalStyle from "../config/globalStyle";
 
+import { Card } from "react-native-paper";
 
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
+import { CardAnimationContext } from "react-navigation-stack";
 
 function HomeScreen(){
   
@@ -23,10 +25,16 @@ function HomeScreen(){
   };
 
   return (
-    <View style={styles.container}>
-      <Button title="Open Drawer" onPress={() => navigation.openDrawer()} />
-      <Text>Email: {user.email}</Text>
-      <Text>Welcome to Track-It!</Text>
+    <View style={globalStyle.container}>
+      <Card style={globalStyle.container} >
+          <Card.Content>
+              <Text style={globalStyle.title}> Graph</Text>
+              
+          </Card.Content>
+          <Card.Actions>
+            
+          </Card.Actions>
+      </Card>
       <TouchableOpacity onPress={handleSignOut} style={globalStyle.button}>
         <Text style={globalStyle.buttonText}>Sign out</Text>
       </TouchableOpacity>
@@ -34,10 +42,3 @@ function HomeScreen(){
   );
 };
 export default HomeScreen;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  }
-});
