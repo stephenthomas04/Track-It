@@ -46,11 +46,21 @@ function RouteName() {
         swipeEdgeWidth: 500,
         drawerHideStatusBarOnOpen: true,
         headerShown: true,
+        drawerActiveTintColor: colors.blackTextColor,
+        drawerActiveBackgroundColor: colors.primaryButtonGreen,
+  
+      
+
+        headerStyle: {
+          backgroundColor: colors.primaryButtonGreen ,
+        },
 
         drawerStyle: {
-          backgroundColor: colors.primaryButtonGreen,
+          backgroundColor: colors.whiteBackgroundColor,
           width: 240,
         },
+
+        
       }}
     >
       <Drawer.Screen
