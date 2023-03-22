@@ -17,13 +17,15 @@ const globalStyle=StyleSheet.create({
   title: {
     color: colors.darkGreenTextColor,
     padding: "5%", 
-    fontSize: 28,
+    fontFamily: "Damascus",
+    fontSize: 40,
     marginBottom: "5%",
   },
   subHeading: {
-    colors: colors.greenTextColor,
-    padding: 5,
-    fontSize: 18, 
+    color: colors.darkGreenTextColor,
+    padding: "5%", 
+    fontSize: 28,
+    marginBottom: "5%",
   },
   inputContainer: {
     padding: "5%",
@@ -46,12 +48,12 @@ const globalStyle=StyleSheet.create({
     marginBottom: "25%"
   },
   button: {
-    backgroundColor: colors.primaryDarkGreen,
+    backgroundColor: colors.primaryButtonGreen,
     width: "60%",
     padding: 15,
     borderRadius: 20,
-    borderColor: colors.secondaryGreen,
-    borderWidth: 2,
+    borderColor: colors.primaryDarkGreen,
+    borderWidth: 1,
     alignItems: "center",
   },
   buttonOutline: {

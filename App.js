@@ -40,7 +40,7 @@ function App() {
 function RouteName() {
   return (
     <Drawer.Navigator
-      initialRouteName="Home"
+      initialRouteName=""
       screenOptions={{
         drawerType: "front",
         drawerPosition: "left",
@@ -48,10 +48,10 @@ function RouteName() {
         drawerHideStatusBarOnOpen: true,
         headerShown: true,  
         drawerActiveTintColor: colors.greenTextColor,
-        drawerInactiveTintColor: "#ff0000",
+        drawerInactiveTintColor: colors.blackTextColor,
     
         headerStyle: {
-          backgroundColor: colors.primaryButtonGreen ,
+          backgroundColor: colors.secondaryGreen ,
         },
 
         drawerStyle: {

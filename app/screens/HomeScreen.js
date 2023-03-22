@@ -26,12 +26,22 @@ function HomeScreen(){
 
   return (
     <View style={globalStyle.container}>
-      <Card style={globalStyle.container} >
+      <Text style={globalStyle.title}>Your Finance Outlook:</Text>
+
+      <Card style={[globalStyle.container,
+      {
+        flex:0,
+        padding: "5%", 
+        marginBottom: "20%", 
+      },
+      
+      ]} >
           <Card.Content>
-              <Text style={globalStyle.title}> Graph</Text>
+              <Text style={globalStyle.subHeading}> Graph</Text>
               
           </Card.Content>
           <Card.Actions>
+          
             
           </Card.Actions>
       </Card>
