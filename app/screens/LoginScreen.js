@@ -82,7 +82,7 @@ const LoginScreen = (props) => {
         <TouchableOpacity onPress={handleLogin} style={globalStyle.button}>
           <Text style={globalStyle.buttonText}>Login</Text>
         </TouchableOpacity>
-        <Button title="Click here to Register" onPress={() => navigation.navigate('signup')} />
+        <Button title="Click here to Register" onPress={() => navigation.navigate('Signup')} />
       </View>
     </KeyboardAvoidingView>
   );
