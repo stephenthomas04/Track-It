@@ -40,7 +40,7 @@ function App() {
 function RouteName() {
   return (
     <Drawer.Navigator
-      initialRouteName=""
+      initialRouteName="Home"
       screenOptions={{
         drawerType: "front",
         drawerPosition: "left",
