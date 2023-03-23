@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  KeyboardAvoidingView,
+} from "react-native";
 
 import globalStyle from "../config/globalStyle";
 
@@ -35,33 +41,33 @@ const DataInput = () => {
   };
 
   return (
-    <View style={globalStyle.container}>
+    <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
       <TextInput
-        style={globalStyle.input}
+        style={styles.input}
         onChangeText={handleInput1Change}
         value={setStoreName}
         placeholder="Store"
       />
       <TextInput
-        style={globalStyle.input}
+        style={styles.input}
         onChangeText={handleInput2Change}
         value={setTotalPrice}
         placeholder="Price"
       />
       <TextInput
-        style={globalStyle.input}
+        style={styles.input}
         onChangeText={handleInput3Change}
         value={setAddress}
         placeholder="Address"
       />
       <TextInput
-        style={globalStyle.input}
+        style={styles.input}
         onChangeText={handleInput4Change}
         value={setDate}
         placeholder="Date"
       />
       <Button title="Submit" onPress={handlePress} />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -11,15 +11,12 @@ import DataInput from "./app/screens/DataInput";
 import { FontAwesome } from "@expo/vector-icons";
 import SettingScreen from "./app/screens/SettingScreen";
 import SignupScreen from "./app/screens/SignupScreen";
+import CameraScreen from "./app/screens/CameraScreen";
 import colors from "./app/config/colors";
-
-
-
 
 const Stack = createNativeStackNavigator();
 
 const Drawer = createDrawerNavigator();
-
 
 function App() {
   return (
@@ -30,8 +27,16 @@ function App() {
           name="Login"
           component={LoginScreen}
         />
-        <Stack.Screen  options={{ headerShown: false }} name="Signup" component={SignupScreen} />
-        <Stack.Screen  options={{ headerShown: false }} name="Home" component={RouteName} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Signup"
+          component={SignupScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={RouteName}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -46,29 +51,25 @@ function RouteName() {
         drawerPosition: "left",
         swipeEdgeWidth: 500,
         drawerHideStatusBarOnOpen: true,
-        headerShown: true,  
+        headerShown: true,
         drawerActiveTintColor: colors.greenTextColor,
         drawerInactiveTintColor: colors.blackTextColor,
-    
+
         headerStyle: {
-          backgroundColor: colors.secondaryGreen ,
+          backgroundColor: colors.secondaryGreen,
         },
 
         drawerStyle: {
           backgroundColor: colors.whiteBackgroundColor,
           width: 240,
         },
-
-        
       }}
     >
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          drawerIcon: () => (
-            <FontAwesome name="home" size={24} color="black" />
-          ),
+          drawerIcon: () => <FontAwesome name="home" size={24} color="black" />,
         }}
       />
       <Drawer.Screen
@@ -84,34 +85,35 @@ function RouteName() {
         name="DataInput"
         component={DataInput}
         options={{
-          drawerIcon: () => (
-            <FontAwesome name="user" size={24} color="black" />
-          ),
+          drawerIcon: () => <FontAwesome name="user" size={24} color="black" />,
         }}
       />
       <Drawer.Screen
         name="Settings"
         component={SettingScreen}
         options={{
+          drawerIcon: () => <FontAwesome name="gear" size={24} color="black" />,
+        }}
+      />
+      <Drawer.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{
           drawerIcon: () => (
-            <FontAwesome name="gear" size={24} color = "black"/>
+            <FontAwesome name="camera" size={24} color="black" />
           ),
         }}
       />
-      
     </Drawer.Navigator>
-);
+  );
 
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-})};
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  });
+}
 export default App;
-
-
