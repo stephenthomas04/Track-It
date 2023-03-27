@@ -13,6 +13,7 @@ import SettingScreen from "./app/screens/SettingScreen";
 import SignupScreen from "./app/screens/SignupScreen";
 import CameraScreen from "./app/screens/CameraScreen";
 import colors from "./app/config/colors";
+import { Entypo } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
 
@@ -77,7 +78,8 @@ function RouteName() {
         component={GraphScreen}
         options={{
           drawerIcon: () => (
-            <FontAwesome name="info-circle" size={24} color="black" />
+            <Entypo name="bar-graph" size={24} color="black" />
+            
           ),
         }}
       />
@@ -89,13 +91,6 @@ function RouteName() {
         }}
       />
       <Drawer.Screen
-        name="Settings"
-        component={SettingScreen}
-        options={{
-          drawerIcon: () => <FontAwesome name="gear" size={24} color="black" />,
-        }}
-      />
-      <Drawer.Screen
         name="Camera"
         component={CameraScreen}
         options={{
@@ -104,6 +99,14 @@ function RouteName() {
           ),
         }}
       />
+      <Drawer.Screen
+        name="Settings"
+        component={SettingScreen}
+        options={{
+          drawerIcon: () => <FontAwesome name="gear" size={24} color="black" />,
+        }}
+      />
+      
     </Drawer.Navigator>
   );
 
