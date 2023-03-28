@@ -6,6 +6,9 @@ import {
   Button,
   KeyboardAvoidingView,
 } from "react-native";
+import { collection, addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import db from "../firebase";
 
 import globalStyle from "../config/globalStyle";
 
@@ -15,6 +18,9 @@ const DataInput = () => {
   const [address, setAddress] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
+
+  const auth = getAuth();
+  const user = auth.currentUser.email;
 
   const handleInput1Change = (text) => {
     setStoreName(text);
@@ -36,7 +42,20 @@ const DataInput = () => {
     setImage(text);
   };
 
-  const handlePress = () => {
+  const handlePress = async () => {
+    console.log("Document written with ID: ", user);
+    try {
+      const docRef = await addDoc(collection(db, user), {
+        store: storeName,
+        price: totalPrice,
+        address: address,
+        date: date,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
     console.log(setStoreName, setTotalPrice, setAddress, setDate);
   };
 
