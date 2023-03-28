@@ -83,11 +83,10 @@ const SignupScreen = () => {
       <View style={globalStyle.buttonContainer}>
         <TouchableOpacity
           onPress={handleSignUp}
-          style={[globalStyle.button, globalStyle.buttonOutline]}
-        >
+          style={[globalStyle.button, globalStyle.buttonOutline]} >
           <Text style={globalStyle.buttonOutlineText}>Register</Text>
-  
         </TouchableOpacity>
+        <Button title="Click here to Login" onPress={() => navigation.navigate('Login')} />
       </View>
     </KeyboardAvoidingView>
   );
