@@ -12,7 +12,7 @@ import { getAuth } from "firebase/auth";
 import db from "../firebase";
 
 import globalStyle from "../config/globalStyle";
-import images from "../assets/receipt";
+import Image from "../assets/receipt";
 
 const DataInput = () => {
   const [storeName, setStoreName] = useState("");
