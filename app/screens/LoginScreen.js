@@ -82,10 +82,35 @@ const LoginScreen = (props) => {
         <TouchableOpacity onPress={handleLogin} style={globalStyle.button}>
           <Text style={globalStyle.buttonText}>Login</Text>
         </TouchableOpacity>
-        <Button title="Click here to Register" onPress={() => navigation.navigate('Signup')} />
       </View>
-    </KeyboardAvoidingView>
+
+
+    <View style={styles.footer}>
+      <Text style={styles.footerText}> Don't have an account? </Text>
+        <TouchableOpacity>
+        <Button title = "Press me" onPress={() => navigation.navigate('Signup')} />
+          </TouchableOpacity>
+      </View>
+       </KeyboardAvoidingView>
+        
   );
 };
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  footer: {
+    position: 'absolute',
+    bottom: 10,
+    textAlign: 'center',
+    flexDirection: 'row',
+  },
+  footerText: {
+    color: colors.darkGreenTextColor,
+
+  },
+  signupBtn: {
+    color: colors.primaryButtonGreen,
+    fontWeight: 'bold',
+  },
+});
