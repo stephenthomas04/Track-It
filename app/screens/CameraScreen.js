@@ -44,18 +44,25 @@ function CameraScreen() {
             style={styles.button}
             onPress={() => retakePicture()}
           >
-            <Text style={styles.buttonText}>Retake Image</Text>
+            <Text style={styles.buttonText}>Retake</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <Camera style={styles.camera} ref={(ref) => setCameraRef(ref)}>
           <View style={styles.buttonContainer}>
+
+          <TouchableOpacity
+              style={styles.uploadButton}
+              onPress={() => console.log("Upload Picture")}
+            >
+            </TouchableOpacity>
+            
             <TouchableOpacity
-              style={styles.button}
+              style={styles.cameraButton}
               onPress={() => takePicture()}
             >
-              <Text style={styles.buttonText}>Take Picture</Text>
             </TouchableOpacity>
+          
           </View>
         </Camera>
       )}
@@ -69,6 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
+    flexDirection:"column",
   },
   camera: {
     flex: 1,
@@ -77,22 +85,29 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   buttonContainer: {
-    flex: 0,
+    backgroundColor: "#222",
+    flex: 0.15,
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 20,
+    alignItems: "center",
+    width: "100%",
+    
   },
-  button: {
-    width: 100,
-    height: 50,
-    backgroundColor: "#222",
-    borderRadius: 10,
+  cameraButton: {
+    width: 80,
+    height: 80,
+    backgroundColor: "#fff",
+    borderRadius: "50%",
+    marginRight: "20%",
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 3,
+    
   },
   buttonText: {
-    color: "#fff",
-    fontSize: 16,
+    color: "#222",
+    fontSize: 18,
+    fontWeight: "bold"
   },
   preview: {
     flex: 1,
@@ -109,7 +124,28 @@ const styles = StyleSheet.create({
     width: 300,
     height: 600,
     borderRadius: 10,
+    border: 1, 
   },
+  button:{
+    width: 80,
+    height: 80,
+    backgroundColor: "#fff",
+    borderRadius: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 20 ,
+    borderWidth: 3,
+  },
+  uploadButton:{
+    width: 40,
+    height: 40,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 20 ,
+    marginRight: "7.5%", 
+    borderWidth: 3,
+  }
 });
 
 export default CameraScreen;
