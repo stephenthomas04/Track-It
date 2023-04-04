@@ -43,7 +43,7 @@ const DataInput = () => {
   };
 
   const handlePress = async () => {
-    console.log("Document written with ID: ", user);
+    /*console.log("Document written with ID: ", user);
     try {
       const docRef = await addDoc(collection(db, user), {
         store: storeName,
@@ -56,7 +56,27 @@ const DataInput = () => {
       console.error("Error adding document: ", e);
     }
 
-    console.log(setStoreName, setTotalPrice, setAddress, setDate);
+    console.log(setStoreName, setTotalPrice, setAddress, setDate);*/
+
+    const vision = require("@google-cloud/vision");
+
+    const CREDENTIALS = "YOUR CREDNTIALS JSON FILE";
+
+    const CONFIG = {
+      credentials: {
+        private_key: "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0",
+        client_email: "track-it-31a75@appspot.gserviceaccount.com",
+      },
+    };
+
+    const client = new vision.ImageAnnotatorClient(CONFIG);
+
+    const detectText = async (file_path) => {
+      let [result] = await client.textDetection(file_path);
+      console.log(result.fullTextAnnotation.text);
+    };
+
+    detectText("receipt.jpeg");
   };
 
   return (
