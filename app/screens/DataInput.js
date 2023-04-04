@@ -4,6 +4,7 @@ import {
   View,
   TextInput,
   Button,
+  Image,
   KeyboardAvoidingView,
 } from "react-native";
 import { collection, addDoc } from "firebase/firestore";
