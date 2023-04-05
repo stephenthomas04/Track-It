@@ -4,6 +4,7 @@ import { Camera } from "expo-camera";
 
 import globalStyle from "../config/globalStyle";
 import colors from "../config/colors";
+import { AntDesign } from '@expo/vector-icons';
 function CameraScreen() {
   const API_KEY = "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0";
   const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
@@ -12,6 +13,7 @@ function CameraScreen() {
   const [cameraRef, setCameraRef] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [info, setInfo] = useState("");
+  
 
   useEffect(() => {
     (async () => {
@@ -109,7 +111,7 @@ function CameraScreen() {
             <TouchableOpacity
               style={styles.uploadButton}
               onPress={() => console.log("Upload Picture")}
-            ></TouchableOpacity>
+            ><AntDesign name="upload" size={24} color="green" /></TouchableOpacity>
 
             <TouchableOpacity
               style={styles.cameraButton}
