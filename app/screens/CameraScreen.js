@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { Camera } from "expo-camera";
 
 import globalStyle from "../config/globalStyle";
-
+import colors from "../config/colors";
 function CameraScreen() {
   const API_KEY = "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0";
   const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
@@ -90,13 +90,14 @@ function CameraScreen() {
             source={{ uri: `data:image/jpeg;base64,${photo}` }}
           />
           <TouchableOpacity
-            style={styles.button}
+            style={styles.retakeButton}
             onPress={() => retakePicture()}
+            
           >
             <Text style={styles.buttonText}>Retake</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.button}
+            style={styles.submitButton}
             onPress={() => callGoogleVisionAsync(photo)}
           >
             <Text style={styles.buttonText}>Submit</Text>
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#222",
     fontSize: 18,
-    fontWeight: "bold",
+
   },
   preview: {
     flex: 1,
@@ -175,15 +176,27 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     border: 1,
   },
-  button: {
-    width: 80,
-    height: 80,
+  retakeButton: {
+    width: 100,
+    height: 60,
     backgroundColor: "#fff",
-    borderRadius: "50%",
+    borderRadius: "25%",
     justifyContent: "center",
     alignItems: "center",
-    margin: 10,
-    borderWidth: 3,
+    marginRight: 200,
+    marginTop: 10,
+    borderWidth: 1,
+  },
+
+  submitButton: {
+    width: 100,
+    height: 60,
+    backgroundColor: colors.secondaryGreen,
+    borderRadius: "25%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 200,
+    borderWidth: 1,
   },
   uploadButton: {
     width: 40,
