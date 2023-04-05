@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { Camera } from "expo-camera";
-
 import globalStyle from "../config/globalStyle";
 import colors from "../config/colors";
 import { AntDesign } from '@expo/vector-icons';
@@ -72,15 +71,6 @@ function CameraScreen() {
     setInfo(result.responses[0].textAnnotations[0].description);
     console.log(info);
   }
-
-  const submitPicture = () => {
-    try {
-      const result = callGoogleVisionAsync(photo);
-      setStatus(result);
-    } catch (error) {
-      setStatus(`Error: ${error.message}`);
-    }
-  };
 
   return (
     <View style={styles.container}>
