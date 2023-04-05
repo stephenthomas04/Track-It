@@ -71,9 +71,9 @@ function CameraScreen() {
     console.log(info);
   }
 
-  const submitPicture = async () => {
+  const submitPicture = () => {
     try {
-      const result = await callGoogleVisionAsync(photo);
+      const result = callGoogleVisionAsync(photo);
       setStatus(result);
     } catch (error) {
       setStatus(`Error: ${error.message}`);
@@ -95,7 +95,10 @@ function CameraScreen() {
           >
             <Text style={styles.buttonText}>Retake</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => submitPicture}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => callGoogleVisionAsync(photo)}
+          >
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
         </View>
@@ -179,7 +182,7 @@ const styles = StyleSheet.create({
     borderRadius: "50%",
     justifyContent: "center",
     alignItems: "center",
-    margin: 20,
+    margin: 10,
     borderWidth: 3,
   },
   uploadButton: {
