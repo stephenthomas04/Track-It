@@ -5,13 +5,17 @@ import { Camera } from "expo-camera";
 import globalStyle from "../config/globalStyle";
 
 function CameraScreen() {
+  const API_KEY = "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0";
+  const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
+
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [info, setInfo] = useState("");
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
+      const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   }, []);
@@ -20,11 +24,12 @@ function CameraScreen() {
     if (cameraRef) {
       const options = { quality: 0.5, base64: true };
       const data = await cameraRef.takePictureAsync(options);
-      setPhoto(data.uri);
+      setPhoto(data.base64);
     }
   };
 
   const retakePicture = () => {
+    console.log(info);
     setPhoto(null);
   };
 
@@ -34,35 +39,78 @@ function CameraScreen() {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
+  async function callGoogleVisionAsync(image) {
+    const body = {
+      requests: [
+        {
+          image: {
+            content: image,
+          },
+          features: [
+            {
+              type: "TEXT_DETECTION",
+              maxResults: 1,
+            },
+          ],
+        },
+      ],
+    };
+
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const result = await response.json();
+    console.log("callGoogleVisionAsync -> result", result);
+    setInfo(result.responses[0].textAnnotations[0].description);
+    console.log(info);
+  }
+
+  const submitPicture = async () => {
+    try {
+      const result = await callGoogleVisionAsync(photo);
+      setStatus(result);
+    } catch (error) {
+      setStatus(`Error: ${error.message}`);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {photo ? (
         <View style={styles.preview}>
           <Text style={styles.previewText}>Receipt Image:</Text>
-          <Image style={styles.previewImage} source={{ uri: photo }} />
+          <Image
+            style={styles.previewImage}
+            source={{ uri: `data:image/jpeg;base64,${photo}` }}
+          />
           <TouchableOpacity
             style={styles.button}
             onPress={() => retakePicture()}
           >
             <Text style={styles.buttonText}>Retake</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => submitPicture}>
+            <Text style={styles.buttonText}>Submit</Text>
+          </TouchableOpacity>
         </View>
       ) : (
         <Camera style={styles.camera} ref={(ref) => setCameraRef(ref)}>
           <View style={styles.buttonContainer}>
-
-          <TouchableOpacity
+            <TouchableOpacity
               style={styles.uploadButton}
               onPress={() => console.log("Upload Picture")}
-            >
-            </TouchableOpacity>
-            
+            ></TouchableOpacity>
+
             <TouchableOpacity
               style={styles.cameraButton}
               onPress={() => takePicture()}
-            >
-            </TouchableOpacity>
-          
+            ></TouchableOpacity>
           </View>
         </Camera>
       )}
@@ -76,7 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
-    flexDirection:"column",
+    flexDirection: "column",
   },
   camera: {
     flex: 1,
@@ -91,7 +139,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    
   },
   cameraButton: {
     width: 80,
@@ -102,12 +149,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 3,
-    
   },
   buttonText: {
     color: "#222",
     fontSize: 18,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   preview: {
     flex: 1,
@@ -124,28 +170,28 @@ const styles = StyleSheet.create({
     width: 300,
     height: 600,
     borderRadius: 10,
-    border: 1, 
+    border: 1,
   },
-  button:{
+  button: {
     width: 80,
     height: 80,
     backgroundColor: "#fff",
     borderRadius: "50%",
     justifyContent: "center",
     alignItems: "center",
-    margin: 20 ,
+    margin: 20,
     borderWidth: 3,
   },
-  uploadButton:{
+  uploadButton: {
     width: 40,
     height: 40,
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
-    margin: 20 ,
-    marginRight: "7.5%", 
+    margin: 20,
+    marginRight: "7.5%",
     borderWidth: 3,
-  }
+  },
 });
 
 export default CameraScreen;
