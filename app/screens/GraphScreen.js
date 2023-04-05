@@ -13,6 +13,38 @@ import {LineChart,
     StackedBarChart} from "react-native-chart-kit";
 import { Value } from "react-native-reanimated";
 
+const pieChartData = [
+  {
+    name: "Grocery",
+    spent: $234,
+    color: "rgba(131, 167, 234, 1)",
+    legendFontColor: "#7F7F7F",
+    legendFontSize: 15
+  },
+  {
+    name: "Clothing",
+    spent: $530,
+    color: "#F00",
+    legendFontColor: "#7F7F7F",
+    legendFontSize: 15
+  },
+  {
+    name: "Entertainment",
+    spent: $35,
+    color: "red",
+    legendFontColor: "#7F7F7F",
+    legendFontSize: 15
+  },
+  {
+    name: "Utilities",
+    spent: $200,
+    color: "#ffffff",
+    legendFontColor: "#7F7F7F",
+    legendFontSize: 15
+  },
+  
+];
+
 
   const GraphScreen = () => {
     return(
@@ -111,7 +143,7 @@ import { Value } from "react-native-reanimated";
                 }}
               />
 
-<LineChart
+              <LineChart
                 data={{
                   labels: ["January", "February", "March", "April", "May", "June"],
                   datasets: [
@@ -154,6 +186,31 @@ import { Value } from "react-native-reanimated";
                   borderRadius: 16
                 }}
               />
+
+
+              <PieChart
+                data={pieChartData}
+                width={Dimensions.get("window").width}
+                height={300}
+                chartConfig={{
+                  backgroundColor: "#e26a00",
+                  backgroundGradientFrom: "#fb8c00",
+                  backgroundGradientTo: "#ffa726",
+                  decimalPlaces: 2, // optional, defaults to 2dp
+                  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                  style: {
+                    borderRadius: 16
+                  },
+                  
+                }}
+                accessor={"population"}
+                backgroundColor={"transparent"}
+                paddingLeft={"15"}
+                center={[10, 50]}
+                absolute
+              />
+             
         </ScrollView>
         
     );
