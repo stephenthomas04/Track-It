@@ -1,10 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  KeyboardAvoidingView,
+  TextInput,
+  Button,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { Camera } from "expo-camera";
 import globalStyle from "../config/globalStyle";
 import colors from "../config/colors";
-import { AntDesign } from '@expo/vector-icons';
+import BottomSheet from "@gorhom/bottom-sheet";
+import { AntDesign } from "@expo/vector-icons";
+import { collection, addDoc } from "firebase/firestore";
+import * as ImagePicker from "expo-image-picker";
+import { getAuth } from "firebase/auth";
+import db from "../firebase";
+
 function CameraScreen() {
+  const auth = getAuth();
+  const user = auth.currentUser.email;
+
+  const [storeName, setStoreName] = useState("");
+  const [totalPrice, setTotalPrice] = useState("");
+  const [address, setAddress] = useState("");
+  const [date, setDate] = useState("");
+  const [image, setImage] = useState("");
+
   const API_KEY = "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0";
   const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
 
@@ -12,11 +44,39 @@ function CameraScreen() {
   const [cameraRef, setCameraRef] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [info, setInfo] = useState("");
-  
+
+  const sheetRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(true);
+  const snapPoints = useMemo(() => ["85%"], []);
+
+  const handleInput1Change = (text) => {
+    setStoreName(text);
+  };
+
+  const handleInput2Change = (text) => {
+    setTotalPrice(text);
+  };
+
+  const handleInput3Change = (text) => {
+    setAddress(text);
+  };
+
+  const handleInput4Change = (text) => {
+    setDate(text);
+  };
+
+  const handleInput5Change = (text) => {
+    setImage(text);
+  };
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
+      if (Platform.OS !== "web") {
+        const { status } = await Camera.requestCameraPermissionsAsync();
+        setHasPermission(status === "granted");
+      }
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   }, []);
@@ -26,6 +86,19 @@ function CameraScreen() {
       const options = { quality: 0.5, base64: true };
       const data = await cameraRef.takePictureAsync(options);
       setPhoto(data.base64);
+    }
+  };
+
+  const uploadImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setPhoto(result.uri);
     }
   };
 
@@ -40,6 +113,10 @@ function CameraScreen() {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
+  const openSheet = () => {
+    sheetRef.current.expand();
+  };
 
   async function callGoogleVisionAsync(image) {
     const body = {
@@ -72,6 +149,23 @@ function CameraScreen() {
     console.log(info);
   }
 
+  const handlePress = async () => {
+    console.log("Submitted");
+    /*try {
+      const docRef = await addDoc(collection(db, user), {
+        store: storeName,
+        price: totalPrice,
+        address: address,
+        date: date,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+    console.log(setStoreName, setTotalPrice, setAddress, setDate);*/
+  };
+
   return (
     <View style={styles.container}>
       {photo ? (
@@ -84,13 +178,12 @@ function CameraScreen() {
           <TouchableOpacity
             style={styles.retakeButton}
             onPress={() => retakePicture()}
-            
           >
             <Text style={styles.buttonText}>Retake</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.submitButton}
-            onPress={() => callGoogleVisionAsync(photo)}
+            onPress={() => openSheet()}
           >
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
@@ -100,8 +193,10 @@ function CameraScreen() {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.uploadButton}
-              onPress={() => console.log("Upload Picture")}
-            ><AntDesign name="upload" size={24} color="green" /></TouchableOpacity>
+              onPress={() => uploadImage()}
+            >
+              <AntDesign name="upload" size={24} color="green" />
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.cameraButton}
@@ -110,6 +205,43 @@ function CameraScreen() {
           </View>
         </Camera>
       )}
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={snapPoints}
+        enablePanDownToClose={"true"}
+      >
+        <View style={styles.bottomSheet}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <KeyboardAvoidingView behavior="padding">
+              <TextInput
+                style={styles.input}
+                onChangeText={handleInput1Change}
+                value={setStoreName}
+                placeholder="Store"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={handleInput2Change}
+                value={setTotalPrice}
+                placeholder="Price"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={handleInput3Change}
+                value={setAddress}
+                placeholder="Address"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={handleInput4Change}
+                value={setDate}
+                placeholder="Date"
+              />
+              <Button title="Submit" onPress={handlePress} />
+            </KeyboardAvoidingView>
+          </TouchableWithoutFeedback>
+        </View>
+      </BottomSheet>
     </View>
   );
 }
@@ -149,7 +281,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#222",
     fontSize: 18,
-
   },
   preview: {
     flex: 1,
@@ -199,6 +330,14 @@ const styles = StyleSheet.create({
     margin: 20,
     marginRight: "7.5%",
     borderWidth: 3,
+  },
+  input: {
+    height: 40,
+    width: "100%",
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
+    paddingHorizontal: 10,
   },
 });
 

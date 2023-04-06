@@ -6,6 +6,8 @@ import {
   Button,
   Image,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
@@ -47,7 +49,7 @@ const DataInput = () => {
 
   const handlePress = async () => {
     console.log("Document written with ID: ", user);
-    try {
+    /*try {
       const docRef = await addDoc(collection(db, user), {
         store: storeName,
         price: totalPrice,
@@ -59,37 +61,39 @@ const DataInput = () => {
       console.error("Error adding document: ", e);
     }
 
-    console.log(setStoreName, setTotalPrice, setAddress, setDate);
+    console.log(setStoreName, setTotalPrice, setAddress, setDate);*/
   };
 
   return (
-    <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
-      <TextInput
-        style={styles.input}
-        onChangeText={handleInput1Change}
-        value={setStoreName}
-        placeholder="Store"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={handleInput2Change}
-        value={setTotalPrice}
-        placeholder="Price"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={handleInput3Change}
-        value={setAddress}
-        placeholder="Address"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={handleInput4Change}
-        value={setDate}
-        placeholder="Date"
-      />
-      <Button title="Submit" onPress={handlePress} />
-    </KeyboardAvoidingView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
+        <TextInput
+          style={styles.input}
+          onChangeText={handleInput1Change}
+          value={setStoreName}
+          placeholder="Store"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={handleInput2Change}
+          value={setTotalPrice}
+          placeholder="Price"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={handleInput3Change}
+          value={setAddress}
+          placeholder="Address"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={handleInput4Change}
+          value={setDate}
+          placeholder="Date"
+        />
+        <Button title="Submit" onPress={handlePress} />
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
