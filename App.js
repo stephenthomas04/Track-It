@@ -10,6 +10,7 @@ import GraphScreen from "./app/screens/GraphScreen";
 import DataInput from "./app/screens/DataInput";
 import { FontAwesome } from "@expo/vector-icons";
 import SettingScreen from "./app/screens/SettingScreen";
+import DataScreen from "./app/screens/Data";
 import SignupScreen from "./app/screens/SignupScreen";
 import CameraScreen from "./app/screens/CameraScreen";
 import colors from "./app/config/colors";
@@ -97,6 +98,13 @@ function RouteName() {
           drawerIcon: () => (
             <FontAwesome name="camera" size={24} color="black" />
           ),
+        }}
+      />
+      <Drawer.Screen
+        name="Data"
+        component={DataScreen}
+        options={{
+          drawerIcon: () => <FontAwesome name="gear" size={24} color="black" />,
         }}
       />
       <Drawer.Screen
