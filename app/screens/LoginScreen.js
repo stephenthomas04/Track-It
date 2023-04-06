@@ -10,6 +10,8 @@ import {
   View,
   Image,
   Button,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import {
   getAuth,
@@ -56,12 +58,13 @@ const LoginScreen = (props) => {
   };
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
       <Image
         style={globalStyle.imageStyles}
         source={require("../assets/trackIt.png")}
       />
-
+ 
       <View style={globalStyle.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -83,7 +86,7 @@ const LoginScreen = (props) => {
           <Text style={globalStyle.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
-
+     
 
     <View style={styles.footer}>
       <Text style={styles.footerText}> Don't have an account? </Text>
@@ -92,6 +95,7 @@ const LoginScreen = (props) => {
           </TouchableOpacity>
       </View>
        </KeyboardAvoidingView>
+       </TouchableWithoutFeedback>
         
   );
 };

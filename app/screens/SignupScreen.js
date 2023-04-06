@@ -10,6 +10,8 @@ import {
   View,
   Image,
   Button,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 import {
@@ -57,6 +59,7 @@ const SignupScreen = () => {
   
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
 
       <Text>
@@ -89,6 +92,7 @@ const SignupScreen = () => {
         <Button title="Click here to Login" onPress={() => navigation.navigate('Login')} />
       </View>
     </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
