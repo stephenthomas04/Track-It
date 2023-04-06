@@ -201,7 +201,7 @@ const GraphScreen = () => {
             borderRadius: 16,
           },
         }}
-        accessor={"population"}
+        accessor={"spent"}
         backgroundColor={"transparent"}
         paddingLeft={"15"}
         center={[10, 50]}
