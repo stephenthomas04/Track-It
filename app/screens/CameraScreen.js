@@ -47,7 +47,7 @@ function CameraScreen() {
 
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
-  const snapPoints = useMemo(() => ["85%"], []);
+  const snapPoints = useMemo(() => ["1%", "85%"], []);
 
   const handleInput1Change = (text) => {
     setStoreName(text);
@@ -98,7 +98,7 @@ function CameraScreen() {
     });
 
     if (!result.canceled) {
-      setPhoto(result.uri);
+      setPhoto(result);
     }
   };
 
@@ -116,6 +116,10 @@ function CameraScreen() {
 
   const openSheet = () => {
     sheetRef.current.expand();
+  };
+
+  const closeSheet = () => {
+    sheetRef.current.collapse();
   };
 
   async function callGoogleVisionAsync(image) {
