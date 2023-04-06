@@ -24,7 +24,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           options={{ headerShown: false }}
           name="Login"
           component={LoginScreen}
@@ -33,7 +33,7 @@ function App() {
           options={{ headerShown: false }}
           name="Signup"
           component={SignupScreen}
-        />
+        /> */}
         <Stack.Screen
           options={{ headerShown: false }}
           name="Home"
