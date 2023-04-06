@@ -17,28 +17,28 @@ import { Value } from "react-native-reanimated";
 const pieChartData = [
   {
     name: "Grocery",
-    spent: $234,
+    spent: 234,
     color: "rgba(131, 167, 234, 1)",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15,
   },
   {
     name: "Clothing",
-    spent: $530,
+    spent: 530,
     color: "#F00",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15,
   },
   {
     name: "Entertainment",
-    spent: $35,
+    spent: 35,
     color: "red",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15,
   },
   {
     name: "Utilities",
-    spent: $200,
+    spent: 200,
     color: "#ffffff",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15,
