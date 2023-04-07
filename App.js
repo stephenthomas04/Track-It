@@ -14,7 +14,7 @@ import DataScreen from "./app/screens/Data";
 import SignupScreen from "./app/screens/SignupScreen";
 import CameraScreen from "./app/screens/CameraScreen";
 import colors from "./app/config/colors";
-import { Entypo } from '@expo/vector-icons';
+import { Entypo } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +24,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           options={{ headerShown: false }}
           name="Login"
           component={LoginScreen}
@@ -33,7 +33,7 @@ function App() {
           options={{ headerShown: false }}
           name="Signup"
           component={SignupScreen}
-        /> */}
+        />
         <Stack.Screen
           options={{ headerShown: false }}
           name="Home"
@@ -78,10 +78,7 @@ function RouteName() {
         name="GraphScreen"
         component={GraphScreen}
         options={{
-          drawerIcon: () => (
-            <Entypo name="bar-graph" size={24} color="black" />
-            
-          ),
+          drawerIcon: () => <Entypo name="bar-graph" size={24} color="black" />,
         }}
       />
       <Drawer.Screen
@@ -114,7 +111,6 @@ function RouteName() {
           drawerIcon: () => <FontAwesome name="gear" size={24} color="black" />,
         }}
       />
-      
     </Drawer.Navigator>
   );
 

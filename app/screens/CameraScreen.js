@@ -15,12 +15,14 @@ import {
   TextInput,
   Button,
   TouchableWithoutFeedback,
+  ActivityIndicator,
   Keyboard,
+  Alert,
 } from "react-native";
 import { Camera } from "expo-camera";
 import globalStyle from "../config/globalStyle";
 import colors from "../config/colors";
-import BottomSheet from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { AntDesign } from "@expo/vector-icons";
 import { collection, addDoc } from "firebase/firestore";
 import * as ImagePicker from "expo-image-picker";
@@ -35,7 +37,6 @@ function CameraScreen() {
   const [totalPrice, setTotalPrice] = useState("");
   const [address, setAddress] = useState("");
   const [date, setDate] = useState("");
-  const [image, setImage] = useState("");
 
   const API_KEY = "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0";
   const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
@@ -44,7 +45,7 @@ function CameraScreen() {
   const [cameraRef, setCameraRef] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [info, setInfo] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
   const snapPoints = useMemo(() => ["1%", "85%"], []);
@@ -93,12 +94,12 @@ function CameraScreen() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      base64: true,
       quality: 1,
     });
 
     if (!result.canceled) {
-      setPhoto(result);
+      setPhoto(result.base64);
     }
   };
 
@@ -114,6 +115,15 @@ function CameraScreen() {
     return <Text>No access to camera</Text>;
   }
 
+  const validateFields = (fields) => {
+    for (const key in fields) {
+      if (fields.hasOwnProperty(key) && !fields[key]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const openSheet = () => {
     sheetRef.current.expand();
   };
@@ -122,7 +132,8 @@ function CameraScreen() {
     sheetRef.current.collapse();
   };
 
-  async function callGoogleVisionAsync(image) {
+  const callGoogleVisionAsync = async (image) => {
+    setIsLoading(true);
     const body = {
       requests: [
         {
@@ -139,35 +150,71 @@ function CameraScreen() {
       ],
     };
 
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-    const result = await response.json();
-    console.log("callGoogleVisionAsync -> result", result);
-    setInfo(result.responses[0].textAnnotations[0].description);
-    console.log(info);
-  }
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const result = await response.json();
+      console.log("callGoogleVisionAsync -> result", result);
+      setInfo(result.responses[0].textAnnotations[0].description);
+      openSheet();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      findData(info);
+      setIsLoading(false);
+      console.log(info);
+    }
+  };
 
   const handlePress = async () => {
     console.log("Submitted");
-    /*try {
-      const docRef = await addDoc(collection(db, user), {
-        store: storeName,
-        price: totalPrice,
-        address: address,
-        date: date,
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+    const fields = { storeName, totalPrice, address, date };
+    const isValid = validateFields(fields);
 
-    console.log(setStoreName, setTotalPrice, setAddress, setDate);*/
+    if (isValid) {
+      // Submit the form
+      try {
+        const docRef = await addDoc(collection(db, user), {
+          store: storeName,
+          price: totalPrice,
+          address: address,
+          date: date,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+      closeSheet();
+      Alert.alert("Success", "Receipt submitted successfully");
+    } else {
+      Alert.alert("Error", "Please fill in all required fields");
+    }
+  };
+
+  const findData = (text) => {
+    const priceFormat = /\d+\.\d+/g;
+    const numbers = text.match(priceFormat)?.map(Number) || [];
+    const totalPrice = Math.max(...numbers);
+    console.log(typeof totalPrice);
+    setTotalPrice("" + totalPrice);
+
+    const regex =
+      /\b(\d{2}[\/-]\d{2}[\/-]\d{2}|\d{2}[\/-]\d{2}[\/-]\d{4}|\d{2}-\d{2}-\d{2})\b/g;
+    const match = text.match(regex);
+    setDate(match[0]);
+
+    const index = text.indexOf("\n");
+    if (index !== -1) {
+      setStoreName(text.substring(0, index));
+    } else {
+      setStoreName("NoName");
+    }
   };
 
   return (
@@ -185,9 +232,14 @@ function CameraScreen() {
           >
             <Text style={styles.buttonText}>Retake</Text>
           </TouchableOpacity>
+          {isLoading ? (
+            <View style={styles.indicatorWrapper}>
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          ) : null}
           <TouchableOpacity
             style={styles.submitButton}
-            onPress={() => openSheet()}
+            onPress={() => callGoogleVisionAsync(photo)}
           >
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
@@ -214,37 +266,44 @@ function CameraScreen() {
         snapPoints={snapPoints}
         enablePanDownToClose={"true"}
       >
-        <View style={styles.bottomSheet}>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <KeyboardAvoidingView behavior="padding">
-              <TextInput
-                style={styles.input}
-                onChangeText={handleInput1Change}
-                value={setStoreName}
-                placeholder="Store"
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={handleInput2Change}
-                value={setTotalPrice}
-                placeholder="Price"
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={handleInput3Change}
-                value={setAddress}
-                placeholder="Address"
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={handleInput4Change}
-                value={setDate}
-                placeholder="Date"
-              />
-              <Button title="Submit" onPress={handlePress} />
-            </KeyboardAvoidingView>
-          </TouchableWithoutFeedback>
-        </View>
+        <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
+          <View style={styles.bottomSheet}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <KeyboardAvoidingView behavior="padding">
+                <TextInput
+                  style={styles.input}
+                  onChangeText={handleInput1Change}
+                  value={setStoreName}
+                  placeholder="Store"
+                  defaultValue={storeName}
+                />
+                <TextInput
+                  style={styles.input}
+                  onChangeText={handleInput2Change}
+                  value={setTotalPrice}
+                  keyboardType="numeric"
+                  placeholder="Price"
+                  defaultValue={totalPrice}
+                />
+                <TextInput
+                  style={styles.input}
+                  onChangeText={handleInput3Change}
+                  value={setAddress}
+                  placeholder="Address"
+                />
+                <TextInput
+                  style={styles.input}
+                  onChangeText={handleInput4Change}
+                  value={setDate}
+                  placeholder="Date"
+                  defaultValue={date}
+                />
+                <Button title="Submit" onPress={handlePress} />
+              </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
+            <Text>{info}</Text>
+          </View>
+        </BottomSheetScrollView>
       </BottomSheet>
     </View>
   );
@@ -342,6 +401,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     paddingHorizontal: 10,
+  },
+
+  indicatorWrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  contentContainer: {
+    backgroundColor: "white",
   },
 });
 
