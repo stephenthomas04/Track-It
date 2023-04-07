@@ -166,9 +166,9 @@ function CameraScreen() {
     } catch (error) {
       console.error(error);
     } finally {
+      console.log(info);
       findData(info);
       setIsLoading(false);
-      console.log(info);
     }
   };
 
@@ -178,7 +178,6 @@ function CameraScreen() {
     const isValid = validateFields(fields);
 
     if (isValid) {
-      // Submit the form
       try {
         const docRef = await addDoc(collection(db, user), {
           store: storeName,
@@ -258,6 +257,12 @@ function CameraScreen() {
               style={styles.cameraButton}
               onPress={() => takePicture()}
             ></TouchableOpacity>
+            <TouchableOpacity
+              style={styles.uploadButton}
+              onPress={() => openSheet()}
+            >
+              <AntDesign name="form" size={24} color="green" />
+            </TouchableOpacity>
           </View>
         </Camera>
       )}

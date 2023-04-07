@@ -7,7 +7,6 @@ import HomeScreen from "./app/screens/HomeScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import GraphScreen from "./app/screens/GraphScreen";
-import DataInput from "./app/screens/DataInput";
 import { FontAwesome } from "@expo/vector-icons";
 import SettingScreen from "./app/screens/SettingScreen";
 import DataScreen from "./app/screens/Data";
@@ -81,13 +80,7 @@ function RouteName() {
           drawerIcon: () => <Entypo name="bar-graph" size={24} color="black" />,
         }}
       />
-      <Drawer.Screen
-        name="DataInput"
-        component={DataInput}
-        options={{
-          drawerIcon: () => <FontAwesome name="user" size={24} color="black" />,
-        }}
-      />
+
       <Drawer.Screen
         name="Camera"
         component={CameraScreen}
@@ -101,7 +94,7 @@ function RouteName() {
         name="Data"
         component={DataScreen}
         options={{
-          drawerIcon: () => <FontAwesome name="gear" size={24} color="black" />,
+          drawerIcon: () => <FontAwesome name="list" size={24} color="black" />,
         }}
       />
       <Drawer.Screen
