@@ -98,6 +98,10 @@ function CameraScreen() {
   };
 
   const uploadImage = async () => {
+    setDate("");
+    setAddress("hello");
+    setStoreName("");
+    setTotalPrice("");
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -112,7 +116,8 @@ function CameraScreen() {
 
   const retakePicture = () => {
     setDate("");
-    setAddress("");
+    setAddress("hello");
+    console.log(address);
     setStoreName("");
     setTotalPrice("");
     setPhoto(null);
