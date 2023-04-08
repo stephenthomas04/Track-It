@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, FlatList } from "react-native";
 import Constants from "expo-constants";
 import { collection, getDocs } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 import db from "../firebase";
+import { getAuth } from "firebase/auth";
 
 export default function DataScreen() {
   const auth = getAuth();
@@ -27,23 +27,22 @@ export default function DataScreen() {
 
   useEffect(() => {
     (async () => {
-      /* const items = [];
-
-      const querySnapshot = await getDocs(collection(db, user));
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        const data = doc.data();
-        const id = doc.id;
-
-        console.log(doc.id, " => ", doc.data());
-        items.push({ id, ...data });
-      });
-
-      setReceipts(items);*/
+      const items = [];
+      if (receipts.length <= 1) {
+        const querySnapshot = await getDocs(collection(db, user));
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          const data = doc.data();
+          const id = doc.id;
+          console.log(doc.id, " => ", doc.data());
+          items.push({ id, ...data });
+        });
+      }
+      setReceipts(items);
 
       // The commented code above works. To test the code a sample array is passed in instead.
       // This will short the amount of calls made to firebase
-      setReceipts(testReceipts);
+      //setReceipts(testReceipts);
     })();
   }, []);
 

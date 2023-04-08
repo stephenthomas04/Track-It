@@ -30,6 +30,10 @@ import { getAuth } from "firebase/auth";
 import db from "../firebase";
 
 function CameraScreen() {
+  const [fileText, setFileText] = useState(
+    "Nike\n39.99\n$45.99\n1/15/2023\n2045634\nhgdwjeolgrd\n00.99\n$37.72\n$00.00\n&3.99\n$-48.25"
+  );
+
   const auth = getAuth();
   const user = auth.currentUser.email;
 
@@ -40,6 +44,7 @@ function CameraScreen() {
 
   const API_KEY = "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0";
   const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
+  const filePath = `C:\Users\Aashman Sharma\Documents\GitHub\Track-It\app\assets\testData.txt`;
 
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
@@ -49,6 +54,8 @@ function CameraScreen() {
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
   const snapPoints = useMemo(() => ["1%", "85%"], []);
+
+  const [testData, setTestData] = useState("");
 
   const handleInput1Change = (text) => {
     setStoreName(text);
@@ -104,7 +111,10 @@ function CameraScreen() {
   };
 
   const retakePicture = () => {
-    console.log(info);
+    setDate("");
+    setAddress("");
+    setStoreName("");
+    setTotalPrice("");
     setPhoto(null);
   };
 
@@ -160,16 +170,32 @@ function CameraScreen() {
         body: JSON.stringify(body),
       });
       const result = await response.json();
-      console.log("callGoogleVisionAsync -> result", result);
-      setInfo(result.responses[0].textAnnotations[0].description);
-      openSheet();
+      console.log(
+        "callGoogleVisionAsync -> result",
+        result.responses[0].textAnnotations[0].description
+      );
+      setData(result).then((info) => {
+        openSheet();
+        console.log(info);
+        findData(info);
+      });
     } catch (error) {
       console.error(error);
     } finally {
-      console.log(info);
-      findData(info);
       setIsLoading(false);
     }
+  };
+
+  const setData = (result) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const info = result.responses[0].textAnnotations[0].description;
+        setInfo(info);
+        resolve(info);
+      } catch (error) {
+        reject(error);
+      }
+    });
   };
 
   const handlePress = async () => {
@@ -197,22 +223,55 @@ function CameraScreen() {
   };
 
   const findData = (text) => {
-    const priceFormat = /\d+\.\d+/g;
-    const numbers = text.match(priceFormat)?.map(Number) || [];
-    const totalPrice = Math.max(...numbers);
-    console.log(typeof totalPrice);
-    setTotalPrice("" + totalPrice);
+    try {
+      const newText = text.replace(/\$/g, "");
+      const priceFormat = /\d+\.\d+/g;
+      const numbers = text.match(priceFormat)?.map(Number) || [];
+      const totalPrice = Math.max(...numbers);
 
-    const regex =
-      /\b(\d{2}[\/-]\d{2}[\/-]\d{2}|\d{2}[\/-]\d{2}[\/-]\d{4}|\d{2}-\d{2}-\d{2})\b/g;
-    const match = text.match(regex);
-    setDate(match[0]);
+      setTotalPrice("" + totalPrice);
 
-    const index = text.indexOf("\n");
-    if (index !== -1) {
-      setStoreName(text.substring(0, index));
-    } else {
-      setStoreName("NoName");
+      if (totalPrice !== null) {
+        console.log("Price: ", totalPrice);
+        setTotalPrice("" + totalPrice);
+      } else {
+        console.log("Price: ", "No Price found");
+        setTotalPrice("");
+      }
+    } catch (e) {
+      console.log(e);
+      console.log("Price: ", "No Price found");
+      setTotalPrice("");
+    }
+
+    try {
+      const regex =
+        /\b((0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/(19|20)?\d{2}|(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-(19|20)?\d{2})\b/g;
+      const match = text.match(regex);
+      if (match != null) {
+        //console.log("Date: ", match[0]);
+        setDate(match[0]);
+      } else {
+        //console.log("Date: ", "No Date found");
+        setDate("");
+      }
+    } catch (e) {
+      //console.log("Date: ", "No Date found");
+      setDate("");
+    }
+
+    try {
+      const index = text.indexOf("\n");
+      if (index !== -1) {
+        // console.log(text.substring(0, index));
+        setStoreName(text.substring(0, index));
+      } else {
+        //console.log("Store: ", "No Store found");
+        setStoreName("");
+      }
+    } catch (e) {
+      //console.log("Store: ", "No Store found");
+      setStoreName("");
     }
   };
 
@@ -416,6 +475,7 @@ const styles = StyleSheet.create({
 
   contentContainer: {
     backgroundColor: "white",
+    margin: 10,
   },
 });
 

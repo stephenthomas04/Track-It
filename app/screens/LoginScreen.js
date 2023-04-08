@@ -30,7 +30,7 @@ const LoginScreen = (props) => {
   const [user, setUser] = useState();
 
   const nav = useNavigation();
-  const {navigation} = props;
+  const { navigation } = props;
 
   function onAuthStateChanged(user) {
     setUser(user);
@@ -47,7 +47,6 @@ const LoginScreen = (props) => {
     return unsubscribe;
   }, []);
 
-
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
@@ -59,44 +58,45 @@ const LoginScreen = (props) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
-      <Image
-        style={globalStyle.imageStyles}
-        source={require("../assets/trackIt.png")}
-      />
- 
-      <View style={globalStyle.inputContainer}>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={globalStyle.input}
+      <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
+        <Image
+          style={globalStyle.imageStyles}
+          source={require("../assets/trackIt.png")}
         />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          style={globalStyle.input}
-          secureTextEntry
-        />
-      </View>
 
-      <View style={globalStyle.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={globalStyle.button}>
-          <Text style={globalStyle.buttonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
-     
+        <View style={globalStyle.inputContainer}>
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={globalStyle.input}
+          />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            style={globalStyle.input}
+            secureTextEntry
+          />
+        </View>
 
-    <View style={styles.footer}>
-      <Text style={styles.footerText}> Don't have an account? </Text>
-        <TouchableOpacity>
-        <Button title = "Press me" onPress={() => navigation.navigate('Signup')} />
+        <View style={globalStyle.buttonContainer}>
+          <TouchableOpacity onPress={handleLogin} style={globalStyle.button}>
+            <Text style={globalStyle.buttonText}>Login</Text>
           </TouchableOpacity>
-      </View>
-       </KeyboardAvoidingView>
-       </TouchableWithoutFeedback>
-        
+        </View>
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}> Don't have an account? </Text>
+          <TouchableOpacity>
+            <Button
+              title="Press me"
+              onPress={() => navigation.navigate("Signup")}
+            />
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -104,17 +104,16 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   footer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 10,
-    textAlign: 'center',
-    flexDirection: 'row',
+    textAlign: "center",
+    flexDirection: "row",
   },
   footerText: {
     color: colors.darkGreenTextColor,
-
   },
   signupBtn: {
     color: colors.primaryButtonGreen,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });

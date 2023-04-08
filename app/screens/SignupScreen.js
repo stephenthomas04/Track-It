@@ -19,7 +19,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
 import globalStyle from "../config/globalStyle";
 
 const SignupScreen = () => {
@@ -56,42 +55,40 @@ const SignupScreen = () => {
       .catch((error) => alert(error.message));
   };
 
-  
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
+      <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
+        <Text>REGISTER TO TRACK-IT</Text>
 
-      <Text>
-        REGISTER TO TRACK-IT
+        <View style={globalStyle.inputContainer}>
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={globalStyle.input}
+          />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            style={globalStyle.input}
+            secureTextEntry
+          />
+        </View>
 
-      </Text>
-    
-      <View style={globalStyle.inputContainer}>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={globalStyle.input}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          style={globalStyle.input}
-          secureTextEntry
-        />
-      </View>
-
-      <View style={globalStyle.buttonContainer}>
-        <TouchableOpacity
-          onPress={handleSignUp}
-          style={[globalStyle.button, globalStyle.buttonOutline]} >
-          <Text style={globalStyle.buttonOutlineText}>Register</Text>
-        </TouchableOpacity>
-        <Button title="Click here to Login" onPress={() => navigation.navigate('Login')} />
-      </View>
-    </KeyboardAvoidingView>
+        <View style={globalStyle.buttonContainer}>
+          <TouchableOpacity
+            onPress={handleSignUp}
+            style={[globalStyle.button, globalStyle.buttonOutline]}
+          >
+            <Text style={globalStyle.buttonOutlineText}>Register</Text>
+          </TouchableOpacity>
+          <Button
+            title="Click here to Login"
+            onPress={() => navigation.navigate("Login")}
+          />
+        </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };

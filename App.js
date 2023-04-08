@@ -14,6 +14,7 @@ import SignupScreen from "./app/screens/SignupScreen";
 import CameraScreen from "./app/screens/CameraScreen";
 import colors from "./app/config/colors";
 import { Entypo } from "@expo/vector-icons";
+import { getAuth } from "firebase/auth";
 
 const Stack = createNativeStackNavigator();
 
