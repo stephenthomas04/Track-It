@@ -60,7 +60,7 @@ const LoginScreen = (props) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
         <Image
-          style={globalStyle.imageStyles}
+          style={styles.image}
           source={require("../assets/trackIt.png")}
         />
 
@@ -81,18 +81,19 @@ const LoginScreen = (props) => {
         </View>
 
         <View style={globalStyle.buttonContainer}>
-          <TouchableOpacity onPress={handleLogin} style={globalStyle.button}>
+          <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
             <Text style={globalStyle.buttonText}>Login</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.footerText}> Don't have an account? </Text>
           <TouchableOpacity>
+          <Text style={styles.footerText}> Don't have an account? </Text>
             <Button
-              title="Press me"
-              onPress={() => navigation.navigate("Signup")}
-            />
+              style={styles.appButtonContainer}
+              title="Sign Up"
+              onPress={() => navigation.navigate("Signup")}>
+              </Button>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -105,10 +106,28 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   footer: {
     position: "absolute",
-    bottom: 10,
+    paddingTop:520,
     textAlign: "center",
     flexDirection: "row",
   },
+  loginButton: {
+    backgroundColor: colors.primaryButtonGreen,
+    width: "60%",
+    padding: 15,
+    borderRadius: 20,
+    paddingBottom:20,
+    borderColor: colors.primaryDarkGreen,
+    borderWidth: 1,
+    alignItems: "center",
+  },
+ 
+    image: {
+      width: "30%",
+      height: "30%",
+      justifyContent: "center",
+      paddingTop: "5%",
+    },
+  
   footerText: {
     color: colors.darkGreenTextColor,
   },

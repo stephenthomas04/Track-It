@@ -1,5 +1,16 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Image,
+  Button,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import Constants from 'expo-constants';
 
 

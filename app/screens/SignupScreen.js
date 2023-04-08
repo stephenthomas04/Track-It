@@ -58,7 +58,11 @@ const SignupScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
-        <Text>REGISTER TO TRACK-IT</Text>
+      <Image
+          style={styles.image}
+          source={require("../assets/trackIt.png")}
+        />
+       <Text style={globalStyle.subHeading}>Register to Track-It:</Text>
 
         <View style={globalStyle.inputContainer}>
           <TextInput
@@ -94,3 +98,14 @@ const SignupScreen = () => {
 };
 
 export default SignupScreen;
+
+const styles = StyleSheet.create({
+
+  image: {
+    width: "30%",
+    height: "30%",
+    justifyContent: "center",
+    paddingTop: "5%",
+  },
+
+});
