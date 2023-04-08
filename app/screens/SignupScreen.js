@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     width: "30%",
     height: "30%",
     justifyContent: "center",
-    paddingTop: "5%",
   },
   footerText: {
     color: colors.darkGreenTextColor,

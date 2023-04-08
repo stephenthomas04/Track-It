@@ -322,7 +322,7 @@ function CameraScreen() {
               onPress={() => takePicture()}
             ></TouchableOpacity>
             <TouchableOpacity
-              style={styles.uploadButton}
+              style={styles.formButton}
               onPress={() => openSheet()}
             >
               <AntDesign name="form" size={24} color="green" />
@@ -405,7 +405,6 @@ const styles = StyleSheet.create({
     height: 80,
     backgroundColor: "#fff",
     borderRadius: "50%",
-    marginRight: "20%",
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 3,
@@ -460,7 +459,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 20,
-    marginRight: "7.5%",
+    marginRight: "15%",
+    borderWidth: 3,
+  },
+
+  formButton: {
+    width: 40,
+    height: 40,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 20,
+    marginLeft: "15%",
     borderWidth: 3,
   },
   input: {
