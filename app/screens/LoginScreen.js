@@ -63,7 +63,7 @@ const LoginScreen = (props) => {
           style={globalStyle.imageStyles}
           source={require("../assets/trackIt.png")}
         />
-
+        <Text style={globalStyle.subHeading}>Login to Track-It</Text>
         <View style={globalStyle.inputContainer}>
           <TextInput
             placeholder="Email"
@@ -81,19 +81,17 @@ const LoginScreen = (props) => {
         </View>
 
         <View style={globalStyle.buttonContainer}>
-          <TouchableOpacity onPress={handleLogin} style={globalStyle.button}>
-            <Text style={globalStyle.buttonText}>Login</Text>
+          <TouchableOpacity
+            onPress={handleLogin}
+            style={[globalStyle.button, globalStyle.buttonOutline]}>
+            <Text style={globalStyle.buttonOutlineText}>Login</Text>
+            
           </TouchableOpacity>
-        </View>
-
-        <View style={styles.footer}>
           <Text style={styles.footerText}> Don't have an account? </Text>
-          <TouchableOpacity>
             <Button
-              title="Press me"
+              title="Sign Up"
               onPress={() => navigation.navigate("Signup")}
             />
-          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
@@ -103,17 +101,16 @@ const LoginScreen = (props) => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  footer: {
-    position: "absolute",
-    bottom: 10,
-    textAlign: "center",
-    flexDirection: "row",
+
+  image: {
+    width: "30%",
+    height: "30%",
+    justifyContent: "center",
+    paddingTop: "5%",
   },
   footerText: {
     color: colors.darkGreenTextColor,
+    paddingTop: 20,
   },
-  signupBtn: {
-    color: colors.primaryButtonGreen,
-    fontWeight: "bold",
-  },
+
 });

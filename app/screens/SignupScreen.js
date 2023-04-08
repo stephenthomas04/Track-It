@@ -62,7 +62,7 @@ const SignupScreen = () => {
           style={styles.image}
           source={require("../assets/trackIt.png")}
         />
-       <Text style={globalStyle.subHeading}>Register to Track-It:</Text>
+       <Text style={globalStyle.subHeading}>Sign Up to Track-It</Text>
 
         <View style={globalStyle.inputContainer}>
           <TextInput
@@ -83,14 +83,15 @@ const SignupScreen = () => {
         <View style={globalStyle.buttonContainer}>
           <TouchableOpacity
             onPress={handleSignUp}
-            style={[globalStyle.button, globalStyle.buttonOutline]}
-          >
+            style={[globalStyle.button, globalStyle.buttonOutline]}>
             <Text style={globalStyle.buttonOutlineText}>Register</Text>
+            
           </TouchableOpacity>
-          <Button
-            title="Click here to Login"
-            onPress={() => navigation.navigate("Login")}
-          />
+          <Text style={styles.footerText}> Already have an account? </Text>
+            <Button
+              title="Login In"
+              onPress={() => navigation.navigate("Login")}
+            />
         </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
@@ -106,6 +107,10 @@ const styles = StyleSheet.create({
     height: "30%",
     justifyContent: "center",
     paddingTop: "5%",
+  },
+  footerText: {
+    color: colors.darkGreenTextColor,
+    paddingTop: 20,
   },
 
 });
