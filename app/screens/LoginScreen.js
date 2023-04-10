@@ -85,14 +85,15 @@ const LoginScreen = (props) => {
             onPress={handleLogin}
             style={[globalStyle.button, globalStyle.buttonOutline]}>
             <Text style={globalStyle.buttonOutlineText}>Login</Text>
-            
           </TouchableOpacity>
-          <Text style={styles.footerText}> Don't have an account? </Text>
-            <Button
-              title="Sign Up"
-              onPress={() => navigation.navigate("Signup")}
-            />
+          <Text>Don't have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+            <Text style={{color: '#AD40AF', fontWeight: '700'}}> Sign Up</Text>
+          </TouchableOpacity>
         </View>
+
+        
+        
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
