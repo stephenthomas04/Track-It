@@ -83,7 +83,7 @@ function RouteName() {
       />
 
       <Drawer.Screen
-        name="Camera"
+        name="Reciept Scanner"
         component={CameraScreen}
         options={{
           drawerIcon: () => (
