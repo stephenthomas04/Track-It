@@ -15,7 +15,7 @@ export default function DataScreen() {
 
   const testReceipts = [
     { id: "1", store: " Store", date: "1/9/23", price: "$100" },
-    { id: "2", store: "Store", date: "1/9/23", price: "$100" },
+    { id: "2", store: " Store", date: "1/9/23", price: "$100" },
     { id: "3", store: " Store", date: "1/9/23", price: "$100" },
     { id: "4", store: " Store", date: "1/9/23", price: "$100" },
     { id: "5", store: " Store", date: "1/9/23", price: "$100" },
@@ -27,7 +27,7 @@ export default function DataScreen() {
 
   useEffect(() => {
     (async () => {
-      const items = [];
+      /*const items = [];
       if (receipts.length <= 1) {
         const querySnapshot = await getDocs(collection(db, user));
         querySnapshot.forEach((doc) => {
@@ -38,11 +38,11 @@ export default function DataScreen() {
           items.push({ id, ...data });
         });
       }
-      setReceipts(items);
+      setReceipts(items);*/
 
       // The commented code above works. To test the code a sample array is passed in instead.
       // This will short the amount of calls made to firebase
-      //setReceipts(testReceipts);
+      setReceipts(testReceipts);
     })();
   }, []);
 
