@@ -14,6 +14,18 @@ import {
 } from "react-native-chart-kit";
 import { Value } from "react-native-reanimated";
 
+const testReceipts = [
+  { id: "1", store: " Store", date: "1/9/23", price: "100", },
+  { id: "2", store: "Store", date: "1/9/23", price: "100", },
+  { id: "3", store: " Store", date: "1/9/23", price: "100", },
+  { id: "4", store: " Store", date: "1/9/23", price: "100", },
+  { id: "5", store: " Store", date: "1/9/23", price: "100", },
+  { id: "6", store: " Store", date: "1/9/23", price: "100", },
+  { id: "7", store: " Store", date: "1/9/23", price: "100", },
+  { id: "8", store: " Store", date: "1/9/23", price: "100", },
+  { id: "9", store: " Store", date: "1/9/23", price: "100", },
+];
+
 const pieChartData = [
   {
     name: "Grocery",
@@ -59,12 +71,12 @@ const GraphScreen = () => {
           datasets: [
             {
               data: [
-                Math.random() * 10, //REPLACE THIS WITH ACTUAL USER DATA
+                testReceipts[0].price,
                 Math.random() * 10,
                 Math.random() * 10,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
+                Math.random() * 15,
+                Math.random() * 10,
+                Math.random() * 20,
               ],
             },
           ],
@@ -72,7 +84,7 @@ const GraphScreen = () => {
         width={Dimensions.get("window").width} // from react-native
         height={220}
         yAxisLabel="$"
-        yAxisSuffix="k"
+        yAxisSuffix=""
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
           backgroundColor: colors.whiteBackgroundColor,
