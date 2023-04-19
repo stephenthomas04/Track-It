@@ -47,9 +47,9 @@ const pieChartData = [
 
 const GraphScreen = () => {
   return (
-    <ScrollView>
+    <ScrollView style={globalStyle.graphScreen}>
       <Text style={globalStyle.subHeading}>
-        Spending over the last 6 months
+        Your Finance Outlook
       </Text>
       <StatusBar style="auto" />
 
@@ -75,12 +75,12 @@ const GraphScreen = () => {
         yAxisSuffix="k"
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
-          backgroundColor: colors.primaryGreen,
-          backgroundGradientFrom: colors.secondaryDarkGreen,
-          backgroundGradientTo: colors.secondaryGreen,
+          backgroundColor: colors.whiteBackgroundColor,
+          backgroundGradientFrom: colors.whiteBackgroundColor,
+          backgroundGradientTo: colors.whiteBackgroundColor,
           decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, 
           style: {
             borderRadius: 16,
           },
@@ -120,12 +120,12 @@ const GraphScreen = () => {
         yAxisSuffix="k"
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
-          backgroundColor: colors.primaryGreen,
-          backgroundGradientFrom: colors.secondaryDarkGreen,
-          backgroundGradientTo: colors.secondaryGreen,
+          backgroundColor: colors.whiteBackgroundColor,
+          backgroundGradientFrom: colors.whiteBackgroundColor,
+          backgroundGradientTo: colors.whiteBackgroundColor,
           decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           style: {
             borderRadius: 16,
           },
@@ -164,12 +164,12 @@ const GraphScreen = () => {
         yAxisSuffix="k"
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
-          backgroundColor: colors.primaryGreen,
-          backgroundGradientFrom: colors.secondaryDarkGreen,
-          backgroundGradientTo: colors.secondaryGreen,
+          backgroundColor: colors.whiteBackgroundColor,
+          backgroundGradientFrom: colors.whiteBackgroundColor,
+          backgroundGradientTo: colors.whiteBackgroundColor,
           decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, 
           style: {
             borderRadius: 16,
           },

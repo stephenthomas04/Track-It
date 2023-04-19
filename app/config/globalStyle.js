@@ -79,6 +79,9 @@ const globalStyle=StyleSheet.create({
     marginBottom: "5%",
     
   },
+  graphScreen:{
+    backgroundColor: colors.secondaryDarkGreen,
+  }
 
 
 })
