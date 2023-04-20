@@ -15,19 +15,24 @@ import {
 import { Value } from "react-native-reanimated";
 
 const testReceipts = [
-  { id: "1", store: " Store", date: "1/9/23", price: "100", },
-  { id: "2", store: "Store", date: "1/9/23", price: "100", },
-  { id: "3", store: " Store", date: "1/9/23", price: "100", },
-  { id: "4", store: " Store", date: "1/9/23", price: "100", },
-  { id: "5", store: " Store", date: "1/9/23", price: "100", },
-  { id: "6", store: " Store", date: "1/9/23", price: "100", },
-  { id: "7", store: " Store", date: "1/9/23", price: "100", },
-  { id: "8", store: " Store", date: "1/9/23", price: "100", },
-  { id: "9", store: " Store", date: "1/9/23", price: "100", },
+  { id: "1", store: " Store", date: "1/9/23", price: 23, },
+  { id: "2", store: "Store", date: "1/9/23", price: 234, },
+  { id: "3", store: " Store", date: "3/9/23", price: 324, },
+  { id: "4", store: " Store", date: "1/9/23", price: 23, },
+  { id: "5", store: " Store", date: "1/9/23", price: 100, },
+  { id: "6", store: " Store", date: "1/9/23", price: 100, },
+  { id: "7", store: " Store", date: "1/9/23", price: 620, },
+  { id: "8", store: " Store", date: "1/9/23", price: 100, },
+  { id: "9", store: " Store", date: "1/9/23", price: 150, },
 ];
+
+
+
+
 
 const pieChartData = [
   {
+    
     name: "Grocery",
     spent: 234,
     color: "rgba(131, 167, 234, 1)",
@@ -67,17 +72,10 @@ const GraphScreen = () => {
 
       <BarChart
         data={{
-          labels: ["January", "February", "March", "April", "May", "June"],
+          labels: testReceipts.map(receipt => receipt.date),
           datasets: [
             {
-              data: [
-                testReceipts[0].price,
-                Math.random() * 10,
-                Math.random() * 10,
-                Math.random() * 15,
-                Math.random() * 10,
-                Math.random() * 20,
-              ],
+              data: testReceipts.map(receipt => receipt.price),
             },
           ],
         }}
@@ -115,14 +113,8 @@ const GraphScreen = () => {
           labels: ["January", "February", "March", "April", "May", "June"],
           datasets: [
             {
-              data: [
-                Math.random() * 10, //REPLACE THIS WITH ACTUAL USER DATA
-                Math.random() * 10,
-                Math.random() * 10,
-                Math.random() * 15,
-                Math.random() * 10,
-                Math.random() * 20,
-              ],
+            
+              data: testReceipts.map(receipt => receipt.price),
             },
           ],
         }}
