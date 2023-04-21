@@ -26,6 +26,7 @@ import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { AntDesign } from "@expo/vector-icons";
 import { collection, addDoc } from "firebase/firestore";
 import * as ImagePicker from "expo-image-picker";
+import DropDownPicker from "react-native-dropdown-picker";
 import { getAuth } from "firebase/auth";
 import db from "../firebase";
 
@@ -39,7 +40,7 @@ function CameraScreen() {
 
   const [storeName, setStoreName] = useState("");
   const [totalPrice, setTotalPrice] = useState("");
-  const [address, setAddress] = useState("");
+  const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
 
   const API_KEY = "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0";
@@ -65,16 +66,12 @@ function CameraScreen() {
     setTotalPrice(text);
   };
 
-  const handleInput3Change = (text) => {
-    setAddress(text);
-  };
-
   const handleInput4Change = (text) => {
     setDate(text);
   };
 
   const handleInput5Change = (text) => {
-    setImage(text);
+    setCategory(text);
   };
 
   useEffect(() => {
@@ -99,7 +96,7 @@ function CameraScreen() {
 
   const uploadImage = async () => {
     setDate("");
-    setAddress("hello");
+
     setStoreName("");
     setTotalPrice("");
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -116,8 +113,7 @@ function CameraScreen() {
 
   const retakePicture = () => {
     setDate("");
-    setAddress("hello");
-    console.log(address);
+
     setStoreName("");
     setTotalPrice("");
     setPhoto(null);
@@ -205,7 +201,11 @@ function CameraScreen() {
 
   const handlePress = async () => {
     console.log("Submitted");
-    const fields = { storeName, totalPrice, address, date };
+    if (photo == null) {
+      setPhoto("Manually Inputted");
+    }
+
+    const fields = { storeName, totalPrice, category, date };
     const isValid = validateFields(fields);
 
     if (isValid) {
@@ -213,7 +213,7 @@ function CameraScreen() {
         const docRef = await addDoc(collection(db, user), {
           store: storeName,
           price: totalPrice,
-          address: address,
+          category: category,
           date: date,
         });
         console.log("Document written with ID: ", docRef.id);
@@ -354,12 +354,14 @@ function CameraScreen() {
                   placeholder="Price"
                   defaultValue={totalPrice}
                 />
+
                 <TextInput
                   style={styles.input}
-                  onChangeText={handleInput3Change}
-                  value={setAddress}
-                  placeholder="Address"
+                  onChangeText={handleInput5Change}
+                  value={setCategory}
+                  placeholder="Category"
                 />
+
                 <TextInput
                   style={styles.input}
                   onChangeText={handleInput4Change}
