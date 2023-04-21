@@ -15,16 +15,49 @@ import {
 import { Value } from "react-native-reanimated";
 
 const testReceipts = [
-  { id: "1", store: " Store", date: "1/9/23", price: 23, },
-  { id: "2", store: "Store", date: "1/9/23", price: 234, },
-  { id: "3", store: " Store", date: "3/9/23", price: 324, },
-  { id: "4", store: " Store", date: "1/9/23", price: 23, },
-  { id: "5", store: " Store", date: "1/9/23", price: 100, },
-  { id: "6", store: " Store", date: "1/9/23", price: 100, },
-  { id: "7", store: " Store", date: "1/9/23", price: 620, },
-  { id: "8", store: " Store", date: "1/9/23", price: 100, },
-  { id: "9", store: " Store", date: "1/9/23", price: 150, },
+  { id: "1", store: " Store", date: "1/9/23 ", price: 23, },
+  { id: "2", store: "Store", date: "1/9/23 ", price: 234, },
+  { id: "3", store: " Store", date: "3/9/23 ", price: 324, },
+  { id: "4", store: " Store", date: "1/9/23 ", price: 23, },
+  { id: "5", store: " Store", date: "1/9/23 ", price: 100, },
+  { id: "6", store: " Store", date: "1/10/23 ", price: 100, },
+  { id: "7", store: " Store", date: "2/9/23 ", price: 620, },
+  { id: "8", store: " Store", date: "5/9/24 ", price: 100, },
+  { id: "9", store: " Store", date: "1/9/23 ", price: 150, },
 ];
+
+const sortedData = testReceipts.sort((a, b) => {
+  const dateA = new Date(a.date.split('/').reverse().join('-')).getTime();
+  const dateB = new Date(b.date.split('/').reverse().join('-')).getTime();
+  
+    return dateA - dateB;
+  
+  
+});
+
+const sortSimilarDates = sortedData.sort((a,b) => {
+  const dateA = new Date(a.date.split('/').reverse().join('-')).getTime();
+  const dateB = new Date(b.date.split('/').reverse().join('-')).getTime();
+
+  if(dateA == dateB){ 
+    console.log("This is dateA " + dateA + " , This is dateB " + dateB );
+    const total = a.price  + b.price;
+
+    sortedData.splice((a.id-1), 1);
+
+    console.log(sortedData);
+    
+    return sortedData;
+  }
+  else{
+     return "";
+  }
+});
+
+console.log(sortedData);
+
+
+
 
 
 
@@ -72,7 +105,7 @@ const GraphScreen = () => {
 
       <BarChart
         data={{
-          labels: testReceipts.map(receipt => receipt.date),
+          labels: sortedData.map(receipt => receipt.date),
           datasets: [
             {
               data: testReceipts.map(receipt => receipt.price),
@@ -148,7 +181,7 @@ const GraphScreen = () => {
 
       <LineChart
         data={{
-          labels: ["January", "February", "March", "April", "May", "June"],
+          labels: testReceipts.map(receipt => receipt.date),
           datasets: [
             {
               data: [
