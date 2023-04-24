@@ -14,20 +14,67 @@ export default function DataScreen() {
   const [receipts, setReceipts] = useState([]);
 
   const testReceipts = [
-    { id: "1", store: " Store", date: "1/9/23", price: "$100" },
-    { id: "2", store: " Store", date: "1/9/23", price: "$100" },
-    { id: "3", store: " Store", date: "1/9/23", price: "$100" },
-    { id: "4", store: " Store", date: "1/9/23", price: "$100" },
-    { id: "5", store: " Store", date: "1/9/23", price: "$100" },
-    { id: "6", store: " Store", date: "1/9/23", price: "$100" },
-    { id: "7", store: " Store", date: "1/9/23", price: "$100" },
-    { id: "8", store: " Store", date: "1/9/23", price: "$100" },
-    { id: "9", store: " Store", date: "1/9/23", price: "$100" },
+    {
+      category: "Cloths",
+      date: "01/11/23",
+      id: "yCTOISkTSfSQJnZoAbSt",
+      price: "12.99",
+      store: "Kohls",
+    },
+    {
+      category: "Food",
+      date: "01/13/23",
+      id: "8LXGx7hr974P3T8o4pY",
+      price: "15.99",
+      store: "Chipotle",
+    },
+    {
+      category: "Entertainment",
+      date: "03/04/23",
+      id: "Q2JMOLBF8S7Ku08Cafc",
+      price: "6.99",
+      store: "AMC",
+    },
+    {
+      category: "Personal",
+      date: "09/13/23",
+      id: "WB8IjKQm3uwmd0OR2as",
+      price: "0.99",
+      store: "walmart",
+    },
+    {
+      category: "Food",
+      date: "09/13/23",
+      id: "YelkygyNsJj3wxB0aMz",
+      price: "11.50",
+      store: "Chipotle",
+    },
+    {
+      category: "Food",
+      date: "09/14/23",
+      id: "jKe0kJWUDCiZt2aZYau",
+      price: "9.99",
+      store: "Chipotle",
+    },
+    {
+      category: "Travel",
+      date: "09/15/23",
+      id: "m4tAdv3UofY0kJhXmI9",
+      price: "125.99",
+      store: "Delta",
+    },
+    {
+      category: "Entertainment",
+      date: "12/13/23",
+      id: "nFNITrmLoEE7domhGN1",
+      price: "50.00",
+      store: "Arcade",
+    },
   ];
 
   useEffect(() => {
     (async () => {
-      /*const items = [];
+      const items = [];
       if (receipts.length <= 1) {
         const querySnapshot = await getDocs(collection(db, user));
         querySnapshot.forEach((doc) => {
@@ -38,11 +85,10 @@ export default function DataScreen() {
           items.push({ id, ...data });
         });
       }
-      setReceipts(items);*/
-
+      setReceipts(items);
       // The commented code above works. To test the code a sample array is passed in instead.
       // This will short the amount of calls made to firebase
-      setReceipts(testReceipts);
+      //setReceipts(testReceipts);
     })();
   }, []);
 

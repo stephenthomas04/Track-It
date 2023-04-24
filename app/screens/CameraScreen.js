@@ -35,6 +35,8 @@ function CameraScreen() {
     "Nike\n39.99\n$45.99\n1/15/2023\n2045634\nhgdwjeolgrd\n00.99\n$37.72\n$00.00\n&3.99\n$-48.25"
   );
 
+  const defaultImage = require("../assets/defaultReceipt.png");
+
   const auth = getAuth();
   const user = auth.currentUser.email;
 
@@ -49,6 +51,7 @@ function CameraScreen() {
 
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
+  const [cameraToggle, setCameraToggle] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [info, setInfo] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -91,6 +94,7 @@ function CameraScreen() {
       const options = { quality: 0.5, base64: true };
       const data = await cameraRef.takePictureAsync(options);
       setPhoto(data.base64);
+      setCameraToggle(null);
     }
   };
 
@@ -108,6 +112,7 @@ function CameraScreen() {
 
     if (!result.canceled) {
       setPhoto(result.base64);
+      setCameraToggle(null);
     }
   };
 
@@ -117,6 +122,7 @@ function CameraScreen() {
     setStoreName("");
     setTotalPrice("");
     setPhoto(null);
+    setCameraToggle(true);
   };
 
   if (hasPermission === null) {
@@ -282,30 +288,44 @@ function CameraScreen() {
 
   return (
     <View style={styles.container}>
-      {photo ? (
+      {!cameraToggle ? (
         <View style={styles.preview}>
-          <Text style={styles.previewText}>Receipt Image:</Text>
-          <Image
-            style={styles.previewImage}
-            source={{ uri: `data:image/jpeg;base64,${photo}` }}
-          />
-          <TouchableOpacity
-            style={styles.retakeButton}
-            onPress={() => retakePicture()}
-          >
-            <Text style={styles.buttonText}>Retake</Text>
-          </TouchableOpacity>
+          <View style={styles.shadow}>
+            {photo ? (
+              <Image
+                style={styles.previewImage}
+                source={{ uri: `data:image/jpeg;base64,${photo}` }}
+              />
+            ) : (
+              <Image style={styles.previewImage} source={defaultImage} />
+            )}
+          </View>
+
+          <View style={styles.buttonRow}>
+            <TouchableOpacity
+              style={styles.retakeButton}
+              onPress={() => retakePicture()}
+            >
+              <Text style={styles.buttonText}>Retake</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={() => callGoogleVisionAsync(photo)}
+            >
+              <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.formButton}
+              onPress={() => openSheet()}
+            >
+              <AntDesign name="form" size={24} color="green" />
+            </TouchableOpacity>
+          </View>
           {isLoading ? (
             <View style={styles.indicatorWrapper}>
               <ActivityIndicator size="large" color="#0000ff" />
             </View>
           ) : null}
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={() => callGoogleVisionAsync(photo)}
-          >
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
         </View>
       ) : (
         <Camera style={styles.camera} ref={(ref) => setCameraRef(ref)}>
@@ -321,12 +341,6 @@ function CameraScreen() {
               style={styles.cameraButton}
               onPress={() => takePicture()}
             ></TouchableOpacity>
-            <TouchableOpacity
-              style={styles.formButton}
-              onPress={() => openSheet()}
-            >
-              <AntDesign name="form" size={24} color="green" />
-            </TouchableOpacity>
           </View>
         </Camera>
       )}
@@ -395,11 +409,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   buttonContainer: {
-    backgroundColor: "#222",
     flex: 0.15,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    marginRight: 125,
     width: "100%",
   },
   cameraButton: {
@@ -416,7 +430,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   preview: {
-    flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
@@ -427,7 +441,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   previewImage: {
-    width: 300,
+    width: 320,
     height: 600,
     borderRadius: 10,
     border: 1,
@@ -439,8 +453,6 @@ const styles = StyleSheet.create({
     borderRadius: "25%",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 200,
-    marginTop: 10,
     borderWidth: 1,
   },
 
@@ -451,8 +463,16 @@ const styles = StyleSheet.create({
     borderRadius: "25%",
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 200,
     borderWidth: 1,
+  },
+
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    width: "100%",
+    marginTop: 30,
   },
   uploadButton: {
     width: 40,
@@ -466,14 +486,13 @@ const styles = StyleSheet.create({
   },
 
   formButton: {
-    width: 40,
-    height: 40,
+    width: 100,
+    height: 60,
     backgroundColor: "#fff",
+    borderRadius: "25%",
     justifyContent: "center",
     alignItems: "center",
-    margin: 20,
-    marginLeft: "15%",
-    borderWidth: 3,
+    borderWidth: 1,
   },
   input: {
     height: 40,
@@ -493,6 +512,13 @@ const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: "white",
     margin: 10,
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 3,
   },
 });
 
