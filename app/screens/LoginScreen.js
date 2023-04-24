@@ -86,9 +86,9 @@ const LoginScreen = (props) => {
             style={[globalStyle.button, globalStyle.buttonOutline]}>
             <Text style={globalStyle.buttonOutlineText}>Login</Text>
           </TouchableOpacity>
-          <Text>Don't have an account?</Text>
+          <Text style={{fontSize: '20'}}>Don't have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-            <Text style={{color: '#AD40AF', fontWeight: '700'}}> Sign Up</Text>
+            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '20'}}> Sign Up</Text>
           </TouchableOpacity>
         </View>
 
