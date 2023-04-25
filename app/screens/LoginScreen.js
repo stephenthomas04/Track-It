@@ -10,6 +10,7 @@ import {
   View,
   Image,
   Button,
+  InputField,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -20,6 +21,7 @@ import {
 } from "firebase/auth";
 
 import globalStyle from "../config/globalStyle";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState("");
@@ -65,6 +67,9 @@ const LoginScreen = (props) => {
         />
         <Text style={globalStyle.subHeading}>Login to Track-It</Text>
         <View style={globalStyle.inputContainer}>
+      
+        <MaterialCommunityIcons name="login-variant" size={24} color="black"style={{marginRight: 5}} />
+    
           <TextInput
             placeholder="Email"
             value={email}
@@ -86,9 +91,9 @@ const LoginScreen = (props) => {
             style={[globalStyle.button, globalStyle.buttonOutline]}>
             <Text style={globalStyle.buttonOutlineText}>Login</Text>
           </TouchableOpacity>
-          <Text style={{fontSize: '20'}}>Don't have an account?</Text>
+          <Text style={{fontSize: "15", marginUp: 5}}>Don't have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '20'}}> Sign Up</Text>
+            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '15'}}> Sign Up</Text>
           </TouchableOpacity>
         </View>
 
@@ -113,5 +118,6 @@ const styles = StyleSheet.create({
     color: colors.darkGreenTextColor,
     paddingTop: 20,
   },
+  
 
 });
