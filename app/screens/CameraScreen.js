@@ -149,6 +149,10 @@ function CameraScreen() {
     sheetRef.current.collapse();
   };
 
+  const backOut = () => {
+    setCameraToggle(null);
+  };
+
   const callGoogleVisionAsync = async (image) => {
     setIsLoading(true);
     const body = {
@@ -231,6 +235,7 @@ function CameraScreen() {
     } else {
       Alert.alert("Error", "Please fill in all required fields");
     }
+    setCameraToggle(null);
   };
 
   const findData = (text) => {
@@ -306,7 +311,7 @@ function CameraScreen() {
               style={styles.retakeButton}
               onPress={() => retakePicture()}
             >
-              <Text style={styles.buttonText}>Retake</Text>
+              <AntDesign name="camerao" size={30} color="green" />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.submitButton}
@@ -318,7 +323,7 @@ function CameraScreen() {
               style={styles.formButton}
               onPress={() => openSheet()}
             >
-              <AntDesign name="form" size={24} color="green" />
+              <AntDesign name="form" size={30} color="green" />
             </TouchableOpacity>
           </View>
           {isLoading ? (
@@ -341,6 +346,13 @@ function CameraScreen() {
               style={styles.cameraButton}
               onPress={() => takePicture()}
             ></TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => backOut()}
+            >
+              <AntDesign name="arrowright" size={24} color="green" />
+            </TouchableOpacity>
           </View>
         </Camera>
       )}
@@ -411,10 +423,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 0.15,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
-    marginRight: 125,
+    marginLeft: "15%",
     width: "100%",
+    marginBottom: "4%",
   },
   cameraButton: {
     width: 80,
@@ -423,7 +436,6 @@ const styles = StyleSheet.create({
     borderRadius: "50%",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 3,
   },
   buttonText: {
     color: "#222",
@@ -480,9 +492,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
-    margin: 20,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: "15%",
-    borderWidth: 3,
   },
 
   formButton: {
