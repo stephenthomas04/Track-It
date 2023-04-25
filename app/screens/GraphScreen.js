@@ -15,16 +15,88 @@ import {
 import { Value } from "react-native-reanimated";
 
 const testReceipts = [
-  { id: "1", store: " Store", date: "1/9/23 ", price: 23, },
-  { id: "2", store: "Store", date: "3/9/23 ", price: 234, },
-  { id: "3", store: " Store", date: "2/9/23 ", price: 324, },
-  { id: "4", store: " Store", date: "5/9/23 ", price: 23, },
-  { id: "5", store: " Store", date: "4/9/23 ", price: 100, },
-  { id: "6", store: " Store", date: "7/10/23 ", price: 100, },
-  { id: "7", store: " Store", date: "6/9/23 ", price: 620, },
-  { id: "8", store: " Store", date: "9/9/23 ", price: 100, },
-  { id: "9", store: " Store", date: "8/9/23 ", price: 150, },
+  {
+    category: "Cloths",
+    day: "01",
+    month: "11",
+    year: "23",
+    id: "yCTOISkTSfSQJnZoAbSt",
+    price: "12.99",
+    store: "Kohls",
+  },
+  {
+    category: "Food",
+    day: "01",
+    month: "13",
+    year: "23",
+    id: "8LXGx7hr974P3T8o4pY",
+    price: "15.99",
+    store: "Chipotle",
+  },
+  {
+    category: "Entertainment",
+    day: "03",
+    month: "04",
+    year: "23",
+    id: "Q2JMOLBF8S7Ku08Cafc",
+    price: "6.99",
+    store: "AMC",
+  },
+  {
+    category: "Personal",
+    day: "09",
+    month: "13",
+    year: "23",
+    id: "WB8IjKQm3uwmd0OR2as",
+    price: "0.99",
+    store: "walmart",
+  },
+  {
+    category: "Food",
+    day: "09",
+    month: "13",
+    year: "23",
+    id: "YelkygyNsJj3wxB0aMz",
+    price: "11.50",
+    store: "Chipotle",
+  },
+  {
+    category: "Food",
+    day: "09",
+    month: "14",
+    year: "23",
+    id: "jKe0kJWUDCiZt2aZYau",
+    price: "9.99",
+    store: "Chipotle",
+  },
+  {
+    category: "Travel",
+    day: "09",
+    month: "15",
+    year: "23",
+    id: "m4tAdv3UofY0kJhXmI9",
+    price: "125.99",
+    store: "Delta",
+  },
+  {
+    category: "Entertainment",
+    day: "12",
+    month: "13",
+    year: "23",
+    id: "nFNITrmLoEE7domhGN1",
+    price: "50.00",
+    store: "Arcade",
+  },
 ];
+
+function stringToDouble(str) {
+  let num = parseFloat(str);
+  if (isNaN(num)) {
+    return null;
+  }
+  return num;
+}
+
 
 
   const sortedData = testReceipts.sort((a, b) => {
@@ -40,6 +112,25 @@ const testReceipts = [
      }
 
   });
+
+
+  function stringToDouble(str) {
+    let num = parseFloat(str);
+    if (isNaN(num)) {
+      return null;
+    }
+    return num;
+  }
+
+  function convertPriceToDouble(receipts) {
+    const convertedReceipts = receipts.map((receipt) => {
+      const price = receipt.price;
+      const convertedPrice = stringToDouble(price);
+      return { ...receipt, price: convertedPrice };
+    });
+    return convertedReceipts;
+  }
+  
 
 
 
@@ -86,6 +177,7 @@ const pieChartData = [
 
 const GraphScreen = () => {
   return (
+    
     <ScrollView style={globalStyle.graphScreen}>
       <Text style={globalStyle.subHeading}>
         Your Finance Outlook
@@ -97,6 +189,8 @@ const GraphScreen = () => {
           labels: sortedData.map(receipt => receipt.date),
           datasets: [
             {
+              const convertedReceipts = convertPriceToDouble(testReceipts);
+              console.log(convertedReceipts);
               data: testReceipts.map(receipt => receipt.price),
             },
           ],

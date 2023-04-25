@@ -127,7 +127,8 @@ function HomeScreen(){
         ]}>
         <Card.Content>
           <Text style={globalStyle.title}>Headliners</Text>
-            <Text style={globalStyle.subHeading}>New</Text>
+            <Text style={globalStyle.subHeading}>News</Text>
+            
         </Card.Content>
       </Card>
 
