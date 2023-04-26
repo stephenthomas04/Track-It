@@ -114,13 +114,6 @@ function stringToDouble(str) {
   });
 
 
-  function stringToDouble(str) {
-    let num = parseFloat(str);
-    if (isNaN(num)) {
-      return null;
-    }
-    return num;
-  }
 
   function convertPriceToDouble(receipts) {
     const convertedReceipts = receipts.map((receipt) => {
@@ -130,6 +123,9 @@ function stringToDouble(str) {
     });
     return convertedReceipts;
   }
+
+  convertedReceipts = convertPriceToDouble(testReceipts);
+  console.log(convertedReceipts);
   
 
 
@@ -177,6 +173,7 @@ const pieChartData = [
 
 const GraphScreen = () => {
   return (
+
     
     <ScrollView style={globalStyle.graphScreen}>
       <Text style={globalStyle.subHeading}>
@@ -189,8 +186,7 @@ const GraphScreen = () => {
           labels: sortedData.map(receipt => receipt.date),
           datasets: [
             {
-              const convertedReceipts = convertPriceToDouble(testReceipts);
-              console.log(convertedReceipts);
+              
               data: testReceipts.map(receipt => receipt.price),
             },
           ],
