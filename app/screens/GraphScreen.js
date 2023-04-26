@@ -99,6 +99,8 @@ function stringToDouble(str) {
 
 
 
+
+
   
 
 
@@ -106,15 +108,47 @@ function stringToDouble(str) {
     const convertedReceipts = receipts.map((receipt) => {
       const price = receipt.price;
       const convertedPrice = stringToDouble(price);
-      return { ...receipt, price: convertedPrice };
+
+      const day = receipt.day;
+      const convertedDay = stringToDouble(day);
+
+
+      const month = receipt.month;
+      const convertedMonth = stringToDouble(month);
+
+      const year = receipt.year;
+      const convertedYear = stringToDouble(year);
+      
+      return { day: convertedDay, month: convertedMonth, year: convertedYear, price: convertedPrice };
     });
     return convertedReceipts;
   }
 
+  function filterData(receipts){
+    for(let i = 0; i < receipts; i++){
+      if(receipts[i].day == receipts[(i+1)].day){
+        receipts
+      }
+    }
+    
+    return convertedReceipts;
+  }
+
+
+
   convertedReceipts = convertPriceToDouble(testReceipts);
   console.log(convertedReceipts);
   
+//Comment this out for run 
 
+//  for( let i = 0; i < 10; i++){
+  //  if(convertedReciepts[i].day != null){
+      
+    
+    //  console.log("Index " + i + " date  is : "+convertedReceipts[i].day);
+    //}
+    
+  //}
 
 
 
@@ -170,7 +204,7 @@ const GraphScreen = () => {
 
       <BarChart
         data={{
-          labels: sortedData.map(receipt => receipt.date),
+          labels: testReceipts.map(receipt => receipt.date),
           datasets: [
             {
               

@@ -92,6 +92,9 @@ const globalStyle=StyleSheet.create({
   },
   graphScreen:{
     backgroundColor: colors.secondaryDarkGreen,
+  },
+  defaultScreen:{
+    backgroundColor: colors.whiteBackgroundColor,
   }
 
 
