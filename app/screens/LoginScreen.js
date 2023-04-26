@@ -68,7 +68,6 @@ const LoginScreen = (props) => {
         <Text style={globalStyle.subHeading}>Login to Track-It</Text>
         <View style={globalStyle.inputContainer}>
       
-        <MaterialCommunityIcons name="login-variant" size={24} color="black"style={{marginRight: 5}} />
     
           <TextInput
             placeholder="Email"
@@ -88,8 +87,8 @@ const LoginScreen = (props) => {
         <View style={globalStyle.buttonContainer}>
           <TouchableOpacity
             onPress={handleLogin}
-            style={[globalStyle.button, globalStyle.buttonOutline]}>
-            <Text style={globalStyle.buttonOutlineText}>Login</Text>
+            style={[globalStyle.button, globalStyle.buttonOutlineGreen]}>
+            <Text style={globalStyle.buttonLoginText}>Login</Text>
           </TouchableOpacity>
           <Text style={{fontSize: "15", marginUp: 5}}>Don't have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>

@@ -62,6 +62,12 @@ const globalStyle=StyleSheet.create({
     borderColor: colors.primaryDarkGreen,
     borderWidth: 2,
   },
+  buttonOutlineGreen: {
+    backgroundColor: "#14AE5C",
+    marginTop: 5,
+    borderColor: "white",
+    borderWidth: 2,
+  },
   buttonText: {
     color: "white",
     fontWeight: "700",
@@ -69,6 +75,11 @@ const globalStyle=StyleSheet.create({
   },
   buttonOutlineText: {
     color: colors.primaryDarkGreen,
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  buttonLoginText: {
+    color: "white",
     fontWeight: "700",
     fontSize: 16,
   },
