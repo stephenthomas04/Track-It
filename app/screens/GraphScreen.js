@@ -99,20 +99,7 @@ function stringToDouble(str) {
 
 
 
-  const sortedData = testReceipts.sort((a, b) => {
-    const dateA = new Date(a.date.split('/').reverse().join('-')).getTime();
-      console.log(dateA);
-    const dateB = new Date(b.date.split('/').reverse().join('-')).getTime();
-    
-     const date = dateA - dateB;
-    
-     if(date == 0){
-      a.price = a.price + b.price;
-
-     }
-
-  });
-
+  
 
 
   function convertPriceToDouble(receipts) {
