@@ -99,11 +99,6 @@ function stringToDouble(str) {
 
 
 
-
-
-  
-
-
   function convertPriceToDouble(receipts) {
     const convertedReceipts = receipts.map((receipt) => {
       const price = receipt.price;
@@ -124,31 +119,37 @@ function stringToDouble(str) {
     return convertedReceipts;
   }
 
-  function filterData(receipts){
-    for(let i = 0; i < receipts; i++){
-      if(receipts[i].day == receipts[(i+1)].day){
-        receipts
-      }
-    }
-    
-    return convertedReceipts;
-  }
+  //function filterData(receipts){
+    //const price = 0;
+    //for(let i = 0; i < receipts.length; i++){
+      //if(i != 0){
+        //if(receipts[i].day == receipts[(i-1)].day){
+          //price = receipts[i].price + receipts[i-1].price;
+          //receipts[i].price = price;
 
+         // receipts.splice(i-1, 1);
 
-
-  convertedReceipts = convertPriceToDouble(testReceipts);
-  console.log(convertedReceipts);
-  
-//Comment this out for run 
-
-//  for( let i = 0; i < 10; i++){
-  //  if(convertedReciepts[i].day != null){
-      
-    
-    //  console.log("Index " + i + " date  is : "+convertedReceipts[i].day);
+      //  }
+     // }
     //}
     
-  //}
+  //  return receipts;
+//  }
+
+
+
+  const convertedReceipts = convertPriceToDouble(testReceipts);
+  console.log(convertedReceipts);
+  
+  //console.log(filterData(convertedReceipts));
+//Comment this out for run 
+
+for( let i = 0; i < convertedReceipts.length; i++){
+  if(convertedReceipts[i].day != null){
+     console.log("Index " + i + " date  is : "+convertedReceipts[i].day);
+    }
+    
+  }
 
 
 
