@@ -25,7 +25,8 @@ const globalStyle=StyleSheet.create({
     color: colors.darkGreenTextColor,
     padding: "5%", 
     fontSize: 28,
-    marginBottom: "5%",
+    marginRight: "60%",
+    marginUp: "5%",
   },
   inputContainer: {
     padding: "5%",
@@ -33,10 +34,10 @@ const globalStyle=StyleSheet.create({
     backgroundColor: colors.whiteBackgroundColor,
   },
   input: {
-    backgroundColor: colors.greyTextColor,
+    backgroundColor: colors.primaryGreen,
     paddingHorizontal: "3%",
     paddingVertical: "2%",
-    borderRadius: "20%",
+    borderRadius: "10%",
     marginTop: "7%",
     height:50,
   },
@@ -84,8 +85,9 @@ const globalStyle=StyleSheet.create({
     fontSize: 16,
   },
   imageStyles:{
-    width: "30%",
-    height: "30%",
+    width: "50%",
+    height: "50%",
+    tintColor: "black",
     justifyContent: "center",
     marginBottom: "5%",
     

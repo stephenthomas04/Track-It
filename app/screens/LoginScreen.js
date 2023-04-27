@@ -65,7 +65,7 @@ const LoginScreen = (props) => {
           style={globalStyle.imageStyles}
           source={require("../assets/trackIt.png")}
         />
-        <Text style={globalStyle.subHeading}>Login to Track-It</Text>
+        <Text style={globalStyle.subHeading}>Login</Text>
         <View style={globalStyle.inputContainer}>
       
     
@@ -73,13 +73,14 @@ const LoginScreen = (props) => {
             placeholder="Email"
             value={email}
             onChangeText={(text) => setEmail(text)}
-            style={globalStyle.input}
+            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:1, paddingBottom:8, marginBottom:25}}
           />
+          <MaterialCommunityIcons >Video @10:51</MaterialCommunityIcons>
           <TextInput
             placeholder="Password"
             value={password}
             onChangeText={(text) => setPassword(text)}
-            style={globalStyle.input}
+            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:1, paddingBottom:8}}
             secureTextEntry
           />
         </View>
