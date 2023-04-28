@@ -8,6 +8,7 @@ const globalStyle=StyleSheet.create({
     backgroundColor: colors.whiteBackgroundColor,
     justifyContent: "center",
     alignItems: "center",
+   
   },
   buttonText: {
     color: colors.greyTextColor,
@@ -26,12 +27,13 @@ const globalStyle=StyleSheet.create({
     padding: "5%", 
     fontSize: 28,
     marginRight: "60%",
-    marginUp: "5%",
+    marginTop: "5%",
   },
   inputContainer: {
     padding: "5%",
     width: "75%",
     backgroundColor: colors.whiteBackgroundColor,
+  
   },
   input: {
     backgroundColor: colors.primaryGreen,
@@ -85,11 +87,10 @@ const globalStyle=StyleSheet.create({
     fontSize: 16,
   },
   imageStyles:{
-    width: "50%",
-    height: "50%",
-    tintColor: "black",
+    width: "60%",
+    height: "60%",
     justifyContent: "center",
-    marginBottom: "5%",
+    marginTop: "30%",
     
   },
   graphScreen:{

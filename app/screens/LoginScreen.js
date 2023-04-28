@@ -22,6 +22,7 @@ import {
 
 import globalStyle from "../config/globalStyle";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState("");
@@ -68,19 +69,20 @@ const LoginScreen = (props) => {
         <Text style={globalStyle.subHeading}>Login</Text>
         <View style={globalStyle.inputContainer}>
       
-    
+        <AntDesign name="user" size={20} color="green" />
           <TextInput
             placeholder="Email"
             value={email}
             onChangeText={(text) => setEmail(text)}
-            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:1, paddingBottom:8, marginBottom:25}}
+            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:2, paddingBottom:8, marginBottom:25, paddingLeft:30}}
           />
-          <MaterialCommunityIcons >Video @10:51</MaterialCommunityIcons>
+
+        <AntDesign name="lock" size={20} color="green" />
           <TextInput
             placeholder="Password"
             value={password}
             onChangeText={(text) => setPassword(text)}
-            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:1, paddingBottom:8}}
+            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:2, paddingBottom:8, paddingLeft:30}}
             secureTextEntry
           />
         </View>
@@ -96,9 +98,6 @@ const LoginScreen = (props) => {
             <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '15'}}> Sign Up</Text>
           </TouchableOpacity>
         </View>
-
-        
-        
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
