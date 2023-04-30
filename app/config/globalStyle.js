@@ -25,7 +25,7 @@ const globalStyle=StyleSheet.create({
   subHeading: {
     color: colors.darkGreenTextColor,
     padding: "5%", 
-    fontSize: 28,
+    fontSize: 30,
     marginRight: "60%",
     marginTop: "5%",
   },
@@ -54,7 +54,7 @@ const globalStyle=StyleSheet.create({
     backgroundColor: colors.primaryButtonGreen,
     width: "60%",
     padding: 15,
-    borderRadius: 20,
+    borderRadius: 15,
     borderColor: colors.primaryDarkGreen,
     borderWidth: 1,
     alignItems: "center",
@@ -87,10 +87,11 @@ const globalStyle=StyleSheet.create({
     fontSize: 16,
   },
   imageStyles:{
-    width: "60%",
-    height: "60%",
-    justifyContent: "center",
-    marginTop: "30%",
+    width: "50%",
+    height: "50%",
+    justifyContent: 'center',
+    alignContent:'center',
+    marginTop: "50%",
     
   },
   graphScreen:{

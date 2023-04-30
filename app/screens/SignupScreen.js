@@ -19,7 +19,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
 import globalStyle from "../config/globalStyle";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
@@ -59,23 +62,26 @@ const SignupScreen = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
       <Image
-          style={styles.image}
+          style={globalStyle.imageStyles}
           source={require("../assets/trackIt.png")}
         />
-       <Text style={globalStyle.subHeading}>Sign Up to Track-It</Text>
-
+        <Text style={globalStyle.subHeading}>Sign Up</Text>
         <View style={globalStyle.inputContainer}>
+      
+        <AntDesign name="user" size={20} color="green" />
           <TextInput
             placeholder="Email"
             value={email}
             onChangeText={(text) => setEmail(text)}
-            style={globalStyle.input}
+            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:2, paddingBottom:8, marginBottom:25, paddingLeft:30}}
           />
+
+<AntDesign name="lock" size={20} color="green" />
           <TextInput
             placeholder="Password"
             value={password}
             onChangeText={(text) => setPassword(text)}
-            style={globalStyle.input}
+            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:2, paddingBottom:8, paddingLeft:30}}
             secureTextEntry
           />
         </View>
@@ -83,15 +89,15 @@ const SignupScreen = () => {
         <View style={globalStyle.buttonContainer}>
           <TouchableOpacity
             onPress={handleSignUp}
-            style={[globalStyle.button, globalStyle.buttonOutline]}>
-            <Text style={globalStyle.buttonOutlineText}>Register</Text>
-            
+            style={[globalStyle.button, globalStyle.buttonOutlineGreen]}>
+            <Text style={globalStyle.buttonLoginText}>Sign Up</Text>
           </TouchableOpacity>
-          <Text style={styles.footerText}> Already have an account? </Text>
-            <Button
-              title="Login In"
-              onPress={() => navigation.navigate("Login")}
-            />
+          <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: "100%", }}>
+          <Text style={{fontSize: "15", marginTop:"5%"}}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '16', marginTop:"24%"}}> Login</Text>
+          </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>

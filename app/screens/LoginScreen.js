@@ -93,10 +93,12 @@ const LoginScreen = (props) => {
             style={[globalStyle.button, globalStyle.buttonOutlineGreen]}>
             <Text style={globalStyle.buttonLoginText}>Login</Text>
           </TouchableOpacity>
-          <Text style={{fontSize: "15", marginUp: 5}}>Don't have an account?</Text>
+          <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: "100%", }}>
+          <Text style={{fontSize: "15", marginTop:"5%"}}>Don't have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '15'}}> Sign Up</Text>
+            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '16', marginTop:"16%"}}> Sign Up</Text>
           </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
@@ -108,14 +110,14 @@ export default LoginScreen;
 const styles = StyleSheet.create({
 
   image: {
-    width: "30%",
-    height: "30%",
-    justifyContent: "center",
-    paddingTop: "5%",
+    width: "50%",
+    height: "50%",
+    justifyContent: 'center',
+    marginTop: "50%"
   },
-  footerText: {
+  signUpText: {
     color: colors.darkGreenTextColor,
-    paddingTop: 20,
+    paddingBottom: "100%",
   },
   
 
