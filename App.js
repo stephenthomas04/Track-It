@@ -52,18 +52,18 @@ function RouteName() {
         drawerType: "front",
         drawerPosition: "left",
         swipeEdgeWidth: 500,
-        drawerHideStatusBarOnOpen: true,
-        headerShown: true,
-        drawerActiveTintColor: colors.greenTextColor,
+        drawerHideStatusBarOnOpen: false,
+        headerShown: false,
+        drawerActiveTintColor: colors.darkGreenTextColor,
         drawerInactiveTintColor: colors.blackTextColor,
 
         headerStyle: {
-          backgroundColor: colors.secondaryGreen,
+          backgroundColor: colors.primaryDarkGreen,
         },
 
         drawerStyle: {
           backgroundColor: colors.whiteBackgroundColor,
-          width: 240,
+          width: 250,
         },
       }}
     >
@@ -108,13 +108,5 @@ function RouteName() {
     </Drawer.Navigator>
   );
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  });
 }
 export default App;

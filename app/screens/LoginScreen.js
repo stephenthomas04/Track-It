@@ -115,12 +115,7 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
 
-  image: {
-    width: "50%",
-    height: "50%",
-    justifyContent: 'center',
-    marginTop: "50%"
-  },
+ 
   icon:{
     width: "13%",
     padding:4,
@@ -128,10 +123,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primaryDarkGreen,
     borderWidth: 1,
   },
-  signUpText: {
-    color: colors.darkGreenTextColor,
-    paddingBottom: "100%",
-  },
+ 
   header: {
     flex: 1,
     justifyContent: 'flex-end',

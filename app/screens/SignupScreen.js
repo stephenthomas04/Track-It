@@ -61,13 +61,16 @@ const SignupScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
-      <Image
+      <View style ={styles.header}>
+        <Image
           style={globalStyle.imageStyles}
           source={require("../assets/trackIt.png")}
         />
+          </View>
+        <View style ={styles.footer}>
         <Text style={globalStyle.subHeading}>Sign Up</Text>
         <View style={globalStyle.inputContainer}>
-      
+
         <AntDesign name="user" size={20} color="green" />
           <TextInput
             placeholder="Email"
@@ -86,7 +89,7 @@ const SignupScreen = () => {
           />
         </View>
 
-        <View style={globalStyle.buttonContainer}>
+       <View style={globalStyle.buttonContainer}>
           <TouchableOpacity
             onPress={handleSignUp}
             style={[globalStyle.button, globalStyle.buttonOutlineGreen]}>
@@ -95,9 +98,10 @@ const SignupScreen = () => {
           <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: "100%", }}>
           <Text style={{fontSize: "15", marginTop:"5%"}}>Already have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '16', marginTop:"24%"}}> Login</Text>
+            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '16', marginTop:"20%"}}> Login</Text>
           </TouchableOpacity>
           </View>
+        </View>
         </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
@@ -108,14 +112,27 @@ export default SignupScreen;
 
 const styles = StyleSheet.create({
 
-  image: {
-    width: "30%",
-    height: "30%",
-    justifyContent: "center",
+  icon:{
+    width: "13%",
+    padding:4,
+    borderRadius: 12,
+    borderColor: colors.primaryDarkGreen,
+    borderWidth: 1,
   },
-  footerText: {
-    color: colors.darkGreenTextColor,
-    paddingTop: 20,
+ 
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    paddingBottom: 50
+},
+footer: {
+    flex: 2.5,
+    backgroundColor: colors.whiteBackgroundColor,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30
   },
 
 });
