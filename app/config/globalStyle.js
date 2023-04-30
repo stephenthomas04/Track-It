@@ -6,8 +6,6 @@ const globalStyle=StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.primaryDarkGreen,
-
-   
   },
   buttonText: {
     color: colors.greyTextColor,
@@ -27,6 +25,7 @@ const globalStyle=StyleSheet.create({
     fontSize: 30,
     marginRight: "60%",
     marginTop: "5%",
+    width:"100%"
   },
   inputContainer: {
     padding: "5%",

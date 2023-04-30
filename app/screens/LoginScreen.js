@@ -68,6 +68,7 @@ const LoginScreen = (props) => {
           source={require("../assets/trackIt.png")}
         />
           </View>
+
         <View style ={styles.footer}>
         <Text style={globalStyle.subHeading}>Login</Text>
         <View style={globalStyle.inputContainer}>
@@ -101,7 +102,7 @@ const LoginScreen = (props) => {
           <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: "100%", }}>
           <Text style={{fontSize: "15", marginTop:"5%"}}>Don't have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '16', marginTop:"16%"}}> Sign Up</Text>
+            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '16', marginTop:"16%",}}> Sign Up</Text>
           </TouchableOpacity>
           </View>
         </View>

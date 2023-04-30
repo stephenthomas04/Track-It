@@ -60,7 +60,7 @@ const SignupScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
+      <KeyboardAvoidingView style={styles.signContainer} behavior="padding">
       <View style ={styles.header}>
         <Image
           style={globalStyle.imageStyles}
@@ -71,7 +71,7 @@ const SignupScreen = () => {
         <Text style={globalStyle.subHeading}>Sign Up</Text>
         <View style={globalStyle.inputContainer}>
 
-        <AntDesign name="user" size={20} color="green" />
+        <AntDesign name="user" size={20} color="green"  style = {styles.icon} />
           <TextInput
             placeholder="Email"
             value={email}
@@ -79,7 +79,7 @@ const SignupScreen = () => {
             style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:2, paddingBottom:8, marginBottom:25, paddingLeft:30}}
           />
 
-<AntDesign name="lock" size={20} color="green" />
+<AntDesign name="lock" size={20} color="green"  style = {styles.icon} />
           <TextInput
             placeholder="Password"
             value={password}
@@ -133,6 +133,10 @@ footer: {
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30
+  },
+  signContainer: {
+    flex: 1,
+    backgroundColor: colors.darkGreenTextColor,
   },
 
 });
