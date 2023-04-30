@@ -62,27 +62,32 @@ const LoginScreen = (props) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
+      <View style ={styles.header}>
         <Image
           style={globalStyle.imageStyles}
           source={require("../assets/trackIt.png")}
         />
+          </View>
+        <View style ={styles.footer}>
         <Text style={globalStyle.subHeading}>Login</Text>
         <View style={globalStyle.inputContainer}>
       
-        <AntDesign name="user" size={20} color="green" />
+        <AntDesign name="user" size={20} color="green"
+        style = {styles.icon} />
           <TextInput
             placeholder="Email"
             value={email}
             onChangeText={(text) => setEmail(text)}
-            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:2, paddingBottom:8, marginBottom:25, paddingLeft:30}}
+            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:1, paddingBottom:8, marginBottom:25, paddingLeft:38, }}
           />
 
-        <AntDesign name="lock" size={20} color="green" />
+        <AntDesign name="lock" size={20} color="green"
+        style = {styles.icon} />
           <TextInput
             placeholder="Password"
             value={password}
             onChangeText={(text) => setPassword(text)}
-            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:2, paddingBottom:8, paddingLeft:30}}
+            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:1, paddingBottom:8, paddingLeft:38}}
             secureTextEntry
           />
         </View>
@@ -100,6 +105,7 @@ const LoginScreen = (props) => {
           </TouchableOpacity>
           </View>
         </View>
+        </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
@@ -115,10 +121,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: "50%"
   },
+  icon:{
+    width: "13%",
+    padding:4,
+    borderRadius: 12,
+    borderColor: colors.primaryDarkGreen,
+    borderWidth: 1,
+  },
   signUpText: {
     color: colors.darkGreenTextColor,
     paddingBottom: "100%",
   },
-  
+  header: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    paddingBottom: 50
+},
+footer: {
+    flex: 2.5,
+    backgroundColor: colors.whiteBackgroundColor,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30
+  },
 
 });

@@ -5,9 +5,8 @@ import { StyleSheet } from 'react-native';
 const globalStyle=StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.whiteBackgroundColor,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: colors.primaryDarkGreen,
+
    
   },
   buttonText: {
@@ -33,6 +32,8 @@ const globalStyle=StyleSheet.create({
     padding: "5%",
     width: "75%",
     backgroundColor: colors.whiteBackgroundColor,
+    marginLeft:"10%"
+
   
   },
   input: {
@@ -48,7 +49,7 @@ const globalStyle=StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: "10%",
-    marginBottom: "25%"
+    marginLeft:"19%"
   },
   button: {
     backgroundColor: colors.primaryButtonGreen,
@@ -87,11 +88,12 @@ const globalStyle=StyleSheet.create({
     fontSize: 16,
   },
   imageStyles:{
-    width: "50%",
-    height: "50%",
+    width: "80%",
+    height: "80%",
     justifyContent: 'center',
     alignContent:'center',
-    marginTop: "50%",
+    marginLeft:"9%",
+    marginBottom:"-5%"
     
   },
   graphScreen:{
