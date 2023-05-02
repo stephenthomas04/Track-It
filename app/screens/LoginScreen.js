@@ -65,7 +65,7 @@ const LoginScreen = (props) => {
       <View style ={styles.header}>
         <Image
           style={globalStyle.imageStyles}
-          source={require("../assets/trackIt.png")}
+          source={require("../assets/mockLogo.png")}
         />
           </View>
 
