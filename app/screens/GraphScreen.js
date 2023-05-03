@@ -97,73 +97,61 @@ function stringToDouble(str) {
   return num;
 }
 
+function convertPriceToDouble(receipts) {
+  const convertedReceipts = receipts.map((receipt) => {
+    const price = receipt.price;
+    const convertedPrice = stringToDouble(price);
 
+    const day = receipt.day;
+    const convertedDay = stringToDouble(day);
 
-  function convertPriceToDouble(receipts) {
-    const convertedReceipts = receipts.map((receipt) => {
-      const price = receipt.price;
-      const convertedPrice = stringToDouble(price);
+    const month = receipt.month;
+    const convertedMonth = stringToDouble(month);
 
-      const day = receipt.day;
-      const convertedDay = stringToDouble(day);
+    const year = receipt.year;
+    const convertedYear = stringToDouble(year);
 
+    return {
+      day: convertedDay,
+      month: convertedMonth,
+      year: convertedYear,
+      price: convertedPrice,
+    };
+  });
+  return convertedReceipts;
+}
 
-      const month = receipt.month;
-      const convertedMonth = stringToDouble(month);
+//function filterData(receipts){
+//const price = 0;
+//for(let i = 0; i < receipts.length; i++){
+//if(i != 0){
+//if(receipts[i].day == receipts[(i-1)].day){
+//price = receipts[i].price + receipts[i-1].price;
+//receipts[i].price = price;
 
-      const year = receipt.year;
-      const convertedYear = stringToDouble(year);
-      
-      return { day: convertedDay, month: convertedMonth, year: convertedYear, price: convertedPrice };
-    });
-    return convertedReceipts;
-  }
+// receipts.splice(i-1, 1);
 
-  //function filterData(receipts){
-    //const price = 0;
-    //for(let i = 0; i < receipts.length; i++){
-      //if(i != 0){
-        //if(receipts[i].day == receipts[(i-1)].day){
-          //price = receipts[i].price + receipts[i-1].price;
-          //receipts[i].price = price;
+//  }
+// }
+//}
 
-         // receipts.splice(i-1, 1);
-
-      //  }
-     // }
-    //}
-    
-  //  return receipts;
+//  return receipts;
 //  }
 
+const convertedReceipts = convertPriceToDouble(testReceipts);
+console.log(convertedReceipts);
 
+//console.log(filterData(convertedReceipts));
+//Comment this out for run
 
-  const convertedReceipts = convertPriceToDouble(testReceipts);
-  console.log(convertedReceipts);
-  
-  //console.log(filterData(convertedReceipts));
-//Comment this out for run 
-
-for( let i = 0; i < convertedReceipts.length; i++){
-  if(convertedReceipts[i].day != null){
-     console.log("Index " + i + " date  is : "+convertedReceipts[i].day);
-    }
-    
+for (let i = 0; i < convertedReceipts.length; i++) {
+  if (convertedReceipts[i].day != null) {
+    console.log("Index " + i + " date  is : " + convertedReceipts[i].day);
   }
-
-
-
-
-
-
-
-
-
-
+}
 
 const pieChartData = [
   {
-    
     name: "Grocery",
     spent: 234,
     color: "rgba(131, 167, 234, 1)",
@@ -195,21 +183,16 @@ const pieChartData = [
 
 const GraphScreen = () => {
   return (
-
-    
     <ScrollView style={globalStyle.graphScreen}>
-      <Text style={globalStyle.subHeading}>
-        Your Finance Outlook
-      </Text>
+      <Text style={globalStyle.subHeading}>Your Finance Outlook</Text>
       <StatusBar style="auto" />
 
       <BarChart
         data={{
-          labels: testReceipts.map(receipt => receipt.date),
+          labels: testReceipts.map((receipt) => receipt.date),
           datasets: [
             {
-              
-              data: testReceipts.map(receipt => receipt.price),
+              data: testReceipts.map((receipt) => receipt.price),
             },
           ],
         }}
@@ -224,7 +207,7 @@ const GraphScreen = () => {
           backgroundGradientTo: colors.whiteBackgroundColor,
           decimalPlaces: 2, // optional, defaults to 2dp
           color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, 
+          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           style: {
             borderRadius: 16,
           },
@@ -247,8 +230,7 @@ const GraphScreen = () => {
           labels: ["January", "February", "March", "April", "May", "June"],
           datasets: [
             {
-            
-              data: testReceipts.map(receipt => receipt.price),
+              data: testReceipts.map((receipt) => receipt.price),
             },
           ],
         }}
@@ -282,7 +264,7 @@ const GraphScreen = () => {
 
       <LineChart
         data={{
-          labels: testReceipts.map(receipt => receipt.date),
+          labels: testReceipts.map((receipt) => receipt.date),
           datasets: [
             {
               data: [
@@ -307,7 +289,7 @@ const GraphScreen = () => {
           backgroundGradientTo: colors.whiteBackgroundColor,
           decimalPlaces: 2, // optional, defaults to 2dp
           color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, 
+          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           style: {
             borderRadius: 16,
           },

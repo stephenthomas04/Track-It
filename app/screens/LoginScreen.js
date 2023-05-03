@@ -142,12 +142,16 @@ const LoginScreen = (props) => {
                   {" "}
                   Sign Up
                 </Text>
+
                 <TouchableOpacity onPress={() => {}}>
-                  <Image
+                  <AntDesign
+                    name="google"
+                    size={55}
+                    color="red"
                     style={styles.google}
-                    source={require("../assets/google.svg.png")}
                   />
                 </TouchableOpacity>
+
               </TouchableOpacity>
             </View>
           </View>
@@ -177,8 +181,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "60%",
     paddingTop: 5,
-
-    paddingVertical: 10,
   },
 
   header: {
@@ -194,5 +196,12 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30,
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 3,
   },
 });

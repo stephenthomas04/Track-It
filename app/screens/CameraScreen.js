@@ -295,7 +295,7 @@ function CameraScreen() {
     <View style={styles.container}>
       {!cameraToggle ? (
         <View style={styles.preview}>
-          <View style={styles.shadow}>
+          <View styles={styles.shadow}>
             {photo ? (
               <Image
                 style={styles.previewImage}
