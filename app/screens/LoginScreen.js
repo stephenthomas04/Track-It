@@ -21,8 +21,8 @@ import {
 } from "firebase/auth";
 
 import globalStyle from "../config/globalStyle";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState("");
@@ -62,50 +62,95 @@ const LoginScreen = (props) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
-      <View style ={styles.header}>
-        <Image
-          style={globalStyle.imageStyles}
-          source={require("../assets/mockLogo.png")}
-        />
-          </View>
-
-        <View style ={styles.footer}>
-        <Text style={globalStyle.subHeading}>Login</Text>
-        <View style={globalStyle.inputContainer}>
-      
-        <AntDesign name="user" size={20} color="green"
-        style = {styles.icon} />
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:1, paddingBottom:8, marginBottom:25, paddingLeft:38, }}
-          />
-
-        <AntDesign name="lock" size={20} color="green"
-        style = {styles.icon} />
-          <TextInput
-            placeholder="Password"
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            style={{flexDirection:'row',borderBottomColor:"black", borderBottomWidth:1, paddingBottom:8, paddingLeft:38}}
-            secureTextEntry
+        <View style={styles.header}>
+          <Image
+            style={globalStyle.imageStyles}
+            source={require("../assets/trackIt.png")}
           />
         </View>
 
-        <View style={globalStyle.buttonContainer}>
-          <TouchableOpacity
-            onPress={handleLogin}
-            style={[globalStyle.button, globalStyle.buttonOutlineGreen]}>
-            <Text style={globalStyle.buttonLoginText}>Login</Text>
-          </TouchableOpacity>
-          <View style={{flexDirection:'row', justifyContent: 'center', marginBottom: "100%", }}>
-          <Text style={{fontSize: "15", marginTop:"5%"}}>Don't have an account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-            <Text style={{color: '#0E733D', fontWeight: '600', fontSize: '16', marginTop:"16%",}}> Sign Up</Text>
-          </TouchableOpacity>
+        <View style={styles.footer}>
+          <Text style={globalStyle.subHeading}>Login</Text>
+          <View style={globalStyle.inputContainer}>
+            <AntDesign
+              name="user"
+              size={20}
+              color="green"
+              style={styles.icon}
+            />
+            <TextInput
+              placeholder="Email"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              style={{
+                flexDirection: "row",
+                borderBottomColor: "black",
+                borderBottomWidth: 1,
+                paddingBottom: 5,
+                marginBottom: 25,
+                paddingLeft: 38,
+              }}
+            />
+
+            <AntDesign
+              name="lock"
+              size={20}
+              color="green"
+              style={styles.icon}
+            />
+            <TextInput
+              placeholder="Password"
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              style={{
+                flexDirection: "row",
+                borderBottomColor: "black",
+                borderBottomWidth: 1,
+                paddingBottom: 5,
+                paddingLeft: 38,
+              }}
+              secureTextEntry
+            />
           </View>
-        </View>
+
+          <View style={globalStyle.buttonContainer}>
+            <TouchableOpacity
+              onPress={handleLogin}
+              style={[globalStyle.button, globalStyle.buttonOutlineGreen]}
+            >
+              <Text style={globalStyle.buttonLoginText}>Login</Text>
+            </TouchableOpacity>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                marginBottom: "100%",
+              }}
+            >
+              <Text style={{ fontSize: "15", marginTop: "5%" }}>
+                Don't have an account?
+              </Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+                <Text
+                  style={{
+                    color: "#0E733D",
+                    fontWeight: "600",
+                    fontSize: "16",
+                    marginTop: "16%",
+                  }}
+                >
+                  {" "}
+                  Sign Up
+                </Text>
+                <TouchableOpacity onPress={() => {}}>
+                  <Image
+                    style={styles.google}
+                    source={require("../assets/google.svg.png")}
+                  />
+                </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
@@ -115,29 +160,39 @@ const LoginScreen = (props) => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-
- 
-  icon:{
-    width: "13%",
-    padding:4,
+  icon: {
+    padding: 4,
     borderRadius: 12,
+    paddingBottom: "3.5%",
     borderColor: colors.primaryDarkGreen,
-    borderWidth: 1,
+    marginBottom: "-10%",
   },
- 
+
+  google: {
+    borderColor: colors.primaryDarkGreen,
+    borderColor: "#ddd",
+    borderWidth: 2,
+    padding: 3,
+    borderRadius: 10,
+    width: "100%",
+    height: "60%",
+    paddingTop: 5,
+
+    paddingVertical: 10,
+  },
+
   header: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     paddingHorizontal: 20,
-    paddingBottom: 50
-},
-footer: {
+    paddingBottom: 50,
+  },
+  footer: {
     flex: 2.5,
     backgroundColor: colors.whiteBackgroundColor,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
-    paddingVertical: 30
+    paddingVertical: 30,
   },
-
 });
