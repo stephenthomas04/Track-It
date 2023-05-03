@@ -366,14 +366,28 @@ function CameraScreen() {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <KeyboardAvoidingView behavior="padding">
                 <TextInput
-                  style={styles.input}
+                   style={{
+                    flexDirection: "row",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 1,
+                    paddingBottom: 5,
+                    marginBottom: 25,
+                    paddingLeft: 38,
+                  }}
                   onChangeText={handleInput1Change}
                   value={setStoreName}
                   placeholder="Store"
                   defaultValue={storeName}
                 />
                 <TextInput
-                  style={styles.input}
+                 style={{
+                  flexDirection: "row",
+                  borderBottomColor: "black",
+                  borderBottomWidth: 1,
+                  paddingBottom: 5,
+                  marginBottom: 25,
+                  paddingLeft: 38,
+                }}
                   onChangeText={handleInput2Change}
                   value={setTotalPrice}
                   keyboardType="numeric"
@@ -382,14 +396,28 @@ function CameraScreen() {
                 />
 
                 <TextInput
-                  style={styles.input}
+                  style={{
+                    flexDirection: "row",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 1,
+                    paddingBottom: 5,
+                    marginBottom: 25,
+                    paddingLeft: 38,
+                  }}
                   onChangeText={handleInput5Change}
                   value={setCategory}
                   placeholder="Category"
                 />
 
                 <TextInput
-                  style={styles.input}
+                   style={{
+                    flexDirection: "row",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 1,
+                    paddingBottom: 5,
+                    marginBottom: 25,
+                    paddingLeft: 38,
+                  }}
                   onChangeText={handleInput4Change}
                   value={setDate}
                   placeholder="Date"
