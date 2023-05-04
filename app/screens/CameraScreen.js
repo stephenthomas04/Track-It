@@ -295,7 +295,7 @@ function CameraScreen() {
     <View style={styles.container}>
       {!cameraToggle ? (
         <View style={styles.preview}>
-          <View styles={styles.shadow}>
+          <View style={styles.shadow}>
             {photo ? (
               <Image
                 style={styles.previewImage}
@@ -366,7 +366,7 @@ function CameraScreen() {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <KeyboardAvoidingView behavior="padding">
                 <TextInput
-                   style={{
+                  style={{
                     flexDirection: "row",
                     borderBottomColor: "black",
                     borderBottomWidth: 1,
@@ -380,14 +380,14 @@ function CameraScreen() {
                   defaultValue={storeName}
                 />
                 <TextInput
-                 style={{
-                  flexDirection: "row",
-                  borderBottomColor: "black",
-                  borderBottomWidth: 1,
-                  paddingBottom: 5,
-                  marginBottom: 25,
-                  paddingLeft: 38,
-                }}
+                  style={{
+                    flexDirection: "row",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 1,
+                    paddingBottom: 5,
+                    marginBottom: 25,
+                    paddingLeft: 38,
+                  }}
                   onChangeText={handleInput2Change}
                   value={setTotalPrice}
                   keyboardType="numeric"
@@ -410,7 +410,7 @@ function CameraScreen() {
                 />
 
                 <TextInput
-                   style={{
+                  style={{
                     flexDirection: "row",
                     borderBottomColor: "black",
                     borderBottomWidth: 1,
