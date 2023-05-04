@@ -87,9 +87,11 @@ const SignupScreen = () => {
                 flexDirection: "row",
                 borderBottomColor: "black",
                 borderBottomWidth: 1,
+                width:"120%",
                 paddingBottom: 5,
                 marginBottom: 25,
                 paddingLeft: 30,
+                marginLeft:-15,
               }}
             />
 
@@ -107,9 +109,11 @@ const SignupScreen = () => {
                 flexDirection: "row",
                 borderBottomColor: "black",
                 borderBottomWidth: 1,
+                width:"120%",
                 paddingBottom: 5,
                 marginBottom: 25,
                 paddingLeft: 30,
+                marginLeft:-15,
               }}
             />
 
@@ -127,8 +131,11 @@ const SignupScreen = () => {
                 flexDirection: "row",
                 borderBottomColor: "black",
                 borderBottomWidth: 1,
+                width:"120%",
                 paddingBottom: 5,
+                marginBottom: 25,
                 paddingLeft: 30,
+                marginLeft:-15,
               }}
               secureTextEntry
             />
@@ -177,9 +184,10 @@ export default SignupScreen;
 const styles = StyleSheet.create({
   icon: {
     padding: 4,
-    borderRadius: 5,
+    borderRadius: 12,
     paddingBottom: "3.5%",
     borderColor: colors.primaryDarkGreen,
+    marginLeft:-15,
     marginBottom: "-10%",
   },
 

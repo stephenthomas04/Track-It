@@ -367,11 +367,19 @@ function CameraScreen() {
               <KeyboardAvoidingView behavior="padding">
                 <TextInput
                   style={{
+                    marginTop:10,
                     flexDirection: "row",
                     borderBottomColor: "black",
                     borderBottomWidth: 1,
                     paddingBottom: 5,
                     marginBottom: 25,
+                    borderRadius: 10,
+                    backgroundColor: "red",
+                    width: "70%",
+                    padding: 15,
+                    marginLeft: "15%",
+                    borderRadius: 10,
+                    alignItems: "center",
                     paddingLeft: 38,
                   }}
                   onChangeText={handleInput1Change}
@@ -386,6 +394,13 @@ function CameraScreen() {
                     borderBottomWidth: 1,
                     paddingBottom: 5,
                     marginBottom: 25,
+                    borderRadius: 10,
+                    backgroundColor: "red",
+                    width: "70%",
+                    padding: 15,
+                    marginLeft: "15%",
+                    borderRadius: 10,
+                    alignItems: "center",
                     paddingLeft: 38,
                   }}
                   onChangeText={handleInput2Change}
@@ -402,6 +417,13 @@ function CameraScreen() {
                     borderBottomWidth: 1,
                     paddingBottom: 5,
                     marginBottom: 25,
+                    borderRadius: 10,
+                    backgroundColor: "red",
+                    width: "70%",
+                    padding: 15,
+                    marginLeft: "15%",
+                    borderRadius: 10,
+                    alignItems: "center",
                     paddingLeft: 38,
                   }}
                   onChangeText={handleInput5Change}
@@ -416,6 +438,13 @@ function CameraScreen() {
                     borderBottomWidth: 1,
                     paddingBottom: 5,
                     marginBottom: 25,
+                    borderRadius: 10,
+                    backgroundColor: "red",
+                    width: "70%",
+                    padding: 15,
+                    marginLeft: "15%",
+                    borderRadius: 10,
+                    alignItems: "center",
                     paddingLeft: 38,
                   }}
                   onChangeText={handleInput4Change}
@@ -423,7 +452,24 @@ function CameraScreen() {
                   placeholder="Date"
                   defaultValue={date}
                 />
-                <Button title="Submit" onPress={handlePress} />
+
+                <TouchableOpacity
+                  onPress={handlePress}
+                  style={{
+                    width: "60%",
+                    padding: 15,
+                    borderRadius: 15,
+                    borderColor: colors.whiteBackgroundColor,
+                    backgroundColor: "#14AE5C",
+                    marginTop: 5,
+                    marginLeft: "20%",
+                    borderColor: "white",
+                    borderWidth: 2,
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={globalStyle.buttonLoginText}>Submit</Text>
+                </TouchableOpacity>
               </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
             <Text>{info}</Text>
@@ -555,7 +601,7 @@ const styles = StyleSheet.create({
   },
 
   contentContainer: {
-    backgroundColor: "white",
+    backgroundColor: "#F5F5F5",
     margin: 10,
   },
   shadow: {
