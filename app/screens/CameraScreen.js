@@ -394,6 +394,12 @@ function CameraScreen() {
           <View style={styles.bottomSheet}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <KeyboardAvoidingView behavior="padding">
+                <FontAwesome5
+                  name="store"
+                  size={18}
+                  color="green"
+                  style={styles.icon}
+                />
                 <TextInput
                   style={{
                     backgroundColor: "white",
@@ -411,6 +417,13 @@ function CameraScreen() {
                   value={setStoreName}
                   placeholder="Store"
                   defaultValue={storeName}
+                />
+
+                <MaterialIcons
+                  name="attach-money"
+                  size={24}
+                  color="green"
+                  style={styles.icon}
                 />
                 <TextInput
                   style={{
@@ -432,6 +445,12 @@ function CameraScreen() {
                   defaultValue={totalPrice}
                 />
 
+                <MaterialIcons
+                  name="category"
+                  size={20}
+                  color="green"
+                  style={styles.icon}
+                />
                 <TextInput
                   style={{
                     backgroundColor: "white",
@@ -450,7 +469,12 @@ function CameraScreen() {
                   placeholder="Category"
                 />
 
-                <MaterialIcons name="date-range" size={24} color="black" />
+                <MaterialIcons
+                  name="date-range"
+                  size={20}
+                  color="green"
+                  style={styles.icon}
+                />
                 <TextInput
                   style={{
                     backgroundColor: "white",
@@ -505,6 +529,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5FCFF",
     flexDirection: "column",
   },
+  icon: {
+    padding: 4,
+    borderRadius: 12,
+    borderColor: colors.primaryDarkGreen,
+    marginLeft: "4%",
+    marginBottom: "-10%",
+    paddingTop: 11,
+  },
+
   camera: {
     flex: 1,
     justifyContent: "flex-end",
