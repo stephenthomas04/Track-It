@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
 
-
 import globalStyle from "../config/globalStyle";
 import colors from "../config/colors";
 
@@ -122,30 +121,27 @@ function convertPriceToDouble(receipts) {
   return convertedReceipts;
 }
 
-  //function filterData(receipts){
-    //const price = 0;
-    //for(let i = 0; i < receipts.length; i++){
-      //if(i != 0){
-        //if(receipts[i].day == receipts[(i-1)].day){
-          //price = receipts[i].price + receipts[i-1].price;
-          //receipts[i].price = price;
+function filterData(receipts) {
+  let price = 0;
+  for (let i = 0; i < receipts.length; i++) {
+    if (i != 0) {
+      if (receipts[i].day == receipts[i - 1].day) {
+        price = receipts[i].price + receipts[i - 1].price;
+        receipts[i].price = price;
 
-         // receipts.splice(i-1, 1);
+        receipts.splice(i - 1, 1);
+      }
+    }
+  }
 
-      //  }
-     // }
-    //}
-    
-  //  return receipts;
-//  }
+  return receipts;
+}
 
+const convertedReceipts = convertPriceToDouble(testReceipts);
+console.log(convertedReceipts);
 
-
-  const convertedReceipts = convertPriceToDouble(testReceipts);
-  console.log(convertedReceipts);
-  
-  //console.log(filterData(convertedReceipts));
-//Comment this out for run 
+//console.log(filterData(convertedReceipts));
+//Comment this out for run
 
 for (let i = 0; i < convertedReceipts.length; i++) {
   if (convertedReceipts[i].day != null) {

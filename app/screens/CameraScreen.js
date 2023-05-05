@@ -29,8 +29,10 @@ import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
 import { getAuth } from "firebase/auth";
 import db from "../firebase";
-import { getStorage, ref, uploadString } from "firebase/storage";
-import { decode } from "base-64";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+// import { getStorage, ref, uploadString } from "firebase/storage";
+// import { decode } from "base-64";
 
 function CameraScreen() {
   const [fileText, setFileText] = useState(
@@ -63,8 +65,8 @@ function CameraScreen() {
 
   const [testData, setTestData] = useState("");
 
-  const storage = getStorage();
-  const imagesRef = ref(storage, "images");
+  // const storage = getStorage();
+  // const imagesRef = ref(storage, "images");
 
   const handleInput1Change = (text) => {
     setStoreName(text);
@@ -245,13 +247,13 @@ function CameraScreen() {
           global.atob = decode;
         }*/
 
-        if (photo != null) {
-          const message2 =
-            "5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB";
-          uploadString(imagesRef, message2).then((snapshot) => {
-            console.log("Uploaded a base64 string!");
-          });
-        }
+        // if (photo != null) {
+        //   const message2 =
+        //     "5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB";
+        //   uploadString(imagesRef, message2).then((snapshot) => {
+        //     console.log("Uploaded a base64 string!");
+        //   });
+        // }
 
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
@@ -394,20 +396,16 @@ function CameraScreen() {
               <KeyboardAvoidingView behavior="padding">
                 <TextInput
                   style={{
-                    marginTop:10,
-                    flexDirection: "row",
-                    borderBottomColor: "black",
-                    borderBottomWidth: 1,
+                    backgroundColor: "white",
+                    paddingHorizontal: 15,
+                    width: "70%",
+                    height: "12%",
+                    paddingVertical: 10,
+                    borderRadius: 5,
+                    marginTop: 5,
+                    marginLeft: "15%",
                     paddingBottom: 5,
                     marginBottom: 25,
-                    borderRadius: 10,
-                    backgroundColor: "red",
-                    width: "70%",
-                    padding: 15,
-                    marginLeft: "15%",
-                    borderRadius: 10,
-                    alignItems: "center",
-                    paddingLeft: 38,
                   }}
                   onChangeText={handleInput1Change}
                   value={setStoreName}
@@ -416,19 +414,16 @@ function CameraScreen() {
                 />
                 <TextInput
                   style={{
-                    flexDirection: "row",
-                    borderBottomColor: "black",
-                    borderBottomWidth: 1,
+                    backgroundColor: "white",
+                    paddingHorizontal: 15,
+                    width: "70%",
+                    height: "12%",
+                    paddingVertical: 10,
+                    borderRadius: 5,
+                    marginTop: 5,
+                    marginLeft: "15%",
                     paddingBottom: 5,
                     marginBottom: 25,
-                    borderRadius: 10,
-                    backgroundColor: "red",
-                    width: "70%",
-                    padding: 15,
-                    marginLeft: "15%",
-                    borderRadius: 10,
-                    alignItems: "center",
-                    paddingLeft: 38,
                   }}
                   onChangeText={handleInput2Change}
                   value={setTotalPrice}
@@ -439,40 +434,35 @@ function CameraScreen() {
 
                 <TextInput
                   style={{
-                    flexDirection: "row",
-                    borderBottomColor: "black",
-                    borderBottomWidth: 1,
+                    backgroundColor: "white",
+                    paddingHorizontal: 15,
+                    width: "70%",
+                    height: "12%",
+                    paddingVertical: 10,
+                    borderRadius: 5,
+                    marginTop: 5,
+                    marginLeft: "15%",
                     paddingBottom: 5,
                     marginBottom: 25,
-                    borderRadius: 10,
-                    backgroundColor: "red",
-                    width: "70%",
-                    padding: 15,
-                    marginLeft: "15%",
-                    borderRadius: 10,
-                    alignItems: "center",
-                    paddingLeft: 38,
                   }}
                   onChangeText={handleInput5Change}
                   value={setCategory}
                   placeholder="Category"
                 />
 
+                <MaterialIcons name="date-range" size={24} color="black" />
                 <TextInput
                   style={{
-                    flexDirection: "row",
-                    borderBottomColor: "black",
-                    borderBottomWidth: 1,
+                    backgroundColor: "white",
+                    paddingHorizontal: 15,
+                    height: "12%",
+                    width: "70%",
+                    paddingVertical: 10,
+                    borderRadius: 5,
+                    marginTop: 5,
+                    marginLeft: "15%",
                     paddingBottom: 5,
                     marginBottom: 25,
-                    borderRadius: 10,
-                    backgroundColor: "red",
-                    width: "70%",
-                    padding: 15,
-                    marginLeft: "15%",
-                    borderRadius: 10,
-                    alignItems: "center",
-                    paddingLeft: 38,
                   }}
                   onChangeText={handleInput4Change}
                   value={setDate}
@@ -630,6 +620,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: "#F5F5F5",
     margin: 10,
+    height: "100%",
   },
   shadow: {
     shadowColor: "#000",
