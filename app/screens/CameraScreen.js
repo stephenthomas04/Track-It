@@ -29,6 +29,8 @@ import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
 import { getAuth } from "firebase/auth";
 import db from "../firebase";
+import { getStorage, ref, uploadString } from "firebase/storage";
+import { decode } from "base-64";
 
 function CameraScreen() {
   const [fileText, setFileText] = useState(
@@ -60,6 +62,9 @@ function CameraScreen() {
   const snapPoints = useMemo(() => ["1%", "85%"], []);
 
   const [testData, setTestData] = useState("");
+
+  const storage = getStorage();
+  const imagesRef = ref(storage, "images");
 
   const handleInput1Change = (text) => {
     setStoreName(text);
@@ -220,12 +225,34 @@ function CameraScreen() {
 
     if (isValid) {
       try {
-        const docRef = await addDoc(collection(db, user), {
+        /* const docRef = await addDoc(collection(db, user), {
           store: storeName,
           price: totalPrice,
           category: category,
           date: date,
-        });
+        });*/
+
+        /*const metadata = {
+          customMetadata: {
+            store: storeName,
+            price: totalPrice,
+            category: category,
+            date: date,
+          },
+        };
+
+        if (typeof atob === "undefined") {
+          global.atob = decode;
+        }*/
+
+        if (photo != null) {
+          const message2 =
+            "5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB";
+          uploadString(imagesRef, message2).then((snapshot) => {
+            console.log("Uploaded a base64 string!");
+          });
+        }
+
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
