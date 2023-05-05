@@ -130,6 +130,13 @@ function filterData(receipts) {
         receipts[i].price = price;
 
         receipts.splice(i - 1, 1);
+
+        return {
+          day,
+          month,
+          year,
+          price,
+        };
       }
     }
   }
@@ -140,7 +147,7 @@ function filterData(receipts) {
 const convertedReceipts = convertPriceToDouble(testReceipts);
 console.log(convertedReceipts);
 
-//console.log(filterData(convertedReceipts));
+console.log("filter data log: " + filterData(convertedReceipts));
 //Comment this out for run
 
 for (let i = 0; i < convertedReceipts.length; i++) {
