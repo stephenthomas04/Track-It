@@ -53,7 +53,7 @@ function RouteName() {
         drawerPosition: "left",
         swipeEdgeWidth: 500,
         drawerHideStatusBarOnOpen: false,
-        headerShown: true,
+        headerShown: false,
         drawerActiveTintColor: colors.darkGreenTextColor,
         drawerInactiveTintColor: colors.blackTextColor,
 

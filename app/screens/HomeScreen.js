@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,6 +6,7 @@ import {
   View,
   Button,
   ScrollView,
+  Animated,
 } from "react-native";
 import { getAuth } from "firebase/auth";
 import { auth, firebase } from "../firebase";
@@ -26,11 +27,94 @@ import {
 } from "react-native-chart-kit";
 import { Value } from "react-native-reanimated";
 import colors from "../config/colors";
-
+import { SafeAreaView } from "react-native-safe-area-context";
+import { collection, getDocs } from "firebase/firestore";
+import db from "../firebase";
 function HomeScreen() {
   const navigation = useNavigation();
   const auth = getAuth();
   const user = auth.currentUser;
+  const email = auth.currentUser.email;
+
+  const [receipts, setReceipts] = useState([]);
+  const [totalSpent, setTotalSpent] = useState();
+  const [budget, setBuget] = useState(1000);
+
+  const testReceipts = [
+    {
+      category: "Cloths",
+      day: "01",
+      month: "11",
+      year: "23",
+      id: "yCTOISkTSfSQJnZoAbSt",
+      price: "12.99",
+      store: "Kohls",
+    },
+    {
+      category: "Food",
+      day: "01",
+      month: "13",
+      year: "23",
+      id: "8LXGx7hr974P3T8o4pY",
+      price: "15.99",
+      store: "Chipotle",
+    },
+    {
+      category: "Entertainment",
+      day: "03",
+      month: "04",
+      year: "23",
+      id: "Q2JMOLBF8S7Ku08Cafc",
+      price: "6.99",
+      store: "AMC",
+    },
+    {
+      category: "Personal",
+      day: "09",
+      month: "13",
+      year: "23",
+      id: "WB8IjKQm3uwmd0OR2as",
+      price: "0.99",
+      store: "walmart",
+    },
+    {
+      category: "Food",
+      day: "09",
+      month: "13",
+      year: "23",
+      id: "YelkygyNsJj3wxB0aMz",
+      price: "11.50",
+      store: "Chipotle",
+    },
+    {
+      category: "Food",
+      day: "09",
+      month: "14",
+      year: "23",
+      id: "jKe0kJWUDCiZt2aZYau",
+      price: "9.99",
+      store: "Chipotle",
+    },
+    {
+      category: "Travel",
+      day: "09",
+      month: "15",
+      year: "23",
+      id: "m4tAdv3UofY0kJhXmI9",
+      price: "125.99",
+      store: "Delta",
+    },
+    {
+      category: "Entertainment",
+      day: "12",
+      month: "13",
+      year: "23",
+      id: "nFNITrmLoEE7domhGN1",
+      price: "50.00",
+      store: "Arcade",
+    },
+  ];
+
   const handleSignOut = () => {
     auth
       .signOut()
@@ -39,102 +123,143 @@ function HomeScreen() {
       })
       .catch((error) => alert(error.message));
   };
-  const testReceipts = [
-    { id: "1", store: " Store", date: "1/9/23 ", price: 23 },
-    { id: "2", store: "Store", date: "3/9/23 ", price: 234 },
-    { id: "3", store: " Store", date: "2/9/23 ", price: 324 },
-    { id: "4", store: " Store", date: "5/9/23 ", price: 23 },
-    { id: "5", store: " Store", date: "4/9/23 ", price: 100 },
-    { id: "6", store: " Store", date: "7/10/23 ", price: 100 },
-    { id: "7", store: " Store", date: "6/9/23 ", price: 620 },
-    { id: "8", store: " Store", date: "9/9/23 ", price: 100 },
-    { id: "9", store: " Store", date: "8/9/23 ", price: 150 },
-  ];
+
+  const getTotalPrice = async (receipts) => {
+    let totalPrice = 0;
+    receipts.forEach((receipts) => {
+      totalPrice += parseFloat(receipts.price);
+    });
+    setTotalSpent(totalPrice);
+  };
+
+  useEffect(() => {
+    /*(async () => {
+      const items = [];
+      if (receipts.length <= 1) {
+        const querySnapshot = await getDocs(collection(db, user));
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          console.log(doc.id, " => ", doc.data());
+          items.push({ id, ...data });
+        });
+      }
+      setReceipts(items);
+    })();*/
+    getTotalPrice(testReceipts);
+  }, []);
+
+  const ProgressBar = ({ spent, budget }) => {
+    const percentSpent = Math.floor((spent / budget) * 100);
+    const progressBarWidth = percentSpent + "%";
+
+    const progress = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+      Animated.timing(progress, {
+        toValue: percentSpent,
+        duration: 1000,
+        useNativeDriver: false,
+      }).start();
+    }, [percentSpent, progress]);
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.progressText}>
+          <Text>{percentSpent}% of budget spent</Text>
+        </View>
+        <View style={styles.progressBar}>
+          <Animated.View
+            style={[
+              styles.progress,
+              {
+                width: progress.interpolate({
+                  inputRange: [0, 100],
+                  outputRange: ["0%", "100%"],
+                }),
+              },
+            ]}
+          />
+        </View>
+      </View>
+    );
+  };
 
   return (
-    <ScrollView style={[globalStyle.defaultScreen, {}]}>
-      <Text style={globalStyle.title}>Welcome Back</Text>
-
-      <Card
-        style={[
-          globalStyle.container,
-          {
-            flex: 0,
-            padding: "5%",
-            marginBottom: "20%",
-            borderRadius: "50%",
-          },
-        ]}
-      >
-        <Card.Content>
-          <BarChart
-            data={{
-              labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-              datasets: [
-                {
-                  data: [
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                  ],
-                },
-              ],
-            }}
-            width={350} // from react-native
-            height={220}
-            yAxisLabel="$"
-            yAxisSuffix=""
-            yAxisInterval={1} // optional, defaults to 1
-            chartConfig={{
-              backgroundColor: "white",
-              backgroundGradientFrom: "white",
-              backgroundGradientTo: "white",
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-              style: {
-                borderRadius: 16,
-              },
-              propsForDots: {
-                r: "6",
-                strokeWidth: "2",
-                stroke: colors.darkGreenTextColor,
-              },
-            }}
-            bezier
-            style={{
-              marginVertical: 8,
-              marginBottom: 10,
-              borderRadius: 22,
-            }}
-          />
-        </Card.Content>
-      </Card>
-
-      <Card
-        style={[
-          globalStyle.container,
-          {
-            flex: 0,
-            padding: "5%",
-            marginBottom: "20%",
-            borderRadius: "20%",
-          },
-        ]}
-      >
-        <Card.Content>
-          <Text style={globalStyle.title}>Headliners</Text>
-          <Text style={globalStyle.subHeading}>News</Text>
-        </Card.Content>
-      </Card>
-
-      <TouchableOpacity onPress={handleSignOut} style={globalStyle.button}>
-        <Text style={globalStyle.buttonText}>Sign out</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    <View style={styles.main}>
+      <Text style={styles.header}>Total Spendings</Text>
+      <Text style={styles.total}>${totalSpent}</Text>
+      <View style={styles.footer}>
+        <View>
+          <ProgressBar spent={totalSpent} budget={budget} />
+        </View>
+        <TouchableOpacity onPress={handleSignOut} style={styles.signoutButton}>
+          <Text style={globalStyle.buttonText}>Sign out</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 3,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    backgroundColor: colors.primaryDarkGreen,
+  },
+
+  total: {
+    color: colors.whiteBackgroundColor,
+    marginBottom: "20%",
+    fontSize: 70,
+  },
+
+  header: {
+    color: colors.whiteBackgroundColor,
+    marginTop: "20%",
+    fontSize: 20,
+  },
+  footer: {
+    flex: 1,
+    backgroundColor: colors.whiteBackgroundColor,
+    borderTopLeftRadius: 30,
+    width: "100%",
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 20,
+  },
+  progressBar: {
+    height: 30,
+    width: "100%",
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: "#ddd",
+    overflow: "hidden",
+  },
+  progress: {
+    height: "100%",
+    backgroundColor: "green",
+  },
+  progressText: {
+    marginVertical: 10,
+  },
+
+  signoutButton: {
+    alignSelf: "center",
+    backgroundColor: colors.primaryButtonGreen,
+    width: "60%",
+    padding: 15,
+    borderRadius: 15,
+    borderColor: colors.primaryDarkGreen,
+    borderWidth: 1,
+    alignItems: "center",
+  },
+});

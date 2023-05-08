@@ -121,7 +121,7 @@ function convertPriceToDouble(receipts) {
   return convertedReceipts;
 }
 
-function filterData(receipts) {
+/*function filterData(receipts) {
   let price = 0;
   for (let i = 0; i < receipts.length; i++) {
     if (i != 0) {
@@ -142,12 +142,12 @@ function filterData(receipts) {
   }
 
   return receipts;
-}
+}*/
 
 const convertedReceipts = convertPriceToDouble(testReceipts);
 console.log(convertedReceipts);
 
-console.log("filter data log: " + filterData(convertedReceipts));
+//console.log("filter data log: " + filterData(convertedReceipts));
 //Comment this out for run
 
 for (let i = 0; i < convertedReceipts.length; i++) {

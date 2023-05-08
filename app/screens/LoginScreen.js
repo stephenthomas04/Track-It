@@ -86,11 +86,11 @@ const LoginScreen = (props) => {
                 flexDirection: "row",
                 borderBottomColor: "black",
                 borderBottomWidth: 1,
-                width:"120%",
+                width: "120%",
                 paddingBottom: 5,
                 marginBottom: 25,
                 paddingLeft: 30,
-                marginLeft:-15,
+                marginLeft: -15,
               }}
             />
 
@@ -108,10 +108,10 @@ const LoginScreen = (props) => {
                 flexDirection: "row",
                 borderBottomColor: "black",
                 borderBottomWidth: 1,
-                width:"120%",
+                width: "120%",
                 paddingBottom: 5,
                 paddingLeft: 30,
-                marginLeft:-15,
+                marginLeft: -15,
               }}
               secureTextEntry
             />
@@ -155,7 +155,6 @@ const LoginScreen = (props) => {
                     style={styles.google}
                   />
                 </TouchableOpacity>
-
               </TouchableOpacity>
             </View>
           </View>
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingBottom: "3.5%",
     borderColor: colors.primaryDarkGreen,
-    marginLeft:-15,
+    marginLeft: -15,
     marginBottom: "-10%",
   },
 
