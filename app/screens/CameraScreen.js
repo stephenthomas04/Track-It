@@ -227,12 +227,12 @@ function CameraScreen() {
 
     if (isValid) {
       try {
-        /* const docRef = await addDoc(collection(db, user), {
+        const docRef = await addDoc(collection(db, user), {
           store: storeName,
           price: totalPrice,
           category: category,
           date: date,
-        });*/
+        });
 
         /*const metadata = {
           customMetadata: {
