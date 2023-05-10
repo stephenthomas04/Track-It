@@ -17,7 +17,7 @@ import { Value } from "react-native-reanimated";
 const testReceipts = [
   {
     category: "Cloths",
-    day: "01",
+    day: "12",
     month: "11",
     year: "23",
     id: "yCTOISkTSfSQJnZoAbSt",
@@ -26,7 +26,7 @@ const testReceipts = [
   },
   {
     category: "Food",
-    day: "01",
+    day: "11",
     month: "13",
     year: "23",
     id: "8LXGx7hr974P3T8o4pY",
@@ -35,7 +35,7 @@ const testReceipts = [
   },
   {
     category: "Entertainment",
-    day: "03",
+    day: "7",
     month: "04",
     year: "23",
     id: "Q2JMOLBF8S7Ku08Cafc",
@@ -44,7 +44,7 @@ const testReceipts = [
   },
   {
     category: "Personal",
-    day: "09",
+    day: "8",
     month: "13",
     year: "23",
     id: "WB8IjKQm3uwmd0OR2as",
@@ -53,7 +53,7 @@ const testReceipts = [
   },
   {
     category: "Food",
-    day: "09",
+    day: "1",
     month: "13",
     year: "23",
     id: "YelkygyNsJj3wxB0aMz",
@@ -62,7 +62,7 @@ const testReceipts = [
   },
   {
     category: "Food",
-    day: "09",
+    day: "10",
     month: "14",
     year: "23",
     id: "jKe0kJWUDCiZt2aZYau",
@@ -71,7 +71,7 @@ const testReceipts = [
   },
   {
     category: "Travel",
-    day: "09",
+    day: "11",
     month: "15",
     year: "23",
     id: "m4tAdv3UofY0kJhXmI9",
@@ -80,7 +80,7 @@ const testReceipts = [
   },
   {
     category: "Entertainment",
-    day: "12",
+    day: "6",
     month: "13",
     year: "23",
     id: "nFNITrmLoEE7domhGN1",
@@ -127,35 +127,63 @@ function convertPriceToDouble(receipts) {
     if (i != 0) {
       if (receipts[i].day == receipts[i - 1].day) {
         price = receipts[i].price + receipts[i - 1].price;
+
+        console.log("reciepts: (price) " + receipts[i].price + " reciepts: (day) " + receipts[i].day );
         receipts[i].price = price;
 
         receipts.splice(i - 1, 1);
 
-        return {
-          day,
-          month,
-          year,
-          price,
-        };
+        
       }
     }
   }
 
-  return receipts;
+  return {
+    day: receipts.day,
+    month: receipts.month,
+    year: receipts.year,
+    price: receipts.price,
+  };
 }*/
+
+function selectionSort(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    console.log("**** [i.day] **** " + arr[i].day);
+    let minIndex = i;
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[j].day < arr[minIndex]) {
+          minIndex = j;
+        }
+      
+      if (minIndex !== arr[i].day) {
+        [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+      }}
+  }
+  console.log("Reciepts Array in Selection sort: \n" + arr[0].day);
+  return arr;
+  
+}
+
+
 
 const convertedReceipts = convertPriceToDouble(testReceipts);
 console.log(convertedReceipts);
 
+
+const sortedArr = selectionSort(convertedReceipts);
+console.log(sortedArr);
+
+
 //console.log("filter data log: " + filterData(convertedReceipts));
 //Comment this out for run
 
+/*
 for (let i = 0; i < convertedReceipts.length; i++) {
   if (convertedReceipts[i].day != null) {
     console.log("Index " + i + " date  is : " + convertedReceipts[i].day);
   }
 }
-
+*/
 const pieChartData = [
   {
     name: "Grocery",
