@@ -395,6 +395,18 @@ function CameraScreen() {
           <View style={styles.bottomSheet}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <KeyboardAvoidingView behavior="padding">
+                <Text
+                  style={{
+                    color: colors.darkGreenTextColor,
+                    padding: "5%",
+                    fontSize: 30,
+                    marginLeft: "5%",
+                    marginTop: "5%",
+                    width: "100%",
+                  }}
+                >
+                  Enter Receipt Manually
+                </Text>
                 <FontAwesome5
                   name="store"
                   size={18}
@@ -403,7 +415,7 @@ function CameraScreen() {
                     padding: 4,
                     borderRadius: 12,
                     marginLeft: "11%",
-                    marginTop: 100,
+                    marginTop: "5%",
                     marginBottom: "-30%",
                   }}
                 />
@@ -411,7 +423,7 @@ function CameraScreen() {
                   style={{
                     flexDirection: "row",
                     borderBottomColor: "black",
-                    borderBottomWidth: 2,
+                    borderBottomWidth: 1,
                     width: "80%",
                     paddingBottom: 3,
                     marginTop: 100,
@@ -440,7 +452,7 @@ function CameraScreen() {
                   style={{
                     flexDirection: "row",
                     borderBottomColor: "black",
-                    borderBottomWidth: 2,
+                    borderBottomWidth: 1,
                     width: "80%",
                     paddingBottom: 3,
                     marginTop: 50,
@@ -470,7 +482,7 @@ function CameraScreen() {
                   style={{
                     flexDirection: "row",
                     borderBottomColor: "black",
-                    borderBottomWidth: 2,
+                    borderBottomWidth: 1,
                     width: "80%",
                     paddingBottom: 3,
                     marginTop: 50,
@@ -498,7 +510,7 @@ function CameraScreen() {
                   style={{
                     flexDirection: "row",
                     borderBottomColor: "black",
-                    borderBottomWidth: 2,
+                    borderBottomWidth: 1,
                     width: "80%",
                     paddingBottom: 3,
                     marginTop: 50,
