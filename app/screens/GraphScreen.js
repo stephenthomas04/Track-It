@@ -35,7 +35,7 @@ const testReceipts = [
   },
   {
     category: "Entertainment",
-    day: "7",
+    day: "1",
     month: "04",
     year: "23",
     id: "Q2JMOLBF8S7Ku08Cafc",
@@ -121,30 +121,6 @@ function convertPriceToDouble(receipts) {
   return convertedReceipts;
 }
 
-/*function filterData(receipts) {
-  let price = 0;
-  for (let i = 0; i < receipts.length; i++) {
-    if (i != 0) {
-      if (receipts[i].day == receipts[i - 1].day) {
-        price = receipts[i].price + receipts[i - 1].price;
-
-        console.log("reciepts: (price) " + receipts[i].price + " reciepts: (day) " + receipts[i].day );
-        receipts[i].price = price;
-
-        receipts.splice(i - 1, 1);
-
-        
-      }
-    }
-  }
-
-  return {
-    day: receipts.day,
-    month: receipts.month,
-    year: receipts.year,
-    price: receipts.price,
-  };
-}*/
 
 function selectionSort(arr) {
   const n = arr.length;
@@ -166,23 +142,41 @@ function selectionSort(arr) {
 }
 
 function combineData(arr){
-  const n = arr.length;
+  let n = arr.length;
+  let run = true;
+ // while(run){
+    for (let i = 0; i < n-1; i++) {
+      console.log("i "+ i);
+      for (let j = i + 1; j < n; j++) {
+        console.log("j "+ j);
+        if ((arr[i].day) == (arr[j].day))  {
+          console.log(" arr[i] = arr[j] " + (arr[i].day) == (arr[j].day));
+          console.log("arr[i] + arr[j] = price " + ((arr[i].price) + (arr[j].price)));
+          arr[i].price = ((arr[i].price) + (arr[j].price));
+          arr.splice(j,1);
+          n = n-1;
+        } 
+    }
+    }
+    //if(filterData(arr)){
 
-  for (let i = 1; i < n-1; i++) {
-   
-    for (let j = i + 1; j < n; j++) {
-        
-      if ((arr[i].day) == (arr[j].day)) {
-        arr[i].price = ((arr[i].price) + (arr[j].price));
-        
-      } 
-  }
-}
-   
-    return arr;
+    //}
     
+  //}
+    return arr;
 
-};
+}
+
+/*function filterData(arr){
+  
+
+
+  if(){
+    return true;
+  }else{
+    return false;
+  }
+}*/
 
 
 

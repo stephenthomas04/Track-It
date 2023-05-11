@@ -6,10 +6,11 @@ import LoginScreen from "./app/screens/LoginScreen";
 import HomeScreen from "./app/screens/HomeScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import GraphScreen from "./app/screens/GraphScreen";
+
 import { FontAwesome } from "@expo/vector-icons";
 import SettingScreen from "./app/screens/SettingScreen";
 import DataScreen from "./app/screens/Data";
+import GraphScreen from "./app/screens/GraphScreen";
 import SignupScreen from "./app/screens/SignupScreen";
 import CameraScreen from "./app/screens/CameraScreen";
 import colors from "./app/config/colors";
@@ -88,6 +89,14 @@ function RouteName() {
       <Tab.Screen
         name="Data"
         component={DataScreen}
+        options={{
+          headerShown: false,
+          drawerIcon: () => <FontAwesome name="list" size={24} color="black" />,
+        }}
+      />
+      <Tab.Screen
+        name="Graph"
+        component={GraphScreen}
         options={{
           headerShown: false,
           drawerIcon: () => <FontAwesome name="list" size={24} color="black" />,
