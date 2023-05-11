@@ -23,6 +23,7 @@ import {
 import globalStyle from "../config/globalStyle";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState("");
@@ -57,6 +58,18 @@ const LoginScreen = (props) => {
         console.log("Logged in with:", user.email);
       })
       .catch((error) => alert(error.message));
+  };
+
+  const handleGoogleLogin = () => {
+    // Handle Google login
+  };
+
+  const handleFacebookLogin = () => {
+    // Handle Facebook login
+  };
+
+  const handleTwitterLogin = () => {
+    // Handle Twitter login
   };
 
   return (
@@ -146,15 +159,6 @@ const LoginScreen = (props) => {
                   {" "}
                   Sign Up
                 </Text>
-
-                <TouchableOpacity onPress={() => {}}>
-                  <AntDesign
-                    name="google"
-                    size={55}
-                    color="red"
-                    style={styles.google}
-                  />
-                </TouchableOpacity>
               </TouchableOpacity>
             </View>
           </View>
@@ -176,23 +180,13 @@ const styles = StyleSheet.create({
     marginBottom: "-10%",
   },
 
-  google: {
-    borderColor: colors.primaryDarkGreen,
-    borderColor: "#ddd",
-    borderWidth: 2,
-    padding: 3,
-    borderRadius: 10,
-    width: "100%",
-    height: "60%",
-    paddingTop: 5,
-  },
-
   header: {
     flex: 1,
     justifyContent: "flex-end",
     paddingHorizontal: 20,
     paddingBottom: 50,
   },
+
   footer: {
     flex: 2.5,
     backgroundColor: colors.whiteBackgroundColor,

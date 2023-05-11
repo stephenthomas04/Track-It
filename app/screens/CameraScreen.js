@@ -31,8 +31,7 @@ import { getAuth } from "firebase/auth";
 import db from "../firebase";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-// import { getStorage, ref, uploadString } from "firebase/storage";
-// import { decode } from "base-64";
+import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 function CameraScreen() {
   const [fileText, setFileText] = useState(
@@ -41,13 +40,11 @@ function CameraScreen() {
 
   const defaultImage = require("../assets/defaultReceipt.png");
 
-  const auth = getAuth();
-  const user = auth.currentUser.email;
-
   const [storeName, setStoreName] = useState("");
   const [totalPrice, setTotalPrice] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
+  const [imageUrl, setImageURL] = useState("");
 
   const API_KEY = "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0";
   const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
@@ -57,6 +54,7 @@ function CameraScreen() {
   const [cameraRef, setCameraRef] = useState(null);
   const [cameraToggle, setCameraToggle] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [photo64, setPhoto64] = useState(null);
   const [info, setInfo] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const sheetRef = useRef(null);
@@ -64,9 +62,6 @@ function CameraScreen() {
   const snapPoints = useMemo(() => ["1%", "85%"], []);
 
   const [testData, setTestData] = useState("");
-
-  // const storage = getStorage();
-  // const imagesRef = ref(storage, "images");
 
   const handleInput1Change = (text) => {
     setStoreName(text);
@@ -100,7 +95,8 @@ function CameraScreen() {
     if (cameraRef) {
       const options = { quality: 0.5, base64: true };
       const data = await cameraRef.takePictureAsync(options);
-      setPhoto(data.base64);
+      setPhoto(data.uri);
+      setPhoto64(data.base64);
       setCameraToggle(null);
     }
   };
@@ -113,22 +109,24 @@ function CameraScreen() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
+      aspect: [2, 1],
       base64: true,
       quality: 1,
     });
 
     if (!result.canceled) {
-      setPhoto(result.base64);
+      setPhoto(result.uri);
+      setPhoto64(result.base64);
       setCameraToggle(null);
     }
   };
 
   const retakePicture = () => {
     setDate("");
-
     setStoreName("");
     setTotalPrice("");
     setPhoto(null);
+    setPhoto64(null);
     setCameraToggle(true);
   };
 
@@ -218,42 +216,48 @@ function CameraScreen() {
 
   const handlePress = async () => {
     console.log("Submitted");
-    if (photo == null) {
-      setPhoto("Manually Inputted");
-    }
-
+    const auth = getAuth();
+    const user = auth.currentUser.email;
     const fields = { storeName, totalPrice, category, date };
     const isValid = validateFields(fields);
 
     if (isValid) {
+      if (photo == null) {
+        setPhoto("Manually Inputted");
+        setImageURL(null);
+      } else {
+        try {
+          const metadata = {
+            customMetadata: {
+              store: storeName,
+              price: totalPrice,
+              category: category,
+              date: date,
+            },
+          };
+
+          const filename = photo.substring(photo.lastIndexOf("/") + 1);
+          console.log(filename);
+          const path = `users/${user}/${filename}`;
+          const storage = getStorage();
+          const imagesRef = ref(storage, path);
+
+          await uploadBytes(imagesRef, photo, metadata).then((snapshot) => {
+            console.log("Uploaded a blob or file!");
+          });
+          setImageURL(await getDownloadURL(ref(imagesRef)));
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      }
       try {
         const docRef = await addDoc(collection(db, user), {
           store: storeName,
           price: totalPrice,
           category: category,
           date: date,
+          imageUrl: imageUrl,
         });
-
-        /*const metadata = {
-          customMetadata: {
-            store: storeName,
-            price: totalPrice,
-            category: category,
-            date: date,
-          },
-        };
-
-        if (typeof atob === "undefined") {
-          global.atob = decode;
-        }*/
-
-        // if (photo != null) {
-        //   const message2 =
-        //     "5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB";
-        //   uploadString(imagesRef, message2).then((snapshot) => {
-        //     console.log("Uploaded a base64 string!");
-        //   });
-        // }
 
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
@@ -261,10 +265,10 @@ function CameraScreen() {
       }
       closeSheet();
       Alert.alert("Success", "Receipt submitted successfully");
+      setCameraToggle(null);
     } else {
       Alert.alert("Error", "Please fill in all required fields");
     }
-    setCameraToggle(null);
   };
 
   const findData = (text) => {
@@ -326,10 +330,7 @@ function CameraScreen() {
         <View style={styles.preview}>
           <View style={styles.shadow}>
             {photo ? (
-              <Image
-                style={styles.previewImage}
-                source={{ uri: `data:image/jpeg;base64,${photo}` }}
-              />
+              <Image style={styles.previewImage} source={{ uri: photo }} />
             ) : (
               <Image style={styles.previewImage} source={defaultImage} />
             )}
@@ -344,7 +345,7 @@ function CameraScreen() {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.submitButton}
-              onPress={() => callGoogleVisionAsync(photo)}
+              onPress={() => callGoogleVisionAsync(photo64)}
             >
               <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>

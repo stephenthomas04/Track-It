@@ -1,8 +1,7 @@
 import colors from "./colors";
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
-
-const globalStyle=StyleSheet.create({
+const globalStyle = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.primaryDarkGreen,
@@ -14,26 +13,24 @@ const globalStyle=StyleSheet.create({
   },
   title: {
     color: colors.darkGreenTextColor,
-    padding: "5%", 
+    padding: "5%",
     fontFamily: "Damascus",
     fontSize: 40,
     marginBottom: "5%",
   },
   subHeading: {
     color: colors.darkGreenTextColor,
-    padding: "5%", 
+    padding: "5%",
     fontSize: 30,
     marginRight: "60%",
     marginTop: "5%",
-    width:"100%"
+    width: "100%",
   },
   inputContainer: {
     padding: "5%",
     width: "75%",
     backgroundColor: colors.whiteBackgroundColor,
-    marginLeft:"10%"
-
-  
+    marginLeft: "10%",
   },
   input: {
     backgroundColor: colors.primaryGreen,
@@ -41,14 +38,14 @@ const globalStyle=StyleSheet.create({
     paddingVertical: "2%",
     borderRadius: "10%",
     marginTop: "7%",
-    height:50,
+    height: 50,
   },
   buttonContainer: {
     width: "60%",
     justifyContent: "center",
     alignItems: "center",
     marginTop: "10%",
-    marginLeft:"19%"
+    marginLeft: "19%",
   },
   button: {
     backgroundColor: colors.primaryButtonGreen,
@@ -86,27 +83,20 @@ const globalStyle=StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
-  imageStyles:{
+  imageStyles: {
     width: "80%",
     height: "80%",
-    justifyContent: 'center',
-    alignContent:'center',
-    marginLeft:"9%",
-    marginBottom:"-5%"
-    
+    justifyContent: "center",
+    alignContent: "center",
+    marginLeft: "9%",
+    marginBottom: "-5%",
   },
-  graphScreen:{
+  graphScreen: {
     backgroundColor: colors.secondaryDarkGreen,
   },
-  defaultScreen:{
+  defaultScreen: {
     backgroundColor: colors.whiteBackgroundColor,
-  }
-
-
-})
+  },
+});
 
 export default globalStyle;
-      
-  
-    
-  
