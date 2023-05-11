@@ -16,9 +16,13 @@ import colors from "./app/config/colors";
 import { Entypo } from "@expo/vector-icons";
 import { getAuth } from "firebase/auth";
 
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 const Stack = createNativeStackNavigator();
 
 const Drawer = createDrawerNavigator();
+
+const Tab = createBottomTabNavigator();
 
 function App() {
   return (
@@ -46,66 +50,50 @@ function App() {
 
 function RouteName() {
   return (
-    <Drawer.Navigator
+    <Tab.Navigator
       initialRouteName="Home"
-      screenOptions={{
-        drawerType: "front",
-        drawerPosition: "left",
-        swipeEdgeWidth: 500,
-        drawerHideStatusBarOnOpen: false,
-        headerShown: false,
-        drawerActiveTintColor: colors.darkGreenTextColor,
-        drawerInactiveTintColor: colors.blackTextColor,
-
-        headerStyle: {
-          backgroundColor: colors.primaryDarkGreen,
-        },
-
-        drawerStyle: {
-          backgroundColor: colors.whiteBackgroundColor,
-          width: 250,
-        },
+      tabBarOptions={{
+        activeTintColor: "black",
+        inactiveTintColor: "dimgray",
+        labelStyle: { paddingBottom: 0, fontSize: 15, fontWeight: "bold" },
       }}
     >
-      <Drawer.Screen
+      <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          drawerIcon: () => <FontAwesome name="home" size={24} color="black" />,
+          headerShown: false,
+          drawerIcon: () => (
+            <FontAwesome name="home-outline" size={24} color="black" />
+          ),
         }}
       />
-      <Drawer.Screen
+      {/* <Tab.Screen
         name="GraphScreen"
         component={GraphScreen}
         options={{
           drawerIcon: () => <Entypo name="bar-graph" size={24} color="black" />,
         }}
-      />
-
-      <Drawer.Screen
+      /> */}
+      <Tab.Screen
         name="Reciept Scanner"
         component={CameraScreen}
         options={{
+          headerShown: false,
           drawerIcon: () => (
             <FontAwesome name="camera" size={24} color="black" />
           ),
         }}
       />
-      <Drawer.Screen
+      <Tab.Screen
         name="Data"
         component={DataScreen}
         options={{
+          headerShown: false,
           drawerIcon: () => <FontAwesome name="list" size={24} color="black" />,
         }}
       />
-      <Drawer.Screen
-        name="Settings"
-        component={SettingScreen}
-        options={{
-          drawerIcon: () => <FontAwesome name="gear" size={24} color="black" />,
-        }}
-      />
-    </Drawer.Navigator>
+    </Tab.Navigator>
   );
 }
 export default App;

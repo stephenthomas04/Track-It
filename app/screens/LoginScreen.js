@@ -101,7 +101,7 @@ const LoginScreen = (props) => {
                 borderBottomWidth: 1,
                 width: "120%",
                 paddingBottom: 5,
-                marginBottom: 25,
+                marginBottom: 35,
                 paddingLeft: 30,
                 marginLeft: -15,
               }}
