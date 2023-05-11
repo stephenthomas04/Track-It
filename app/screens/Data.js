@@ -150,9 +150,10 @@ const styles = StyleSheet.create({
     borderBottomColor: "black",
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
+    padding: 100,
     marginTop: 20,
     marginBottom: 10,
   },
