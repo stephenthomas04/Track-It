@@ -17,7 +17,7 @@ import { Value } from "react-native-reanimated";
 const testReceipts = [
   {
     category: "Cloths",
-    day: "11",
+    day: "2",
     month: "11",
     year: "23",
     id: "yCTOISkTSfSQJnZoAbSt",
@@ -26,7 +26,7 @@ const testReceipts = [
   },
   {
     category: "Food",
-    day: "11",
+    day: "8",
     month: "13",
     year: "23",
     id: "8LXGx7hr974P3T8o4pY",
@@ -53,7 +53,7 @@ const testReceipts = [
   },
   {
     category: "Food",
-    day: "11",
+    day: "9",
     month: "13",
     year: "23",
     id: "YelkygyNsJj3wxB0aMz",
@@ -71,7 +71,7 @@ const testReceipts = [
   },
   {
     category: "Travel",
-    day: "11",
+    day: "3",
     month: "15",
     year: "23",
     id: "m4tAdv3UofY0kJhXmI9",
@@ -80,7 +80,7 @@ const testReceipts = [
   },
   {
     category: "Entertainment",
-    day: "11",
+    day: "9",
     month: "13",
     year: "23",
     id: "nFNITrmLoEE7domhGN1",
@@ -122,7 +122,7 @@ function convertPriceToDouble(receipts) {
 }
 
 
-function selectionSort(arr) {
+function selectionSortDay(arr) {
   const n = arr.length;
   for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
@@ -160,27 +160,10 @@ function combineData(arr) {
   return arr;
 }
 
-function filterData(arr) {
-  let n = arr.lenght;
-  for (let i = 1; i < n-1; i++) {
-    if (arr[i].day == arr[i+1].day || arr[i].day == arr[i-1].day  ) {
-      return false; // There are still data points with the same day
-    }
-  }
-  return true; // No more data points with the same day remaining
-}
-
-
-
-
-
-
 
 const convertedReceipts = convertPriceToDouble(testReceipts);
 
-
-
-const selectionSortArr = selectionSort(convertedReceipts);
+const selectionSortArr = selectionSortDay(convertedReceipts);
 console.log(selectionSortArr);
 
 const sortedArr = combineData(selectionSortArr);
@@ -226,10 +209,10 @@ const GraphScreen = () => {
 
       <BarChart
         data={{
-          labels: testReceipts.map((receipt) => receipt.date),
+          labels: (sortedArr.map((receipt) => receipt.day) ),
           datasets: [
             {
-              data: testReceipts.map((receipt) => receipt.price),
+              data: sortedArr.map((receipt) => receipt.price),
             },
           ],
         }}
