@@ -17,7 +17,7 @@ import { Value } from "react-native-reanimated";
 const testReceipts = [
   {
     category: "Cloths",
-    day: "12",
+    day: "11",
     month: "11",
     year: "23",
     id: "yCTOISkTSfSQJnZoAbSt",
@@ -35,7 +35,7 @@ const testReceipts = [
   },
   {
     category: "Entertainment",
-    day: "1",
+    day: "11",
     month: "04",
     year: "23",
     id: "Q2JMOLBF8S7Ku08Cafc",
@@ -44,7 +44,7 @@ const testReceipts = [
   },
   {
     category: "Personal",
-    day: "8",
+    day: "11",
     month: "13",
     year: "23",
     id: "WB8IjKQm3uwmd0OR2as",
@@ -53,7 +53,7 @@ const testReceipts = [
   },
   {
     category: "Food",
-    day: "1",
+    day: "11",
     month: "13",
     year: "23",
     id: "YelkygyNsJj3wxB0aMz",
@@ -62,7 +62,7 @@ const testReceipts = [
   },
   {
     category: "Food",
-    day: "10",
+    day: "11",
     month: "14",
     year: "23",
     id: "jKe0kJWUDCiZt2aZYau",
@@ -80,7 +80,7 @@ const testReceipts = [
   },
   {
     category: "Entertainment",
-    day: "6",
+    day: "11",
     month: "13",
     year: "23",
     id: "nFNITrmLoEE7domhGN1",
@@ -141,42 +141,36 @@ function selectionSort(arr) {
   
 }
 
-function combineData(arr){
+function combineData(arr) {
   let n = arr.length;
-  let run = true;
- // while(run){
-    for (let i = 0; i < n-1; i++) {
-      console.log("i "+ i);
-      for (let j = i + 1; j < n; j++) {
-        console.log("j "+ j);
-        if ((arr[i].day) == (arr[j].day))  {
-          console.log(" arr[i] = arr[j] " + (arr[i].day) == (arr[j].day));
-          console.log("arr[i] + arr[j] = price " + ((arr[i].price) + (arr[j].price)));
-          arr[i].price = ((arr[i].price) + (arr[j].price));
-          arr.splice(j,1);
-          n = n-1;
-        } 
+  let i = 0;
+  while (i < n - 1) {
+    let j = i + 1;
+    while (j < n) {
+      if (arr[i].day === arr[j].day) {
+        arr[i].price += arr[j].price;
+        arr.splice(j, 1);
+        n = arr.length;
+      } else {
+        j++;
+      }
     }
-    }
-    //if(filterData(arr)){
-
-    //}
-    
-  //}
-    return arr;
-
+    i++;
+  }
+  return arr;
 }
 
-/*function filterData(arr){
-  
-
-
-  if(){
-    return true;
-  }else{
-    return false;
+function filterData(arr) {
+  let n = arr.lenght;
+  for (let i = 1; i < n-1; i++) {
+    if (arr[i].day == arr[i+1].day || arr[i].day == arr[i-1].day  ) {
+      return false; // There are still data points with the same day
+    }
   }
-}*/
+  return true; // No more data points with the same day remaining
+}
+
+
 
 
 
@@ -193,16 +187,6 @@ const sortedArr = combineData(selectionSortArr);
 console.log(sortedArr);
 
 
-//console.log("filter data log: " + filterData(convertedReceipts));
-//Comment this out for run
-
-/*
-for (let i = 0; i < convertedReceipts.length; i++) {
-  if (convertedReceipts[i].day != null) {
-    console.log("Index " + i + " date  is : " + convertedReceipts[i].day);
-  }
-}
-*/
 const pieChartData = [
   {
     name: "Grocery",
