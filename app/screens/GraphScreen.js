@@ -147,30 +147,55 @@ function convertPriceToDouble(receipts) {
 }*/
 
 function selectionSort(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    console.log("**** [i.day] **** " + arr[i].day);
+  const n = arr.length;
+  for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
-      for (let j = i + 1; j < arr.length; j++) {
-        if (arr[j].day < arr[minIndex]) {
-          minIndex = j;
-        }
-      
-      if (minIndex !== arr[i].day) {
-        [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
-      }}
+    for (let j = i + 1; j < n; j++) {
+      if ((arr[j].day) < (arr[minIndex].day)) {
+        minIndex = j;
+      }
+    }
+
+    const temp = arr[i];
+    arr[i] = arr[minIndex];
+    arr[minIndex] = temp;
   }
-  console.log("Reciepts Array in Selection sort: \n" + arr[0].day);
+  console.log("Reciepts Array in Selection sort: \n" + arr[0].day + "\n"+arr[1].day +"\n"+ arr[2].day  +"\n"+ arr[3].day + "\n"+arr[4].day +"\n"+ arr[5].day  + "\n"+arr[6].day+ "\n"+arr[7].day );
   return arr;
   
 }
 
+function combineData(arr){
+  const n = arr.length;
+
+  for (let i = 1; i < n-1; i++) {
+   
+    for (let j = i + 1; j < n; j++) {
+        
+      if ((arr[i].day) == (arr[j].day)) {
+        arr[i].price = ((arr[i].price) + (arr[j].price));
+        
+      } 
+  }
+}
+   
+    return arr;
+    
+
+};
+
+
+
 
 
 const convertedReceipts = convertPriceToDouble(testReceipts);
-console.log(convertedReceipts);
 
 
-const sortedArr = selectionSort(convertedReceipts);
+
+const selectionSortArr = selectionSort(convertedReceipts);
+console.log(selectionSortArr);
+
+const sortedArr = combineData(selectionSortArr);
 console.log(sortedArr);
 
 
