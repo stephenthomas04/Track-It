@@ -399,20 +399,25 @@ function CameraScreen() {
                   name="store"
                   size={18}
                   color="green"
-                  style={styles.icon}
+                  style={{
+                    padding: 4,
+                    borderRadius: 12,
+                    marginLeft: "11%",
+                    marginTop: 100,
+                    marginBottom: "-30%",
+                  }}
                 />
                 <TextInput
                   style={{
-                    backgroundColor: "white",
-                    paddingHorizontal: 15,
-                    width: "70%",
-                    height: "12%",
-                    paddingVertical: 10,
-                    borderRadius: 5,
-                    marginTop: 5,
-                    marginLeft: "15%",
-                    paddingBottom: 5,
-                    marginBottom: 25,
+                    flexDirection: "row",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 2,
+                    width: "80%",
+                    paddingBottom: 3,
+                    marginTop: 100,
+                    marginBottom: "10%",
+                    paddingLeft: 35,
+                    marginLeft: "11%",
                   }}
                   onChangeText={handleInput1Change}
                   value={setStoreName}
@@ -424,20 +429,24 @@ function CameraScreen() {
                   name="attach-money"
                   size={24}
                   color="green"
-                  style={styles.icon}
+                  style={{
+                    padding: 4,
+                    borderRadius: 12,
+                    marginLeft: "11%",
+                    marginBottom: "-18%",
+                  }}
                 />
                 <TextInput
                   style={{
-                    backgroundColor: "white",
-                    paddingHorizontal: 15,
-                    width: "70%",
-                    height: "12%",
-                    paddingVertical: 10,
-                    borderRadius: 5,
-                    marginTop: 5,
-                    marginLeft: "15%",
-                    paddingBottom: 5,
-                    marginBottom: 25,
+                    flexDirection: "row",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 2,
+                    width: "80%",
+                    paddingBottom: 3,
+                    marginTop: 50,
+                    marginBottom: "10%",
+                    paddingLeft: 30,
+                    marginLeft: "11%",
                   }}
                   onChangeText={handleInput2Change}
                   value={setTotalPrice}
@@ -450,20 +459,24 @@ function CameraScreen() {
                   name="category"
                   size={20}
                   color="green"
-                  style={styles.icon}
+                  style={{
+                    padding: 4,
+                    borderRadius: 12,
+                    marginLeft: "11%",
+                    marginBottom: "-18%",
+                  }}
                 />
                 <TextInput
                   style={{
-                    backgroundColor: "white",
-                    paddingHorizontal: 15,
-                    width: "70%",
-                    height: "12%",
-                    paddingVertical: 10,
-                    borderRadius: 5,
-                    marginTop: 5,
-                    marginLeft: "15%",
-                    paddingBottom: 5,
-                    marginBottom: 25,
+                    flexDirection: "row",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 2,
+                    width: "80%",
+                    paddingBottom: 3,
+                    marginTop: 50,
+                    marginBottom: "10%",
+                    paddingLeft: 30,
+                    marginLeft: "11%",
                   }}
                   onChangeText={handleInput5Change}
                   value={setCategory}
@@ -474,20 +487,24 @@ function CameraScreen() {
                   name="date-range"
                   size={20}
                   color="green"
-                  style={styles.icon}
+                  style={{
+                    padding: 4,
+                    borderRadius: 12,
+                    marginLeft: "11%",
+                    marginBottom: "-18%",
+                  }}
                 />
                 <TextInput
                   style={{
-                    backgroundColor: "white",
-                    paddingHorizontal: 15,
-                    height: "12%",
-                    width: "70%",
-                    paddingVertical: 10,
-                    borderRadius: 5,
-                    marginTop: 5,
-                    marginLeft: "15%",
-                    paddingBottom: 5,
-                    marginBottom: 25,
+                    flexDirection: "row",
+                    borderBottomColor: "black",
+                    borderBottomWidth: 2,
+                    width: "80%",
+                    paddingBottom: 3,
+                    marginTop: 50,
+                    marginBottom: "10%",
+                    paddingLeft: 30,
+                    marginLeft: "11%",
                   }}
                   onChangeText={handleInput4Change}
                   value={setDate}
@@ -533,10 +550,10 @@ const styles = StyleSheet.create({
   icon: {
     padding: 4,
     borderRadius: 12,
+
     borderColor: colors.primaryDarkGreen,
-    marginLeft: "4%",
+    marginLeft: "20%",
     marginBottom: "-10%",
-    paddingTop: 11,
   },
 
   camera: {
@@ -570,7 +587,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF",
+    backgroundColor: "#ffff",
   },
   previewText: {
     fontSize: 30,
@@ -652,8 +669,7 @@ const styles = StyleSheet.create({
   },
 
   contentContainer: {
-    backgroundColor: "#F5F5F5",
-    margin: 10,
+    backgroundColor: "#ffffff",
     height: "100%",
   },
   shadow: {
