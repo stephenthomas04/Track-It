@@ -160,6 +160,21 @@ function combineData(arr) {
   return arr;
 }
 
+function roundPrice(arr){
+  const convertedReceipts = arr.map((receipt) => {
+    const price = receipt.price;
+    const convertedPrice = Math.round(price);
+
+    
+
+    return {
+      price: convertedPrice,
+    };
+  });
+  return convertedReceipts;
+}
+
+
 
 const convertedReceipts = convertPriceToDouble(testReceipts);
 
@@ -169,6 +184,7 @@ console.log(selectionSortArr);
 const sortedArr = combineData(selectionSortArr);
 console.log(sortedArr);
 
+console.log("Rounded Price " + roundPrice(sortedArr))
 
 const pieChartData = [
   {
@@ -225,7 +241,7 @@ const GraphScreen = () => {
           backgroundColor: colors.whiteBackgroundColor,
           backgroundGradientFrom: colors.whiteBackgroundColor,
           backgroundGradientTo: colors.whiteBackgroundColor,
-          decimalPlaces: 2, // optional, defaults to 2dp
+          decimalPlaces: 0, // optional, defaults to 2dp
           color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
           labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           style: {
