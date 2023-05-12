@@ -6,18 +6,21 @@ import LoginScreen from "./app/screens/LoginScreen";
 import HomeScreen from "./app/screens/HomeScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-
+import GraphScreen from "./app/screens/GraphScreen";
 import { FontAwesome } from "@expo/vector-icons";
 import SettingScreen from "./app/screens/SettingScreen";
 import DataScreen from "./app/screens/Data";
-import GraphScreen from "./app/screens/GraphScreen";
 import SignupScreen from "./app/screens/SignupScreen";
 import CameraScreen from "./app/screens/CameraScreen";
 import colors from "./app/config/colors";
 import { Entypo } from "@expo/vector-icons";
 import { getAuth } from "firebase/auth";
 
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import CustomTabBarButton from "./components/CustomTabBarButton";
+import CustomTabBar from "./components/CustomTabBar";
+import globalStyle from "./app/config/globalStyle";
 
 const Stack = createNativeStackNavigator();
 
@@ -52,57 +55,70 @@ function App() {
 function RouteName() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      tabBar={(props) => <CustomTabBar {...props} />}
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarShowLabel: true,
+        tabBarActiveTintColor: "red",
+        tabBarInactiveTintColor: "black",
+        fontWeight: "bold",
+        tabBarStyle: styles.tabBarStyle,
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          let rn = route.name;
+          if (rn == HomeScreen) {
+            iconName = focused ? "home" : "home-outline";
+          } else if (rn == CameraScreen) {
+            iconName = focused ? "list" : "list-outline";
+          } else if (rn == DataScreen) {
+            iconName = focused ? "settings" : "settings-outline";
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
       tabBarOptions={{
-        activeTintColor: "black",
-        inactiveTintColor: "dimgray",
-        labelStyle: { paddingBottom: 0, fontSize: 15, fontWeight: "bold" },
+        labelStyle: { fontSize: 15, fontWeight: "bold" },
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          headerShown: false,
-          drawerIcon: () => (
-            <FontAwesome name="home-outline" size={24} color="black" />
+          tabBarButton: (props) => (
+            <CustomTabBarButton route="Home" {...props} />
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="GraphScreen"
-        component={GraphScreen}
-        options={{
-          drawerIcon: () => <Entypo name="bar-graph" size={24} color="black" />,
-        }}
-      /> */}
+
       <Tab.Screen
         name="Reciept Scanner"
         component={CameraScreen}
         options={{
-          headerShown: false,
-          drawerIcon: () => (
-            <FontAwesome name="camera" size={24} color="black" />
-          ),
+          tabBarButton: (props) => <CustomTabBarButton {...props} />,
         }}
       />
       <Tab.Screen
         name="Data"
         component={DataScreen}
         options={{
-          headerShown: false,
-          drawerIcon: () => <FontAwesome name="list" size={24} color="black" />,
-        }}
-      />
-      <Tab.Screen
-        name="Graph"
-        component={GraphScreen}
-        options={{
-          headerShown: false,
-          drawerIcon: () => <FontAwesome name="list" size={24} color="black" />,
+          tabBarButton: (props) => (
+            <CustomTabBarButton route="Data" {...props} />
+          ),
         }}
       />
     </Tab.Navigator>
   );
 }
 export default App;
+
+const styles = StyleSheet.create({
+  tabBarStyle: {
+    position: "absolute",
+    backgroundColor: "transparent",
+    borderTopWidth: 0,
+    borderRadius: 100,
+    bottom: 30,
+    right: 10,
+    left: 10,
+  },
+});
