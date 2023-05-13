@@ -1,7 +1,15 @@
 //This file will be used to get data from fire base, parse it into readable data for our graphs then reutrn it
 
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  FlatList,
+  Switch,
+  ScrollView,
+} from "react-native";
 import Constants from "expo-constants";
 import { collection, getDocs } from "firebase/firestore";
 import db from "../firebase";
@@ -12,6 +20,8 @@ export default function DataScreen() {
   const user = auth.currentUser.email;
 
   const [receipts, setReceipts] = useState([]);
+  const [showImages, setShowImages] = useState(false);
+  const [images, setImages] = useState([]);
 
   const testReceipts = [
     {
@@ -108,6 +118,10 @@ export default function DataScreen() {
     })();
   }, []);
 
+  const handleSwitchChange = async (value) => {
+    setShowImages(value);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Receipts</Text>
@@ -123,6 +137,19 @@ export default function DataScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContainer}
       />
+
+      <Switch value={showImages} onValueChange={handleSwitchChange} />
+      {showImages && (
+        <ScrollView horizontal>
+          {images.map((imageUrl, index) => (
+            <Image
+              key={index}
+              source={{ uri: imageUrl }}
+              style={{ width: 200, height: 200, marginRight: 10 }}
+            />
+          ))}
+        </ScrollView>
+      )}
     </View>
   );
 }
