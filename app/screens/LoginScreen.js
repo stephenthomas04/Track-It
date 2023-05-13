@@ -144,7 +144,7 @@ const LoginScreen = (props) => {
                 marginBottom: "100%",
               }}
             >
-              <Text style={{ fontSize: "15", marginTop: "5%" }}>
+              <Text style={{ fontSize: 15, marginTop: "5%" }}>
                 Don't have an account?
               </Text>
               <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
@@ -152,7 +152,7 @@ const LoginScreen = (props) => {
                   style={{
                     color: "#0E733D",
                     fontWeight: "600",
-                    fontSize: "16",
+                    fontSize: 16,
                     marginTop: "16%",
                   }}
                 >

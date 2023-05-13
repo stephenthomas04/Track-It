@@ -26,7 +26,6 @@ import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { AntDesign } from "@expo/vector-icons";
 import { collection, addDoc } from "firebase/firestore";
 import * as ImagePicker from "expo-image-picker";
-import DropDownPicker from "react-native-dropdown-picker";
 import { getAuth } from "firebase/auth";
 import db from "../firebase";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -432,7 +431,7 @@ function CameraScreen() {
                     marginLeft: "11%",
                   }}
                   onChangeText={handleInput1Change}
-                  value={setStoreName}
+                  value={storeName}
                   placeholder="Store"
                   defaultValue={storeName}
                 />
@@ -461,7 +460,7 @@ function CameraScreen() {
                     marginLeft: "11%",
                   }}
                   onChangeText={handleInput2Change}
-                  value={setTotalPrice}
+                  value={totalPrice}
                   keyboardType="numeric"
                   placeholder="Price"
                   defaultValue={totalPrice}
@@ -491,7 +490,7 @@ function CameraScreen() {
                     marginLeft: "11%",
                   }}
                   onChangeText={handleInput5Change}
-                  value={setCategory}
+                  value={category}
                   placeholder="Category"
                 />
 
@@ -519,7 +518,7 @@ function CameraScreen() {
                     marginLeft: "11%",
                   }}
                   onChangeText={handleInput4Change}
-                  value={setDate}
+                  value={date}
                   placeholder="Date"
                   defaultValue={date}
                 />
@@ -610,7 +609,6 @@ const styles = StyleSheet.create({
     width: 320,
     height: 600,
     borderRadius: 10,
-    border: 1,
   },
   retakeButton: {
     width: 100,

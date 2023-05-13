@@ -155,7 +155,7 @@ const SignupScreen = () => {
                 marginBottom: "100%",
               }}
             >
-              <Text style={{ fontSize: "15", marginTop: "5%" }}>
+              <Text style={{ fontSize: 15, marginTop: "5%" }}>
                 Already have an account?
               </Text>
               <TouchableOpacity onPress={() => navigation.navigate("Login")}>
@@ -163,7 +163,7 @@ const SignupScreen = () => {
                   style={{
                     color: "#0E733D",
                     fontWeight: "600",
-                    fontSize: "16",
+                    fontSize: 16,
                     marginTop: "20%",
                   }}
                 >

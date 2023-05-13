@@ -81,11 +81,11 @@ function RouteName() {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="HomeTab"
         component={HomeScreen}
         options={{
           tabBarButton: (props) => (
-            <CustomTabBarButton route="Home" {...props} />
+            <CustomTabBarButton route="HomeTab" {...props} />
           ),
         }}
       />

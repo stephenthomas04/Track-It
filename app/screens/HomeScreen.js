@@ -11,25 +11,9 @@ import {
 import { getAuth } from "firebase/auth";
 import { auth, firebase } from "../firebase";
 import globalStyle from "../config/globalStyle";
-
-import { Card } from "react-native-paper";
-
 import { useNavigation } from "@react-navigation/native";
-import Constants from "expo-constants";
-import { CardAnimationContext } from "react-navigation-stack";
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart,
-} from "react-native-chart-kit";
-import { Value } from "react-native-reanimated";
 import colors from "../config/colors";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { collection, getDocs } from "firebase/firestore";
-import db from "../firebase";
+
 function HomeScreen() {
   const navigation = useNavigation();
   const auth = getAuth();
