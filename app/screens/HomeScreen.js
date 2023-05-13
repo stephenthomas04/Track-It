@@ -14,6 +14,7 @@ import globalStyle from "../config/globalStyle";
 import { useNavigation } from "@react-navigation/native";
 import colors from "../config/colors";
 
+import { FontAwesome } from "@expo/vector-icons";
 function HomeScreen() {
   const navigation = useNavigation();
   const auth = getAuth();
@@ -148,22 +149,32 @@ function HomeScreen() {
     }, [percentSpent, progress]);
 
     return (
-      <View style={styles.container}>
-        <View style={styles.progressText}>
-          <Text>{percentSpent}% of budget spent</Text>
-        </View>
-        <View style={styles.progressBar}>
-          <Animated.View
-            style={[
-              styles.progress,
-              {
-                width: progress.interpolate({
-                  inputRange: [0, 100],
-                  outputRange: ["0%", "100%"],
-                }),
-              },
-            ]}
+      <View>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <FontAwesome
+            name="bars"
+            size={24}
+            color="black"
+            style={{ marginTop: -230, marginLeft: 10 }}
           />
+        </TouchableOpacity>
+        <View style={styles.container}>
+          <View style={styles.progressText}>
+            <Text>{percentSpent}% of budget spent</Text>
+          </View>
+          <View style={styles.progressBar}>
+            <Animated.View
+              style={[
+                styles.progress,
+                {
+                  width: progress.interpolate({
+                    inputRange: [0, 100],
+                    outputRange: ["0%", "100%"],
+                  }),
+                },
+              ]}
+            />
+          </View>
         </View>
       </View>
     );

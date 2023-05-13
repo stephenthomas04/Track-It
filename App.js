@@ -12,6 +12,7 @@ import CameraScreen from "./app/screens/CameraScreen";
 import colors from "./app/config/colors";
 import { Entypo } from "@expo/vector-icons";
 import { getAuth } from "firebase/auth";
+import CustomDrawer from "./components/CustomDrawer";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -42,13 +43,14 @@ function App() {
 function RouteName() {
   return (
     <Drawer.Navigator
+      drawerContent={(props) => <CustomDrawer {...props} />}
       initialRouteName="Home"
       screenOptions={{
         drawerType: "front",
         drawerPosition: "left",
         swipeEdgeWidth: 500,
-        drawerHideStatusBarOnOpen: false,
-        headerShown: true,
+        drawerHideStatusBarOnOpen: true,
+        headerShown: false,
         drawerActiveTintColor: colors.darkGreenTextColor,
         drawerInactiveTintColor: colors.blackTextColor,
         headerStyle: {
