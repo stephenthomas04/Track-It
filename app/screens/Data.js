@@ -5,23 +5,35 @@ import {
   Text,
   View,
   StyleSheet,
+  TouchableOpacity,
   Button,
   FlatList,
   Switch,
+  Image,
   ScrollView,
 } from "react-native";
 import Constants from "expo-constants";
 import { collection, getDocs } from "firebase/firestore";
 import db from "../firebase";
 import { getAuth } from "firebase/auth";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+const Item = ({ item, onPress }) => (
+  <TouchableOpacity style={styles.item} onPress={onPress}>
+    <View style={styles.itemContent}>
+      <Text style={styles.itemText}>{item.store}</Text>
+      <Text style={styles.itemText}>{item.price}</Text>
+      <Text style={styles.itemText}>{item.date}</Text>
+    </View>
+  </TouchableOpacity>
+);
 
 export default function DataScreen() {
   const auth = getAuth();
   const user = auth.currentUser.email;
 
-  const [receipts, setReceipts] = useState([]);
   const [showImages, setShowImages] = useState(false);
-  const [images, setImages] = useState([]);
+  const [imageSource, setImageSource] = useState(null);
 
   const testReceipts = [
     {
@@ -98,6 +110,8 @@ export default function DataScreen() {
     },
   ];
 
+  const [receipts, setReceipts] = useState([]);
+
   useEffect(() => {
     (async () => {
       const items = [];
@@ -105,10 +119,12 @@ export default function DataScreen() {
         const querySnapshot = await getDocs(collection(db, user));
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
-          const data = doc.data();
-          const id = doc.id;
-          console.log(doc.id, " => ", doc.data());
-          items.push({ id, ...data });
+          if (doc.id != "user_information") {
+            const data = doc.data();
+            const id = doc.id;
+            console.log(doc.id, " => ", doc.data());
+            items.push({ id, ...data });
+          }
         });
       }
       setReceipts(items);
@@ -118,38 +134,31 @@ export default function DataScreen() {
     })();
   }, []);
 
-  const handleSwitchChange = async (value) => {
-    setShowImages(value);
+  const renderItem = ({ item }) => {
+    const storage = getStorage();
+    const onPress = async () => {
+      try {
+        console.log(item.imageUrl);
+        setImageSource(item.imageUrl);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    return <Item item={item} onPress={onPress} />;
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Receipts</Text>
       <FlatList
         data={receipts}
-        renderItem={({ item }) => (
-          <View style={styles.row}>
-            <Text>{item.store}</Text>
-            <Text>{item.price}</Text>
-            <Text>{item.date}</Text>
-          </View>
-        )}
+        renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContainer}
       />
-
-      <Switch value={showImages} onValueChange={handleSwitchChange} />
-      {showImages && (
-        <ScrollView horizontal>
-          {images.map((imageUrl, index) => (
-            <Image
-              key={index}
-              source={{ uri: imageUrl }}
-              style={{ width: 200, height: 200, marginRight: 10 }}
-            />
-          ))}
-        </ScrollView>
-      )}
+      <Image
+        source={{
+          uri: "https://firebasestorage.googleapis.com/v0/b/track-it-31a75.appspot.com/o/users%2Fjohndoe%40gmail.com%2F275207E4-1AF5-4DF6-BD2B-C4E2A09B89D0.jpg?alt=media&token=655e7840-2658-4542-9a3a-4952fec12bc1",
+        }}
+      />
     </View>
   );
 }
@@ -168,7 +177,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  row: {
+  itemContent: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     width: "100%",
@@ -183,5 +192,9 @@ const styles = StyleSheet.create({
     padding: 100,
     marginTop: 20,
     marginBottom: 10,
+  },
+
+  itemText: {
+    fontSize: 15,
   },
 });

@@ -244,7 +244,9 @@ function CameraScreen() {
           await uploadBytes(imagesRef, photo, metadata).then((snapshot) => {
             console.log("Uploaded a blob or file!");
           });
-          setImageURL(await getDownloadURL(ref(imagesRef)));
+          const url = await getDownloadURL(ref(imagesRef));
+          console.log(url);
+          setImageURL(url);
         } catch (e) {
           console.error("Error adding document: ", e);
         }
