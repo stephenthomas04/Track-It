@@ -353,7 +353,7 @@ function CameraScreen() {
               style={styles.formButton}
               onPress={() => openSheet()}
             >
-              <AntDesign name="form" size={30} color="green" />
+              <AntDesign name="form" size={30} color="#14AE5C" />
             </TouchableOpacity>
           </View>
           {isLoading ? (
@@ -369,7 +369,7 @@ function CameraScreen() {
               style={styles.uploadButton}
               onPress={() => uploadImage()}
             >
-              <AntDesign name="upload" size={24} color="green" />
+              <AntDesign name="upload" size={24} color="#14AE5C" />
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -381,7 +381,7 @@ function CameraScreen() {
               style={styles.backButton}
               onPress={() => backOut()}
             >
-              <AntDesign name="arrowright" size={24} color="green" />
+              <AntDesign name="arrowright" size={24} color="#14AE5C" />
             </TouchableOpacity>
           </View>
         </Camera>
@@ -592,7 +592,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    color: "#222",
+    color: "#000000",
     fontSize: 18,
   },
   preview: {
@@ -625,7 +625,7 @@ const styles = StyleSheet.create({
   submitButton: {
     width: 100,
     height: 60,
-    backgroundColor: colors.secondaryGreen,
+    backgroundColor: colors.primaryButtonGreen,
     borderRadius: "25%",
     justifyContent: "center",
     alignItems: "center",

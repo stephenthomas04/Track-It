@@ -20,6 +20,7 @@ const testReceipts = [
     day: "2",
     month: "11",
     year: "23",
+    date:"11/2/23",
     id: "yCTOISkTSfSQJnZoAbSt",
     price: "12.99",
     store: "Kohls",
@@ -29,6 +30,7 @@ const testReceipts = [
     day: "8",
     month: "13",
     year: "23",
+    date:"13/8/23",
     id: "8LXGx7hr974P3T8o4pY",
     price: "15.99",
     store: "Chipotle",
@@ -38,6 +40,7 @@ const testReceipts = [
     day: "11",
     month: "04",
     year: "23",
+    date:"11/04/23",
     id: "Q2JMOLBF8S7Ku08Cafc",
     price: "6.99",
     store: "AMC",
@@ -45,8 +48,9 @@ const testReceipts = [
   {
     category: "Personal",
     day: "11",
-    month: "13",
+    month: "12",
     year: "23",
+    date:"11/12/23",
     id: "WB8IjKQm3uwmd0OR2as",
     price: "0.99",
     store: "walmart",
@@ -54,8 +58,9 @@ const testReceipts = [
   {
     category: "Food",
     day: "9",
-    month: "13",
+    month: "11",
     year: "23",
+    date:"9/11/23",
     id: "YelkygyNsJj3wxB0aMz",
     price: "11.50",
     store: "Chipotle",
@@ -63,8 +68,9 @@ const testReceipts = [
   {
     category: "Food",
     day: "11",
-    month: "14",
+    month: "1",
     year: "23",
+    date:"11/1/23",
     id: "jKe0kJWUDCiZt2aZYau",
     price: "9.99",
     store: "Chipotle",
@@ -72,8 +78,9 @@ const testReceipts = [
   {
     category: "Travel",
     day: "3",
-    month: "15",
+    month: "10",
     year: "23",
+    date:"3/10/23",
     id: "m4tAdv3UofY0kJhXmI9",
     price: "125.99",
     store: "Delta",
@@ -81,8 +88,9 @@ const testReceipts = [
   {
     category: "Entertainment",
     day: "9",
-    month: "13",
+    month: "9",
     year: "23",
+    date:"9/9/23",
     id: "nFNITrmLoEE7domhGN1",
     price: "50.00",
     store: "Arcade",
@@ -111,11 +119,14 @@ function convertPriceToDouble(receipts) {
     const year = receipt.year;
     const convertedYear = stringToDouble(year);
 
+    const date = receipt.date;
+
     return {
       day: convertedDay,
       month: convertedMonth,
       year: convertedYear,
       price: convertedPrice,
+      date: date,
     };
   });
   return convertedReceipts;
@@ -160,6 +171,21 @@ function combineData(arr) {
   return arr;
 }
 
+function roundPrice(arr){
+  const convertedReceipts = arr.map((receipt) => {
+    const price = receipt.price;
+    const convertedPrice = Math.round(price);
+
+    
+
+    return {
+      price: convertedPrice,
+    };
+  });
+  return convertedReceipts;
+}
+
+
 
 const convertedReceipts = convertPriceToDouble(testReceipts);
 
@@ -169,6 +195,7 @@ console.log(selectionSortArr);
 const sortedArr = combineData(selectionSortArr);
 console.log(sortedArr);
 
+console.log("Rounded Price " + roundPrice(sortedArr))
 
 const pieChartData = [
   {
@@ -209,7 +236,7 @@ const GraphScreen = () => {
 
       <BarChart
         data={{
-          labels: (sortedArr.map((receipt) => receipt.day) ),
+          labels: (sortedArr.map((receipt) => receipt.date) ),
           datasets: [
             {
               data: sortedArr.map((receipt) => receipt.price),
@@ -225,7 +252,7 @@ const GraphScreen = () => {
           backgroundColor: colors.whiteBackgroundColor,
           backgroundGradientFrom: colors.whiteBackgroundColor,
           backgroundGradientTo: colors.whiteBackgroundColor,
-          decimalPlaces: 2, // optional, defaults to 2dp
+          decimalPlaces: 0, // optional, defaults to 2dp
           color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
           labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
           style: {
