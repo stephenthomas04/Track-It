@@ -60,25 +60,13 @@ const LoginScreen = (props) => {
       .catch((error) => alert(error.message));
   };
 
-  const handleGoogleLogin = () => {
-    // Handle Google login
-  };
-
-  const handleFacebookLogin = () => {
-    // Handle Facebook login
-  };
-
-  const handleTwitterLogin = () => {
-    // Handle Twitter login
-  };
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
         <View style={styles.header}>
           <Image
             style={globalStyle.imageStyles}
-            source={require("../assets/trackIt.png")}
+            source={require("../assets/dazzle.png")}
           />
         </View>
 

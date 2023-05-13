@@ -1,6 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./app/screens/LoginScreen";
 import HomeScreen from "./app/screens/HomeScreen";
@@ -16,17 +13,8 @@ import colors from "./app/config/colors";
 import { Entypo } from "@expo/vector-icons";
 import { getAuth } from "firebase/auth";
 
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CustomTabBarButton from "./components/CustomTabBarButton";
-import CustomTabBar from "./components/CustomTabBar";
-import globalStyle from "./app/config/globalStyle";
-
 const Stack = createNativeStackNavigator();
-
 const Drawer = createDrawerNavigator();
-
-const Tab = createBottomTabNavigator();
 
 function App() {
   return (
@@ -51,74 +39,65 @@ function App() {
     </NavigationContainer>
   );
 }
-
 function RouteName() {
   return (
-    <Tab.Navigator
-      tabBar={(props) => <CustomTabBar {...props} />}
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarShowLabel: true,
-        tabBarActiveTintColor: "red",
-        tabBarInactiveTintColor: "black",
-        fontWeight: "bold",
-        tabBarStyle: styles.tabBarStyle,
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-          let rn = route.name;
-          if (rn == HomeScreen) {
-            iconName = focused ? "home" : "home-outline";
-          } else if (rn == CameraScreen) {
-            iconName = focused ? "list" : "list-outline";
-          } else if (rn == DataScreen) {
-            iconName = focused ? "settings" : "settings-outline";
-          }
-          return <Ionicons name={iconName} size={size} color={color} />;
+    <Drawer.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        drawerType: "front",
+        drawerPosition: "left",
+        swipeEdgeWidth: 500,
+        drawerHideStatusBarOnOpen: false,
+        headerShown: true,
+        drawerActiveTintColor: colors.darkGreenTextColor,
+        drawerInactiveTintColor: colors.blackTextColor,
+        headerStyle: {
+          backgroundColor: colors.primaryDarkGreen,
         },
-      })}
-      tabBarOptions={{
-        labelStyle: { fontSize: 15, fontWeight: "bold" },
+        drawerStyle: {
+          backgroundColor: colors.whiteBackgroundColor,
+          width: 250,
+        },
       }}
     >
-      <Tab.Screen
-        name="HomeTab"
+      <Drawer.Screen
+        name="Home Tab"
         component={HomeScreen}
         options={{
-          tabBarButton: (props) => (
-            <CustomTabBarButton route="HomeTab" {...props} />
-          ),
+          drawerIcon: () => <FontAwesome name="home" size={24} color="black" />,
         }}
       />
-
-      <Tab.Screen
+      <Drawer.Screen
+        name="GraphScreen"
+        component={GraphScreen}
+        options={{
+          drawerIcon: () => <Entypo name="bar-graph" size={24} color="black" />,
+        }}
+      />
+      <Drawer.Screen
         name="Reciept Scanner"
         component={CameraScreen}
         options={{
-          tabBarButton: (props) => <CustomTabBarButton {...props} />,
-        }}
-      />
-      <Tab.Screen
-        name="Data"
-        component={DataScreen}
-        options={{
-          tabBarButton: (props) => (
-            <CustomTabBarButton route="Data" {...props} />
+          drawerIcon: () => (
+            <FontAwesome name="camera" size={24} color="black" />
           ),
         }}
       />
-    </Tab.Navigator>
+      <Drawer.Screen
+        name="Data"
+        component={DataScreen}
+        options={{
+          drawerIcon: () => <FontAwesome name="list" size={24} color="black" />,
+        }}
+      />
+      <Drawer.Screen
+        name="Settings"
+        component={SettingScreen}
+        options={{
+          drawerIcon: () => <FontAwesome name="gear" size={24} color="black" />,
+        }}
+      />
+    </Drawer.Navigator>
   );
 }
 export default App;
-
-const styles = StyleSheet.create({
-  tabBarStyle: {
-    position: "absolute",
-    backgroundColor: "transparent",
-    borderTopWidth: 0,
-    borderRadius: 100,
-    bottom: 30,
-    right: 10,
-    left: 10,
-  },
-});
