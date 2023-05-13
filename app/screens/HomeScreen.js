@@ -163,19 +163,6 @@ function HomeScreen() {
       }).start();
     }, [percentSpent, progress]);
 
-    const PriceCounter = ({ price }) => {
-      const [count, setCount] = useState(0);
-
-      useEffect(() => {
-        const interval = setInterval(() => {
-          setCount((prevCount) => prevCount + 1);
-        }, 10);
-        return () => clearInterval(interval);
-      }, []);
-    };
-
-    const formattedPrice = count.toFixed(2);
-
     return (
       <View style={styles.container}>
         <View style={styles.progressText}>
@@ -201,7 +188,7 @@ function HomeScreen() {
   return (
     <View style={styles.main}>
       <Text style={styles.header}>Total Spendings</Text>
-      <Text style={styles.total}>${formattedPrice}</Text>
+      <Text style={styles.total}>${totalSpent}</Text>
       <View style={styles.footer}>
         <View>
           <ProgressBar spent={totalSpent} budget={budget} />
