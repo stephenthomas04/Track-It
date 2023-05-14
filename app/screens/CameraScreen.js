@@ -31,6 +31,8 @@ import db from "../firebase";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { useNavigation } from "@react-navigation/native";
+import { FontAwesome } from "@expo/vector-icons";
 
 function CameraScreen() {
   const [fileText, setFileText] = useState(
@@ -44,6 +46,7 @@ function CameraScreen() {
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const [imageUrl, setImageURL] = useState("");
+  const navigation = useNavigation();
 
   const API_KEY = "AIzaSyBk0WzBazFzwoZmMA7jPo0ANJsTKSfNXT0";
   const API_URL = `https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`;
@@ -329,6 +332,14 @@ function CameraScreen() {
     <View style={styles.container}>
       {!cameraToggle ? (
         <View style={styles.preview}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <FontAwesome
+              name="bars"
+              size={22}
+              color="black"
+              style={{ marginRight: 320, paddingBottom: 12 }}
+            />
+          </TouchableOpacity>
           <View style={styles.shadow}>
             {photo ? (
               <Image style={styles.previewImage} source={{ uri: photo }} />

@@ -20,7 +20,7 @@ const testReceipts = [
     day: "2",
     month: "11",
     year: "23",
-    date:"11/2/23",
+    date: "11/2/23",
     id: "yCTOISkTSfSQJnZoAbSt",
     price: "12.99",
     store: "Kohls",
@@ -30,7 +30,7 @@ const testReceipts = [
     day: "8",
     month: "13",
     year: "23",
-    date:"13/8/23",
+    date: "13/8/23",
     id: "8LXGx7hr974P3T8o4pY",
     price: "15.99",
     store: "Chipotle",
@@ -40,7 +40,7 @@ const testReceipts = [
     day: "11",
     month: "04",
     year: "23",
-    date:"11/04/23",
+    date: "11/04/23",
     id: "Q2JMOLBF8S7Ku08Cafc",
     price: "6.99",
     store: "AMC",
@@ -50,7 +50,7 @@ const testReceipts = [
     day: "11",
     month: "12",
     year: "23",
-    date:"11/12/23",
+    date: "11/12/23",
     id: "WB8IjKQm3uwmd0OR2as",
     price: "0.99",
     store: "walmart",
@@ -60,7 +60,7 @@ const testReceipts = [
     day: "9",
     month: "11",
     year: "23",
-    date:"9/11/23",
+    date: "9/11/23",
     id: "YelkygyNsJj3wxB0aMz",
     price: "11.50",
     store: "Chipotle",
@@ -70,7 +70,7 @@ const testReceipts = [
     day: "11",
     month: "1",
     year: "23",
-    date:"11/1/23",
+    date: "11/1/23",
     id: "jKe0kJWUDCiZt2aZYau",
     price: "9.99",
     store: "Chipotle",
@@ -80,7 +80,7 @@ const testReceipts = [
     day: "3",
     month: "10",
     year: "23",
-    date:"3/10/23",
+    date: "3/10/23",
     id: "m4tAdv3UofY0kJhXmI9",
     price: "125.99",
     store: "Delta",
@@ -90,7 +90,7 @@ const testReceipts = [
     day: "9",
     month: "9",
     year: "23",
-    date:"9/9/23",
+    date: "9/9/23",
     id: "nFNITrmLoEE7domhGN1",
     price: "50.00",
     store: "Arcade",
@@ -132,13 +132,12 @@ function convertPriceToDouble(receipts) {
   return convertedReceipts;
 }
 
-
 function selectionSortDay(arr) {
   const n = arr.length;
   for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
     for (let j = i + 1; j < n; j++) {
-      if ((arr[j].day) < (arr[minIndex].day)) {
+      if (arr[j].day < arr[minIndex].day) {
         minIndex = j;
       }
     }
@@ -147,9 +146,25 @@ function selectionSortDay(arr) {
     arr[i] = arr[minIndex];
     arr[minIndex] = temp;
   }
-  console.log("Reciepts Array in Selection sort: \n" + arr[0].day + "\n"+arr[1].day +"\n"+ arr[2].day  +"\n"+ arr[3].day + "\n"+arr[4].day +"\n"+ arr[5].day  + "\n"+arr[6].day+ "\n"+arr[7].day );
+  console.log(
+    "Reciepts Array in Selection sort: \n" +
+      arr[0].day +
+      "\n" +
+      arr[1].day +
+      "\n" +
+      arr[2].day +
+      "\n" +
+      arr[3].day +
+      "\n" +
+      arr[4].day +
+      "\n" +
+      arr[5].day +
+      "\n" +
+      arr[6].day +
+      "\n" +
+      arr[7].day
+  );
   return arr;
-  
 }
 
 function combineData(arr) {
@@ -171,12 +186,10 @@ function combineData(arr) {
   return arr;
 }
 
-function roundPrice(arr){
+function roundPrice(arr) {
   const convertedReceipts = arr.map((receipt) => {
     const price = receipt.price;
     const convertedPrice = Math.round(price);
-
-    
 
     return {
       price: convertedPrice,
@@ -184,8 +197,6 @@ function roundPrice(arr){
   });
   return convertedReceipts;
 }
-
-
 
 const convertedReceipts = convertPriceToDouble(testReceipts);
 
@@ -195,7 +206,7 @@ console.log(selectionSortArr);
 const sortedArr = combineData(selectionSortArr);
 console.log(sortedArr);
 
-console.log("Rounded Price " + roundPrice(sortedArr))
+console.log("Rounded Price " + roundPrice(sortedArr));
 
 const pieChartData = [
   {
@@ -236,7 +247,7 @@ const GraphScreen = () => {
 
       <BarChart
         data={{
-          labels: (sortedArr.map((receipt) => receipt.date) ),
+          labels: sortedArr.map((receipt) => receipt.date),
           datasets: [
             {
               data: sortedArr.map((receipt) => receipt.price),

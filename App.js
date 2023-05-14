@@ -58,7 +58,7 @@ function RouteName() {
         },
         drawerStyle: {
           backgroundColor: colors.whiteBackgroundColor,
-          width: 250,
+          width: 300,
         },
       }}
     >

@@ -153,9 +153,9 @@ function HomeScreen() {
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <FontAwesome
             name="bars"
-            size={24}
+            size={22}
             color="black"
-            style={{ marginTop: -230, marginLeft: 10 }}
+            style={{ marginTop: -230, marginLeft: 1 }}
           />
         </TouchableOpacity>
         <View style={styles.container}>

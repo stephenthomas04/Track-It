@@ -18,6 +18,9 @@ import db from "../firebase";
 import { getAuth } from "firebase/auth";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
+import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+
 const Item = ({ item, onPress }) => (
   <TouchableOpacity style={styles.item} onPress={onPress}>
     <View style={styles.itemContent}>
@@ -31,7 +34,7 @@ const Item = ({ item, onPress }) => (
 export default function DataScreen() {
   const auth = getAuth();
   const user = auth.currentUser.email;
-
+  const navigation = useNavigation();
   const [showImages, setShowImages] = useState(false);
   const [imageSource, setImageSource] = useState(null);
 
@@ -149,6 +152,14 @@ export default function DataScreen() {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => navigation.openDrawer()}>
+        <FontAwesome
+          name="bars"
+          size={22}
+          color="black"
+          style={{ marginTop: -160, marginRight: 310 }}
+        />
+      </TouchableOpacity>
       <FlatList
         data={receipts}
         renderItem={renderItem}
@@ -168,8 +179,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 50,
-    marginVertical: 10,
+    padding: 30,
+    marginTop: 200,
   },
 
   listContainer: {

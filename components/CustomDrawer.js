@@ -17,7 +17,7 @@ const CustomDrawer = (props) => {
         <ImageBackground
           source={require("../app/assets/dazzle.png")}
           style={{
-            marginLeft: 7,
+            marginLeft: 29,
             height: 150,
             width: 235,
             marginBottom: 20,
