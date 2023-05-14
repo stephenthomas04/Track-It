@@ -24,15 +24,20 @@ const CustomDrawer = (props) => {
             marginTop: 10,
           }}
         ></ImageBackground>
-        <View style={{ flex: 1, backgroundColor: "#fff", paddingTop: 10 }}>
+        <View style={{ flex: 1, backgroundColor: "#ffffffff", paddingTop: 10 }}>
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
       <View
-        style={{ padding: 30, borderTopWidth: 1, borderTopColor: "#00000" }}
+        style={{ padding: 30, borderTopWidth: 1, borderTopColor: "#000000" }}
       >
         <TouchableOpacity onPress={() => {}}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
             <MaterialIcons name="logout" size={22} color="black" />
             <Text style={{ fontSize: 15, marginLeft: 5 }}>Sign Out</Text>
           </View>
