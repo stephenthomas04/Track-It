@@ -28,9 +28,9 @@ const testReceipts = [
   {
     category: "Food",
     day: "8",
-    month: "13",
+    month: "12",
     year: "23",
-    date: "13/8/23",
+    date: "12/8/23",
     id: "8LXGx7hr974P3T8o4pY",
     price: "15.99",
     store: "Chipotle",
@@ -50,7 +50,7 @@ const testReceipts = [
     day: "11",
     month: "12",
     year: "23",
-    date: "11/12/23",
+    date: "12/11/23",
     id: "WB8IjKQm3uwmd0OR2as",
     price: "0.99",
     store: "walmart",
@@ -60,7 +60,7 @@ const testReceipts = [
     day: "9",
     month: "11",
     year: "23",
-    date: "9/11/23",
+    date: "11/9/23",
     id: "YelkygyNsJj3wxB0aMz",
     price: "11.50",
     store: "Chipotle",
@@ -70,7 +70,7 @@ const testReceipts = [
     day: "11",
     month: "1",
     year: "23",
-    date: "11/1/23",
+    date: "1/11/23",
     id: "jKe0kJWUDCiZt2aZYau",
     price: "9.99",
     store: "Chipotle",
@@ -80,7 +80,7 @@ const testReceipts = [
     day: "3",
     month: "10",
     year: "23",
-    date: "3/10/23",
+    date: "10/3/23",
     id: "m4tAdv3UofY0kJhXmI9",
     price: "125.99",
     store: "Delta",
@@ -132,12 +132,13 @@ function convertPriceToDouble(receipts) {
   return convertedReceipts;
 }
 
+/*
 function selectionSortDay(arr) {
   const n = arr.length;
   for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
     for (let j = i + 1; j < n; j++) {
-      if (arr[j].day < arr[minIndex].day) {
+      if ((arr[j].day) < (arr[minIndex].day)) {
         minIndex = j;
       }
     }
@@ -165,7 +166,53 @@ function selectionSortDay(arr) {
       arr[7].day
   );
   return arr;
-}
+}*/
+const selectionSortDay = (receipts) => {
+  const n = receipts.length;
+  for (let i = 0; i < n - 1; i++) {
+    let minIndex = i;
+    for (let j = i + 1; j < n; j++) {
+      const date1 = new Date(receipts[minIndex].year, receipts[minIndex].month - 1, receipts[minIndex].day);
+      const date2 = new Date(receipts[j].year, receipts[j].month - 1, receipts[j].day);
+      if (date2 < date1) {
+        minIndex = j;
+      }
+    }
+    if (minIndex !== i) {
+      const temp = receipts[i];
+      receipts[i] = receipts[minIndex];
+      receipts[minIndex] = temp;
+    }
+  }
+  return receipts;
+};
+
+
+function pastWeek(arr){
+  /*
+    Get the latest data and -7 day to it
+  */
+    let lowestNum;
+    const n = arr.length;
+    for (let i = 0; i < n - 1; i++) {
+      let minIndex = i;
+      for (let j = i + 1; j < n; j++) {
+        if ((arr[j].day) < (arr[minIndex].day)) {
+          minIndex = j;
+        }
+      }
+  
+      const temp = arr[i];
+      arr[i] = arr[minIndex];
+      arr[minIndex] = temp;
+    }
+   
+    return arr;
+  }
+
+
+
+
 
 function combineData(arr) {
   let n = arr.length;
@@ -198,7 +245,7 @@ function roundPrice(arr) {
   return convertedReceipts;
 }
 
-const convertedReceipts = convertPriceToDouble(testReceipts);
+const convertedReceipts = convertPriceToDouble(testReceipts);//First Pass In
 
 const selectionSortArr = selectionSortDay(convertedReceipts);
 console.log(selectionSortArr);
@@ -208,36 +255,7 @@ console.log(sortedArr);
 
 console.log("Rounded Price " + roundPrice(sortedArr));
 
-const pieChartData = [
-  {
-    name: "Grocery",
-    spent: 234,
-    color: "rgba(131, 167, 234, 1)",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15,
-  },
-  {
-    name: "Clothing",
-    spent: 530,
-    color: "#F00",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15,
-  },
-  {
-    name: "Entertainment",
-    spent: 35,
-    color: "red",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15,
-  },
-  {
-    name: "Utilities",
-    spent: 200,
-    color: "#ffffff",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15,
-  },
-];
+const finalArr = roundPrice(sortedArr)
 
 const GraphScreen = () => {
   return (
@@ -275,7 +293,6 @@ const GraphScreen = () => {
             stroke: colors.darkGreenTextColor,
           },
         }}
-        bezier
         style={{
           marginVertical: 8,
           marginBottom: 10,
@@ -285,17 +302,17 @@ const GraphScreen = () => {
 
       <LineChart
         data={{
-          labels: ["January", "February", "March", "April", "May", "June"],
+          labels: sortedArr.map((receipt) => receipt.date),
           datasets: [
             {
-              data: testReceipts.map((receipt) => receipt.price),
+              data: sortedArr.map((receipt) => receipt.price),
             },
           ],
         }}
         width={Dimensions.get("window").width} // from react-native
         height={220}
         yAxisLabel="$"
-        yAxisSuffix="k"
+        yAxisSuffix=""
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
           backgroundColor: colors.whiteBackgroundColor,
@@ -362,28 +379,6 @@ const GraphScreen = () => {
           marginVertical: 8,
           borderRadius: 16,
         }}
-      />
-
-      <PieChart
-        data={pieChartData}
-        width={Dimensions.get("window").width}
-        height={300}
-        chartConfig={{
-          backgroundColor: "#e26a00",
-          backgroundGradientFrom: "#fb8c00",
-          backgroundGradientTo: "#ffa726",
-          decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-        }}
-        accessor={"spent"}
-        backgroundColor={"transparent"}
-        paddingLeft={"15"}
-        center={[10, 50]}
-        absolute
       />
     </ScrollView>
   );
