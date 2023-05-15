@@ -148,7 +148,7 @@ function HomeScreen() {
     }, [percentSpent, progress]);
 
     return (
-      <View>
+      <ScrollView>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <FontAwesome
             name="bars"
@@ -175,7 +175,7 @@ function HomeScreen() {
             />
           </View>
         </View>
-      </View>
+      </ScrollView>
     );
   };
 

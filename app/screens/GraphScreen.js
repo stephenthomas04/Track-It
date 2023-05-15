@@ -26,6 +26,16 @@ const testReceipts = [
     store: "Kohls",
   },
   {
+    category: "Cloths",
+    day: "2",
+    month: "11",
+    year: "23",
+    date: "11/2/23",
+    id: "yCTOISkTSfSQJnZoAbSt",
+    price: "12.99",
+    store: "Kohls",
+  },
+  {
     category: "Food",
     day: "8",
     month: "12",
@@ -167,7 +177,7 @@ function selectionSortDay(arr) {
   );
   return arr;
 }*/
-const selectionSortDay = (receipts) => {
+const selectionSortDate = (receipts) => {
   const n = receipts.length;
   for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
@@ -237,17 +247,14 @@ function roundPrice(arr) {
   const convertedReceipts = arr.map((receipt) => {
     const price = receipt.price;
     const convertedPrice = Math.round(price);
-
-    return {
-      price: convertedPrice,
-    };
+   
   });
   return convertedReceipts;
 }
 
 const convertedReceipts = convertPriceToDouble(testReceipts);//First Pass In
 
-const selectionSortArr = selectionSortDay(convertedReceipts);
+const selectionSortArr = selectionSortDate(convertedReceipts);
 console.log(selectionSortArr);
 
 const sortedArr = combineData(selectionSortArr);
@@ -330,7 +337,6 @@ const GraphScreen = () => {
             stroke: colors.darkGreenTextColor,
           },
         }}
-        bezier
         style={{
           marginVertical: 8,
           borderRadius: 16,
