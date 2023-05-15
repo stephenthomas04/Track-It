@@ -9,7 +9,6 @@ import {
   Animated,
 } from "react-native";
 import { getAuth } from "firebase/auth";
-import { auth, firebase } from "../firebase";
 import globalStyle from "../config/globalStyle";
 import { useNavigation } from "@react-navigation/native";
 import colors from "../config/colors";
