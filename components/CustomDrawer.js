@@ -7,12 +7,15 @@ import {
 import { ImageBackground } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import { useNavigation } from "@react-navigation/core";
+
 const CustomDrawer = (props) => {
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView
         {...props}
-        contentContainerStyle={{ backgroundColor: "#90ee90" }}
+        contentContainerStyle={{ backgroundColor: "#14AE5C" }}
       >
         <ImageBackground
           source={require("../app/assets/dazzle.png")}
@@ -31,7 +34,7 @@ const CustomDrawer = (props) => {
       <View
         style={{ padding: 30, borderTopWidth: 1, borderTopColor: "#000000" }}
       >
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
           <View
             style={{
               flexDirection: "row",
@@ -46,7 +49,5 @@ const CustomDrawer = (props) => {
     </View>
   );
 };
-
 export default CustomDrawer;
 
-const styles = StyleSheet.create({});
