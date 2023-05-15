@@ -14,6 +14,9 @@ import {
 } from "react-native-chart-kit";
 import { Value } from "react-native-reanimated";
 
+
+
+
 const testReceipts = [
   {
     category: "Cloths",
@@ -50,7 +53,7 @@ const testReceipts = [
     day: "11",
     month: "04",
     year: "23",
-    date: "11/04/23",
+    date: "04/11/23",
     id: "Q2JMOLBF8S7Ku08Cafc",
     price: "6.99",
     store: "AMC",
@@ -142,86 +145,32 @@ function convertPriceToDouble(receipts) {
   return convertedReceipts;
 }
 
-/*
-function selectionSortDay(arr) {
-  const n = arr.length;
-  for (let i = 0; i < n - 1; i++) {
-    let minIndex = i;
-    for (let j = i + 1; j < n; j++) {
-      if ((arr[j].day) < (arr[minIndex].day)) {
-        minIndex = j;
-      }
-    }
+function sortPastMonth(arr){
+  //const date = new Date().getMonth() + 1;
+  const date = 11; 
+  const filteredReceipts = arr.filter(receipt => receipt.month === date);
+  return filteredReceipts;
+}
 
-    const temp = arr[i];
-    arr[i] = arr[minIndex];
-    arr[minIndex] = temp;
-  }
-  console.log(
-    "Reciepts Array in Selection sort: \n" +
-      arr[0].day +
-      "\n" +
-      arr[1].day +
-      "\n" +
-      arr[2].day +
-      "\n" +
-      arr[3].day +
-      "\n" +
-      arr[4].day +
-      "\n" +
-      arr[5].day +
-      "\n" +
-      arr[6].day +
-      "\n" +
-      arr[7].day
-  );
-  return arr;
-}*/
-const selectionSortDate = (receipts) => {
-  const n = receipts.length;
-  for (let i = 0; i < n - 1; i++) {
-    let minIndex = i;
-    for (let j = i + 1; j < n; j++) {
-      const date1 = new Date(receipts[minIndex].year, receipts[minIndex].month - 1, receipts[minIndex].day);
-      const date2 = new Date(receipts[j].year, receipts[j].month - 1, receipts[j].day);
-      if (date2 < date1) {
-        minIndex = j;
-      }
-    }
-    if (minIndex !== i) {
-      const temp = receipts[i];
-      receipts[i] = receipts[minIndex];
-      receipts[minIndex] = temp;
-    }
-  }
-  return receipts;
-};
-
-
-function pastWeek(arr){
-  /*
-    Get the latest data and -7 day to it
-  */
-    let lowestNum;
-    const n = arr.length;
+  const selectionSortDate = (receipts) => {
+    const n = receipts.length;
     for (let i = 0; i < n - 1; i++) {
       let minIndex = i;
       for (let j = i + 1; j < n; j++) {
-        if ((arr[j].day) < (arr[minIndex].day)) {
+        const date1 = new Date(receipts[minIndex].year, receipts[minIndex].month - 1, receipts[minIndex].day);
+        const date2 = new Date(receipts[j].year, receipts[j].month - 1, receipts[j].day);
+        if (date2 < date1) {
           minIndex = j;
         }
       }
-  
-      const temp = arr[i];
-      arr[i] = arr[minIndex];
-      arr[minIndex] = temp;
+      if (minIndex !== i) {
+        const temp = receipts[i];
+        receipts[i] = receipts[minIndex];
+        receipts[minIndex] = temp;
+      }
     }
-   
-    return arr;
-  }
-
-
-
+    return receipts;
+  };
 
 
 function combineData(arr) {
@@ -230,7 +179,7 @@ function combineData(arr) {
   while (i < n - 1) {
     let j = i + 1;
     while (j < n) {
-      if (arr[i].day === arr[j].day) {
+      if (arr[i].day === arr[j].day && arr[i].month === arr[j].month && arr[i].year === arr[j].year) {
         arr[i].price += arr[j].price;
         arr.splice(j, 1);
         n = arr.length;
@@ -243,15 +192,6 @@ function combineData(arr) {
   return arr;
 }
 
-function roundPrice(arr) {
-  const convertedReceipts = arr.map((receipt) => {
-    const price = receipt.price;
-    const convertedPrice = Math.round(price);
-   
-  });
-  return convertedReceipts;
-}
-
 const convertedReceipts = convertPriceToDouble(testReceipts);//First Pass In
 
 const selectionSortArr = selectionSortDate(convertedReceipts);
@@ -260,9 +200,11 @@ console.log(selectionSortArr);
 const sortedArr = combineData(selectionSortArr);
 console.log(sortedArr);
 
-console.log("Rounded Price " + roundPrice(sortedArr));
+const monthArr = sortPastMonth(sortedArr);
+console.log(monthArr);
 
-const finalArr = roundPrice(sortedArr)
+
+
 
 const GraphScreen = () => {
   return (
@@ -272,10 +214,10 @@ const GraphScreen = () => {
 
       <BarChart
         data={{
-          labels: sortedArr.map((receipt) => receipt.date),
+          labels: monthArr.map((receipt) => receipt.date),
           datasets: [
             {
-              data: sortedArr.map((receipt) => receipt.price),
+              data: monthArr.map((receipt) => receipt.price),
             },
           ],
         }}
@@ -337,6 +279,7 @@ const GraphScreen = () => {
             stroke: colors.darkGreenTextColor,
           },
         }}
+
         style={{
           marginVertical: 8,
           borderRadius: 16,
