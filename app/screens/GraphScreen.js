@@ -146,8 +146,7 @@ function convertPriceToDouble(receipts) {
 }
 
 function sortPastMonth(arr){
-  //const date = new Date().getMonth() + 1;
-  const date = 11; 
+  const date = new Date().getMonth() + 1;
   const filteredReceipts = arr.filter(receipt => receipt.month === date);
   return filteredReceipts;
 }
