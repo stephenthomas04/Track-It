@@ -85,11 +85,11 @@ const globalStyle = StyleSheet.create({
   },
   imageStyles: {
     width: "80%",
-    height: "80%",
+    height: "100%",
     justifyContent: "center",
     alignContent: "center",
     marginLeft: "9%",
-    marginBottom: "-5%",
+    marginBottom: "-11%",
   },
   graphScreen: {
     backgroundColor: colors.secondaryDarkGreen,

@@ -33,6 +33,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
+import { async } from "@firebase/util";
 
 function CameraScreen() {
   const [fileText, setFileText] = useState(
@@ -45,6 +46,10 @@ function CameraScreen() {
   const [totalPrice, setTotalPrice] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [info, setInfo] = useState("");
   const [imageUrl, setImageURL] = useState("");
   const navigation = useNavigation();
 
@@ -57,7 +62,7 @@ function CameraScreen() {
   const [cameraToggle, setCameraToggle] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [photo64, setPhoto64] = useState(null);
-  const [info, setInfo] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
@@ -98,6 +103,7 @@ function CameraScreen() {
       const options = { quality: 0.5, base64: true };
       const data = await cameraRef.takePictureAsync(options);
       setPhoto(data.uri);
+      console.log(photo);
       setPhoto64(data.base64);
       setCameraToggle(null);
     }
@@ -129,7 +135,33 @@ function CameraScreen() {
     setTotalPrice("");
     setPhoto(null);
     setPhoto64(null);
+    setCategory("");
+    console.log(date);
+    console.log(storeName);
+    console.log(totalPrice);
+    console.log(photo);
+    console.log(photo64);
     setCameraToggle(true);
+  };
+
+  const clearFields = async () => {
+    console.log("------------------Clearing Data-----------------");
+    setDate("");
+    console.log("Date:", date);
+    setDay("");
+    setMonth("");
+    setYear("");
+    setStoreName("");
+    console.log("Store Name:", storeName);
+    setTotalPrice("");
+    setCategory("");
+    setData("");
+    console.log("Price", totalPrice);
+    setPhoto(null);
+    setPhoto64(null);
+    console.log("Photo:", photo);
+    console.log("Fields have been cleared");
+    console.log("------------------------------------------------");
   };
 
   if (hasPermission === null) {
@@ -161,46 +193,45 @@ function CameraScreen() {
   };
 
   const callGoogleVisionAsync = async (image) => {
-    setIsLoading(true);
-    const body = {
-      requests: [
-        {
-          image: {
-            content: image,
-          },
-          features: [
-            {
-              type: "TEXT_DETECTION",
-              maxResults: 1,
+    if (photo != null) {
+      setIsLoading(true);
+      const body = {
+        requests: [
+          {
+            image: {
+              content: image,
             },
-          ],
-        },
-      ],
-    };
+            features: [
+              {
+                type: "TEXT_DETECTION",
+                maxResults: 1,
+              },
+            ],
+          },
+        ],
+      };
 
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-      const result = await response.json();
-      console.log(
-        "callGoogleVisionAsync -> result",
-        result.responses[0].textAnnotations[0].description
-      );
-      setData(result).then((info) => {
-        openSheet();
-        console.log(info);
-        findData(info);
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+        const result = await response.json();
+        setData(result).then((info) => {
+          openSheet();
+          findData(info);
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      Alert.alert("Please Upload an image or manually input the data");
     }
   };
 
@@ -216,14 +247,38 @@ function CameraScreen() {
     });
   };
 
+  const isValidDate = (text) => {
+    const dateRegex =
+      /^(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/\d{2}(\d{2})?$/;
+    return dateRegex.test(text);
+  };
+
+  const splitDate = (dateString) => {
+    const month = dateString.substring(0, 2);
+    const day = dateString.substring(3, 5);
+    const year = dateString.substring(5);
+    setDay(day);
+    setMonth(month);
+    setYear(year);
+    console.log("Date Split:", day, month, year);
+  };
+
   const handlePress = async () => {
     console.log("Submitted");
     const auth = getAuth();
     const user = auth.currentUser.email;
     const fields = { storeName, totalPrice, category, date };
-    const isValid = validateFields(fields);
+    const isValid = validateFields(fields) && isValidDate(date);
 
     if (isValid) {
+      splitDate(date);
+
+      console.log("------------------Incoming Data-----------------");
+      console.log(date);
+      console.log(storeName);
+      console.log(totalPrice);
+      console.log(photo);
+      console.log("------------------------------------------------");
       if (photo == null) {
         setPhoto("Manually Inputted");
         setImageURL(null);
@@ -234,21 +289,22 @@ function CameraScreen() {
               store: storeName,
               price: totalPrice,
               category: category,
+              day: day,
+              month: month,
+              year: year,
               date: date,
             },
           };
 
           const filename = photo.substring(photo.lastIndexOf("/") + 1);
-          console.log(filename);
           const path = `users/${user}/${filename}`;
           const storage = getStorage();
           const imagesRef = ref(storage, path);
 
           await uploadBytes(imagesRef, photo, metadata).then((snapshot) => {
-            console.log("Uploaded a blob or file!");
+            console.log("Uploaded a file!");
           });
           const url = await getDownloadURL(ref(imagesRef));
-          console.log(url);
           setImageURL(url);
         } catch (e) {
           console.error("Error adding document: ", e);
@@ -260,6 +316,9 @@ function CameraScreen() {
           price: totalPrice,
           category: category,
           date: date,
+          day: day,
+          month: month,
+          year: year,
           imageUrl: imageUrl,
         });
 
@@ -269,13 +328,27 @@ function CameraScreen() {
       }
       closeSheet();
       Alert.alert("Success", "Receipt submitted successfully");
+      try {
+        await clearFields();
+      } catch (e) {
+        console.log("error");
+      }
+      console.log("--------------------Final Data-------------------");
+      console.log(date);
+      console.log(storeName);
+      console.log(totalPrice);
+      console.log(photo);
+      console.log("------------------------------------------------");
       setCameraToggle(null);
     } else {
-      Alert.alert("Error", "Please fill in all required fields");
+      Alert.alert(
+        "Error",
+        "Please fill in all required fields in correct format"
+      );
     }
   };
 
-  const findData = (text) => {
+  const findData = async (text) => {
     try {
       const newText = text.replace(/\$/g, "");
       const priceFormat = /\d+\.\d+/g;
@@ -302,7 +375,7 @@ function CameraScreen() {
         /\b((0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/(19|20)?\d{2}|(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-(19|20)?\d{2})\b/g;
       const match = text.match(regex);
       if (match != null) {
-        //console.log("Date: ", match[0]);
+        console.log("Date: ", match[0]);
         setDate(match[0]);
       } else {
         //console.log("Date: ", "No Date found");
@@ -316,7 +389,7 @@ function CameraScreen() {
     try {
       const index = text.indexOf("\n");
       if (index !== -1) {
-        // console.log(text.substring(0, index));
+        console.log(text.substring(0, index));
         setStoreName(text.substring(0, index));
       } else {
         //console.log("Store: ", "No Store found");
@@ -370,7 +443,7 @@ function CameraScreen() {
           </View>
           {isLoading ? (
             <View style={styles.indicatorWrapper}>
-              <ActivityIndicator size="large" color="#0000ff" />
+              <ActivityIndicator size="large" color="#00ff00" />
             </View>
           ) : null}
         </View>
@@ -475,7 +548,7 @@ function CameraScreen() {
                   onChangeText={handleInput2Change}
                   value={totalPrice}
                   keyboardType="numeric"
-                  placeholder="Price"
+                  placeholder="0.00"
                   defaultValue={totalPrice}
                 />
 
@@ -532,7 +605,7 @@ function CameraScreen() {
                   }}
                   onChangeText={handleInput4Change}
                   value={date}
-                  placeholder="Date"
+                  placeholder="MM/DD/YY"
                   defaultValue={date}
                 />
 
@@ -686,9 +759,14 @@ const styles = StyleSheet.create({
   },
 
   indicatorWrapper: {
-    flex: 1,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
   },
 
   contentContainer: {
