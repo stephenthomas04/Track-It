@@ -116,6 +116,7 @@ function HomeScreen() {
       console.log(receipts.price);
       totalPrice += parseFloat(receipts.price);
     });
+
     setTotalSpent(totalPrice);
   };
 
@@ -194,7 +195,7 @@ function HomeScreen() {
           />
         </TouchableOpacity>
         <View>
-          <ProgressBar spent={totalSpent} budget={budget} />
+          <ProgressBar spent={500} budget={budget} />
         </View>
       </View>
     </View>
