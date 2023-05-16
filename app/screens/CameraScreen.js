@@ -14,6 +14,7 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Button,
+  Platform,
   TouchableWithoutFeedback,
   ActivityIndicator,
   Keyboard,
@@ -186,7 +187,7 @@ function CameraScreen() {
   };
 
   const callGoogleVisionAsync = async (image) => {
-    console.log(date);
+    //console.log(photo);
     if (photo != null) {
       setIsLoading(true);
       const body = {
@@ -254,6 +255,7 @@ function CameraScreen() {
     const fields = { storeName, totalPrice, category, date };
     const isValid = validateFields(fields) && isValidDate(date);
     var url = "Manual Input";
+    var photoUri = photo;
 
     if (isValid) {
       console.log("------------------Incoming Data-----------------");
@@ -268,6 +270,7 @@ function CameraScreen() {
       const year = date.substring(6);
 
       try {
+        setIsLoading(true);
         const metadata = {
           customMetadata: {
             store: storeName,
@@ -281,13 +284,17 @@ function CameraScreen() {
         const path = `users/${user}/${filename}`;
         const storage = getStorage();
         const imagesRef = ref(storage, path);
+        const response = await fetch(photo);
+        const blob = await response.blob();
 
-        await uploadBytes(imagesRef, photo, metadata).then((snapshot) => {});
+        await uploadBytes(imagesRef, blob, metadata).then((snapshot) => {});
         url = await getDownloadURL(ref(imagesRef));
         console.log("Uploaded a file:", url);
-        setImageURL(url);
+        setImageURL(url.uri);
       } catch (e) {
         console.error("Error adding document: ", e);
+      } finally {
+        setIsLoading(false);
       }
 
       try {

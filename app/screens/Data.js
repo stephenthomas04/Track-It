@@ -14,6 +14,7 @@ import Constants from "expo-constants";
 import { collection, getDocs } from "firebase/firestore";
 import db from "../firebase";
 import { getAuth } from "firebase/auth";
+import { Overlay } from "react-native-elements";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 import { FontAwesome } from "@expo/vector-icons";
@@ -35,6 +36,8 @@ export default function DataScreen() {
   const navigation = useNavigation();
   const [showImages, setShowImages] = useState(false);
   const [imageSource, setImageSource] = useState(null);
+
+  const [visible, setVisible] = useState(false);
 
   const testReceipts = [
     {
@@ -135,11 +138,27 @@ export default function DataScreen() {
     })();
   }, []);
 
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
+
+  const downloadFile = async (url) => {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "blob";
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open("GET", url);
+    xhr.send();
+  };
+
   const renderItem = ({ item }) => {
     const storage = getStorage();
     const onPress = async () => {
       try {
         console.log(item.imageUrl);
+        await downloadFile(item.imageUrl);
+        setVisible(!visible);
         setImageSource(item.imageUrl);
       } catch (error) {
         console.error(error);
@@ -164,6 +183,12 @@ export default function DataScreen() {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
+      <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+        <Image
+          style={{ height: 600, width: 300 }}
+          source={{ uri: imageSource }}
+        />
+      </Overlay>
     </View>
   );
 }
