@@ -101,14 +101,68 @@ const testReceipts = [
   {
     category: "Entertainment",
     day: "9",
-    month: "9",
+    month: "11",
     year: "23",
     date: "9/9/23",
     id: "nFNITrmLoEE7domhGN1",
     price: "50.00",
     store: "Arcade",
   },
+  {
+    category: "Entertainment",
+    day: "9",
+    month: "11",
+    year: "23",
+    date: "9/11/23",
+    id: "nFNITrmLoEE7domhGN1",
+    price: "50.00",
+    store: "Arcade",
+  },
 ];
+
+function monthCalculator(){
+  let date = new Date().getMonth() + 1;
+
+  if(date = 1){
+    return "January"; 
+  }
+  if(date = 2){
+    return "January"; 
+  }
+  if(date = 3){
+    return "January"; 
+  }
+  if(date = 4){
+    return "January"; 
+  }
+  if(date = 5){
+    return "May"; 
+  }
+  if(date = 6){
+    return "January"; 
+  }
+  if(date = 7){
+    return "January"; 
+  }
+  if(date = 8){
+    return "January"; 
+  }if(date = 9){
+    return "January"; 
+  }
+  
+  if(date = 10){
+    return "January"; 
+  }
+  if(date = 11){
+    return "January"; 
+  }
+  if(date = 12){
+    return "January"; 
+  }
+  
+  
+  
+}
 
 function stringToDouble(str) {
   let num = parseFloat(str);
@@ -146,9 +200,30 @@ function convertPriceToDouble(receipts) {
 }
 
 function sortPastMonth(arr){
-  const date = new Date().getMonth() + 1;
+  //const date = new Date().getMonth() + 1;
+  let isMonth = false;
+  const date = 11;
+  let x  = 0; //x needs to be a minimum of three receitps. This makes sure that at there is three reciepts in order to display the montly data 
+
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i].month == date){
+      x += 1; 
+    }
+  }
+  console.log("x" + x);
+  if(x >= 3){ 
+    isMonth = true;
+  }
+
   const filteredReceipts = arr.filter(receipt => receipt.month === date);
-  return filteredReceipts;
+  
+
+  if(isMonth){ 
+    return filteredReceipts;
+  }else{
+    return null;
+  }
+    
 }
 
   const selectionSortDate = (receipts) => {
@@ -190,6 +265,14 @@ function combineData(arr) {
   }
   return arr;
 }
+function checkNull(arr){
+ if(arr == null){
+    return false; 
+ }else{
+  return true; 
+ }
+}
+
 
 const convertedReceipts = convertPriceToDouble(testReceipts);//First Pass In
 
@@ -202,134 +285,103 @@ console.log(sortedArr);
 const monthArr = sortPastMonth(sortedArr);
 console.log(monthArr);
 
-
+const arrCheckLogic = checkNull(monthArr);
 
 
 const GraphScreen = () => {
-  return (
-    <ScrollView style={globalStyle.graphScreen}>
-      <Text style={globalStyle.subHeading}>Your Finance Outlook</Text>
-      <StatusBar style="auto" />
-
-      <BarChart
-        data={{
-          labels: monthArr.map((receipt) => receipt.date),
-          datasets: [
-            {
-              data: monthArr.map((receipt) => receipt.price),
+  if(arrCheckLogic){
+    return (
+      <ScrollView style={globalStyle.graphScreen}>
+        <Text style={globalStyle.subHeading}>Your Finance Outlook</Text>
+        <Text style={globalStyle.subHeading}> Your outlook for the month of + {monthCalculator}</Text>
+        <StatusBar style="auto" />
+  
+        <BarChart
+          data={{
+            labels: monthArr.map((receipt) => receipt.date),
+            datasets: [
+              {
+                data: monthArr.map((receipt) => receipt.price),
+              },
+            ],
+          }}
+          width={Dimensions.get("window").width} // from react-native
+          height={220}
+          yAxisLabel="$"
+          yAxisSuffix=""
+          yAxisInterval={1} // optional, defaults to 1
+          chartConfig={{
+            backgroundColor: colors.whiteBackgroundColor,
+            backgroundGradientFrom: colors.whiteBackgroundColor,
+            backgroundGradientTo: colors.whiteBackgroundColor,
+            decimalPlaces: 0, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            style: {
+              borderRadius: 16,
             },
-          ],
-        }}
-        width={Dimensions.get("window").width} // from react-native
-        height={220}
-        yAxisLabel="$"
-        yAxisSuffix=""
-        yAxisInterval={1} // optional, defaults to 1
-        chartConfig={{
-          backgroundColor: colors.whiteBackgroundColor,
-          backgroundGradientFrom: colors.whiteBackgroundColor,
-          backgroundGradientTo: colors.whiteBackgroundColor,
-          decimalPlaces: 0, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-          propsForDots: {
-            r: "6",
-            strokeWidth: "2",
-            stroke: colors.darkGreenTextColor,
-          },
-        }}
-        style={{
-          marginVertical: 8,
-          marginBottom: 10,
-          borderRadius: 22,
-        }}
-      />
-
-      <LineChart
-        data={{
-          labels: sortedArr.map((receipt) => receipt.date),
-          datasets: [
-            {
-              data: sortedArr.map((receipt) => receipt.price),
+            propsForDots: {
+              r: "6",
+              strokeWidth: "2",
+              stroke: colors.darkGreenTextColor,
             },
-          ],
-        }}
-        width={Dimensions.get("window").width} // from react-native
-        height={220}
-        yAxisLabel="$"
-        yAxisSuffix=""
-        yAxisInterval={1} // optional, defaults to 1
-        chartConfig={{
-          backgroundColor: colors.whiteBackgroundColor,
-          backgroundGradientFrom: colors.whiteBackgroundColor,
-          backgroundGradientTo: colors.whiteBackgroundColor,
-          decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-          propsForDots: {
-            r: "6",
-            strokeWidth: "2",
-            stroke: colors.darkGreenTextColor,
-          },
-        }}
-
-        style={{
-          marginVertical: 8,
-          borderRadius: 16,
-        }}
-      />
-
-      <LineChart
-        data={{
-          labels: testReceipts.map((receipt) => receipt.date),
-          datasets: [
-            {
-              data: [
-                Math.random() * 10, //REPLACE THIS WITH ACTUAL USER DATA
-                Math.random() * 10,
-                Math.random() * 10,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-              ],
+          }}
+          style={{
+            marginVertical: 8,
+            marginBottom: 10,
+            borderRadius: 22,
+          }}
+        />
+  
+      </ScrollView>
+    );
+  }else{
+    return (
+      <ScrollView style={globalStyle.graphScreen}>
+        <Text style={globalStyle.subHeading}>Your Finance Outlook {monthCalculator()}</Text>
+        <Text style={globalStyle.subHeading}> Total Data</Text>
+        <StatusBar style="auto" />
+  
+        <BarChart
+          data={{
+            labels: sortedArr.map((receipt) => receipt.date),
+            datasets: [
+              {
+                data: sortedArr.map((receipt) => receipt.price),
+              },
+            ],
+          }}
+          width={Dimensions.get("window").width} // from react-native
+          height={220}
+          yAxisLabel="$"
+          yAxisSuffix=""
+          yAxisInterval={1} // optional, defaults to 1
+          chartConfig={{
+            backgroundColor: colors.whiteBackgroundColor,
+            backgroundGradientFrom: colors.whiteBackgroundColor,
+            backgroundGradientTo: colors.whiteBackgroundColor,
+            decimalPlaces: 0, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            style: {
+              borderRadius: 16,
             },
-          ],
-        }}
-        width={Dimensions.get("window").width} // from react-native
-        height={220}
-        yAxisLabel="$"
-        yAxisSuffix="k"
-        yAxisInterval={1} // optional, defaults to 1
-        chartConfig={{
-          backgroundColor: colors.whiteBackgroundColor,
-          backgroundGradientFrom: colors.whiteBackgroundColor,
-          backgroundGradientTo: colors.whiteBackgroundColor,
-          decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-          propsForDots: {
-            r: "6",
-            strokeWidth: "2",
-            stroke: colors.darkGreenTextColor,
-          },
-        }}
-        bezier
-        style={{
-          marginVertical: 8,
-          borderRadius: 16,
-        }}
-      />
-    </ScrollView>
-  );
+            propsForDots: {
+              r: "6",
+              strokeWidth: "2",
+              stroke: colors.darkGreenTextColor,
+            },
+          }}
+          style={{
+            marginVertical: 8,
+            marginBottom: 10,
+            borderRadius: 22,
+          }}
+        />
+      </ScrollView>
+    );
+  }
+  
 };
 
 export default GraphScreen;
