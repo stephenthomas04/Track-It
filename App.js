@@ -23,27 +23,6 @@ const Drawer = createDrawerNavigator();
 
 function App() {
   return (
-    /*<PaperProvider theme={PaperDarkTheme}>
-      <NavigationContainer theme={DarkTheme}>
-        <Stack.Navigator>
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Login"
-            component={LoginScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Signup"
-            component={SignupScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Home"
-            component={RouteName}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>*/
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -88,14 +67,14 @@ function RouteName() {
       }}
     >
       <Drawer.Screen
-        name="Home Tab"
+        name="Homes"
         component={HomeScreen}
         options={{
           drawerIcon: () => <FontAwesome name="home" size={24} color="black" />,
         }}
       />
       <Drawer.Screen
-        name="GraphScreen"
+        name="Graphs"
         component={GraphScreen}
         options={{
           drawerIcon: () => <Entypo name="bar-graph" size={24} color="black" />,

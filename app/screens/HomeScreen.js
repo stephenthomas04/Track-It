@@ -126,7 +126,8 @@ function HomeScreen() {
       id: "nFNITrmLoEE7domhGN1",
       price: "50.00",
       store: "Arcade",
-    },  {
+    },
+    {
       category: "Cloths",
       day: "2",
       month: "11",
@@ -287,8 +288,19 @@ function HomeScreen() {
     return (
       <View>
         <View style={styles.container}>
+          <Text
+            style={{
+              fontSize: 20,
+              marginBottom: -35,
+              marginRight: 210,
+              color: colors.blackTextColor,
+              fontWeight: "700",
+            }}
+          >
+            Total Budget:
+          </Text>
           <View style={styles.progressText}>
-            <Text>${budget}</Text>
+            <Text style={{ fontSize: 20 }}>${budget}</Text>
           </View>
           <View style={styles.progressBar}>
             <Animated.View
@@ -328,44 +340,35 @@ function HomeScreen() {
     </View>
   );
 }
-function monthCalculator(){
+function monthCalculator() {
   let date = new Date().getMonth() + 1;
 
-  if(date == 1){
-    return "January"; 
-  }else
-  if(date == 2){
-    return "February"; 
-  }else
-  if(date == 3){
-    return "March"; 
-  }else
-  if(date == 4){
-    return "April"; 
-  }else
-  if(date == 5){
-    return "May"; 
-  }else
-  if(date == 6){
-    return "June"; 
-  }else
-  if(date == 7){
-    return "July"; 
-  }else
-  if(date == 8){
-    return "August"; 
-  }if(date == 9){
-    return "September"; 
-  }else
-  if(date == 10){
-    return "October"; 
-  }else
-  if(date == 11){
-    return "November"; 
+  if (date == 1) {
+    return "January";
+  } else if (date == 2) {
+    return "February";
+  } else if (date == 3) {
+    return "March";
+  } else if (date == 4) {
+    return "April";
+  } else if (date == 5) {
+    return "May";
+  } else if (date == 6) {
+    return "June";
+  } else if (date == 7) {
+    return "July";
+  } else if (date == 8) {
+    return "August";
   }
-  else if(date == 12){
-    return "December"; 
-  }else{
+  if (date == 9) {
+    return "September";
+  } else if (date == 10) {
+    return "October";
+  } else if (date == 11) {
+    return "November";
+  } else if (date == 12) {
+    return "December";
+  } else {
     return date.toString;
   }
 }
@@ -377,9 +380,9 @@ function stringToDouble(str) {
   }
   return num;
 }
-/* 
-**** START OF GRAPH CODE **** 
-*/
+/*
+ **** START OF GRAPH CODE ****
+ */
 
 function convertPriceToDouble(receipts) {
   const convertedReceipts = receipts.map((receipt) => {
@@ -408,53 +411,59 @@ function convertPriceToDouble(receipts) {
   return convertedReceipts;
 }
 
-function sortPastMonth(arr){
+function sortPastMonth(arr) {
   //const date = new Date().getMonth() + 1;
-  const date = 11 ;
+  const date = 11;
   let isMonth = false;
 
-  let x  = 0; //x needs to be a minimum of three receitps. This makes sure that at there is three reciepts in order to display the montly data 
+  let x = 0; //x needs to be a minimum of three receitps. This makes sure that at there is three reciepts in order to display the montly data
 
-  for(let i = 0; i < arr.length; i++){
-    if(arr[i].month == date){
-      x += 1; 
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].month == date) {
+      x += 1;
     }
   }
   console.log("x" + x);
-  if(x >= 3){ 
+  if (x >= 3) {
     isMonth = true;
   }
 
-  const filteredReceipts = arr.filter(receipt => receipt.month == date);
-  
-  if(isMonth){ 
+  const filteredReceipts = arr.filter((receipt) => receipt.month == date);
+
+  if (isMonth) {
     return filteredReceipts;
-  }else{
+  } else {
     return null;
   }
-    
 }
 
-  const selectionSortDate = (receipts) => {
-    const n = receipts.length;
-    for (let i = 0; i < n - 1; i++) {
-      let minIndex = i;
-      for (let j = i + 1; j < n; j++) {
-        const date1 = new Date(receipts[minIndex].year, receipts[minIndex].month - 1, receipts[minIndex].day);
-        const date2 = new Date(receipts[j].year, receipts[j].month - 1, receipts[j].day);
-        if (date2 < date1) {
-          minIndex = j;
-        }
-      }
-      if (minIndex !== i) {
-        const temp = receipts[i];
-        receipts[i] = receipts[minIndex];
-        receipts[minIndex] = temp;
+const selectionSortDate = (receipts) => {
+  const n = receipts.length;
+  for (let i = 0; i < n - 1; i++) {
+    let minIndex = i;
+    for (let j = i + 1; j < n; j++) {
+      const date1 = new Date(
+        receipts[minIndex].year,
+        receipts[minIndex].month - 1,
+        receipts[minIndex].day
+      );
+      const date2 = new Date(
+        receipts[j].year,
+        receipts[j].month - 1,
+        receipts[j].day
+      );
+      if (date2 < date1) {
+        minIndex = j;
       }
     }
-    return receipts;
-  };
-
+    if (minIndex !== i) {
+      const temp = receipts[i];
+      receipts[i] = receipts[minIndex];
+      receipts[minIndex] = temp;
+    }
+  }
+  return receipts;
+};
 
 function combineData(arr) {
   let n = arr.length;
@@ -462,7 +471,11 @@ function combineData(arr) {
   while (i < n - 1) {
     let j = i + 1;
     while (j < n) {
-      if (arr[i].day === arr[j].day && arr[i].month === arr[j].month && arr[i].year === arr[j].year) {
+      if (
+        arr[i].day === arr[j].day &&
+        arr[i].month === arr[j].month &&
+        arr[i].year === arr[j].year
+      ) {
         arr[i].price += arr[j].price;
         arr.splice(j, 1);
         n = arr.length;
@@ -474,49 +487,43 @@ function combineData(arr) {
   }
   return arr;
 }
-function checkNull(arr){
- if(arr == null){
-    return false; 
- }else{
-  return true; 
- }
+function checkNull(arr) {
+  if (arr == null) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
-function annualSpending(arr){
-  
+function annualSpending(arr) {
   const fullYear = new Date().getFullYear();
   const year = fullYear.toString().slice(-2);
- 
-
 
   let isYear = false;
 
-  let x  = 0; //x needs to be a minimum of three receitps. This makes sure that at there is three reciepts in order to display the montly data 
+  let x = 0; //x needs to be a minimum of three receitps. This makes sure that at there is three reciepts in order to display the montly data
 
-  for(let i = 0; i < arr.length; i++){
-    if(arr[i].year == year){
-      x += 1; 
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].year == year) {
+      x += 1;
     }
   }
   console.log("x in year " + x);
-  if(x >= 2){ 
+  if (x >= 2) {
     isYear = true;
   }
 
-  const filteredReceipts = arr.filter(receipt => receipt.year == year);
+  const filteredReceipts = arr.filter((receipt) => receipt.year == year);
 
   console.log("isYear " + isYear);
   console.log("filtered reciepts" + filteredReceipts);
-  
-  if(isYear){ 
+
+  if (isYear) {
     return filteredReceipts;
-  }else{
+  } else {
     return null;
   }
-
-
 }
-
 
 export default HomeScreen;
 
@@ -555,16 +562,16 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   progressBar: {
-    height: 30,
+    height: 40,
     width: "100%",
     borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: "#ddd",
+    borderRadius: 10,
+    backgroundColor: "#D5ECD4",
     overflow: "hidden",
   },
   progress: {
     height: "100%",
-    backgroundColor: "green",
+    backgroundColor: "#0E733D",
   },
   progressText: {
     marginVertical: 10,
@@ -582,9 +589,4 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "center",
   },
-}
-
-
-
-
-);
+});
