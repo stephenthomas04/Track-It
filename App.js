@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./app/screens/LoginScreen";
 import HomeScreen from "./app/screens/HomeScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import GraphScreen from "./app/screens/GraphScreen";
 import { FontAwesome } from "@expo/vector-icons";
 import SettingScreen from "./app/screens/SettingScreen";
@@ -13,31 +13,37 @@ import colors from "./app/config/colors";
 import { Entypo } from "@expo/vector-icons";
 import { getAuth } from "firebase/auth";
 import CustomDrawer from "./components/CustomDrawer";
+import {
+  Provider as PaperProvider,
+  DarkTheme as PaperDarkTheme,
+} from "react-native-paper";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Login"
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Signup"
-          component={SignupScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Home"
-          component={RouteName}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PaperProvider theme={PaperDarkTheme}>
+      <NavigationContainer theme={DarkTheme}>
+        <Stack.Navigator>
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Login"
+            component={LoginScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Signup"
+            component={SignupScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Home"
+            component={RouteName}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 function RouteName() {

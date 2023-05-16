@@ -158,7 +158,7 @@ export default function DataScreen() {
           name="bars"
           size={22}
           color="black"
-          style={{ marginTop: -160, marginRight: 310 }}
+          style={{ marginTop: -130, marginRight: 310 }}
         />
       </TouchableOpacity>
       <FlatList
