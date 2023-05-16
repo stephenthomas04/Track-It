@@ -23,7 +23,7 @@ const Drawer = createDrawerNavigator();
 
 function App() {
   return (
-    <PaperProvider theme={PaperDarkTheme}>
+    /*<PaperProvider theme={PaperDarkTheme}>
       <NavigationContainer theme={DarkTheme}>
         <Stack.Navigator>
           <Stack.Screen
@@ -43,7 +43,26 @@ function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </PaperProvider>
+    </PaperProvider>*/
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Login"
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Signup"
+          component={SignupScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={RouteName}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 function RouteName() {
