@@ -148,15 +148,7 @@ function HomeScreen() {
     }, [percentSpent, progress]);
 
     return (
-      <ScrollView>
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <FontAwesome
-            name="bars"
-            size={22}
-            color="black"
-            style={{ marginTop: -230, marginLeft: 1 }}
-          />
-        </TouchableOpacity>
+      <View>
         <View style={styles.container}>
           <View style={styles.progressText}>
             <Text>{percentSpent}% of budget spent</Text>
@@ -175,7 +167,7 @@ function HomeScreen() {
             />
           </View>
         </View>
-      </ScrollView>
+      </View>
     );
   };
 
@@ -184,12 +176,17 @@ function HomeScreen() {
       <Text style={styles.header}>Total Spendings</Text>
       <Text style={styles.total}>${totalSpent}</Text>
       <View style={styles.footer}>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <FontAwesome
+            name="bars"
+            size={25}
+            color="black"
+            style={{ marginTop: -230, marginLeft: 1 }}
+          />
+        </TouchableOpacity>
         <View>
           <ProgressBar spent={totalSpent} budget={budget} />
         </View>
-        <TouchableOpacity onPress={handleSignOut} style={styles.signoutButton}>
-          <Text style={globalStyle.buttonText}>Sign out</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

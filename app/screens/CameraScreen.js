@@ -46,9 +46,6 @@ function CameraScreen() {
   const [totalPrice, setTotalPrice] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
   const [info, setInfo] = useState("");
   const [imageUrl, setImageURL] = useState("");
   const navigation = useNavigation();
@@ -140,22 +137,18 @@ function CameraScreen() {
     console.log(storeName);
     console.log(totalPrice);
     console.log(photo);
-    console.log(photo64);
     setCameraToggle(true);
   };
 
   const clearFields = async () => {
     console.log("------------------Clearing Data-----------------");
+    setInfo("");
     setDate("");
     console.log("Date:", date);
-    setDay("");
-    setMonth("");
-    setYear("");
     setStoreName("");
     console.log("Store Name:", storeName);
     setTotalPrice("");
     setCategory("");
-    setData("");
     console.log("Price", totalPrice);
     setPhoto(null);
     setPhoto64(null);
@@ -193,6 +186,7 @@ function CameraScreen() {
   };
 
   const callGoogleVisionAsync = async (image) => {
+    console.log(date);
     if (photo != null) {
       setIsLoading(true);
       const body = {
@@ -253,63 +247,49 @@ function CameraScreen() {
     return dateRegex.test(text);
   };
 
-  const splitDate = (dateString) => {
-    const month = dateString.substring(0, 2);
-    const day = dateString.substring(3, 5);
-    const year = dateString.substring(5);
-    setDay(day);
-    setMonth(month);
-    setYear(year);
-    console.log("Date Split:", day, month, year);
-  };
-
   const handlePress = async () => {
     console.log("Submitted");
     const auth = getAuth();
     const user = auth.currentUser.email;
     const fields = { storeName, totalPrice, category, date };
     const isValid = validateFields(fields) && isValidDate(date);
+    var url = "Manual Input";
 
     if (isValid) {
-      splitDate(date);
-
       console.log("------------------Incoming Data-----------------");
       console.log(date);
       console.log(storeName);
       console.log(totalPrice);
       console.log(photo);
       console.log("------------------------------------------------");
-      if (photo == null) {
-        setPhoto("Manually Inputted");
-        setImageURL(null);
-      } else {
-        try {
-          const metadata = {
-            customMetadata: {
-              store: storeName,
-              price: totalPrice,
-              category: category,
-              day: day,
-              month: month,
-              year: year,
-              date: date,
-            },
-          };
 
-          const filename = photo.substring(photo.lastIndexOf("/") + 1);
-          const path = `users/${user}/${filename}`;
-          const storage = getStorage();
-          const imagesRef = ref(storage, path);
+      const month = date.substring(0, 2);
+      const day = date.substring(3, 5);
+      const year = date.substring(6);
 
-          await uploadBytes(imagesRef, photo, metadata).then((snapshot) => {
-            console.log("Uploaded a file!");
-          });
-          const url = await getDownloadURL(ref(imagesRef));
-          setImageURL(url);
-        } catch (e) {
-          console.error("Error adding document: ", e);
-        }
+      try {
+        const metadata = {
+          customMetadata: {
+            store: storeName,
+            price: totalPrice,
+            category: category,
+            date: date,
+          },
+        };
+
+        const filename = photo.substring(photo.lastIndexOf("/") + 1);
+        const path = `users/${user}/${filename}`;
+        const storage = getStorage();
+        const imagesRef = ref(storage, path);
+
+        await uploadBytes(imagesRef, photo, metadata).then((snapshot) => {});
+        url = await getDownloadURL(ref(imagesRef));
+        console.log("Uploaded a file:", url);
+        setImageURL(url);
+      } catch (e) {
+        console.error("Error adding document: ", e);
       }
+
       try {
         const docRef = await addDoc(collection(db, user), {
           store: storeName,
@@ -319,7 +299,7 @@ function CameraScreen() {
           day: day,
           month: month,
           year: year,
-          imageUrl: imageUrl,
+          imageUrl: url,
         });
 
         console.log("Document written with ID: ", docRef.id);
@@ -408,7 +388,7 @@ function CameraScreen() {
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <FontAwesome
               name="bars"
-              size={22}
+              size={25}
               color="black"
               style={{ marginRight: 320, paddingBottom: 12 }}
             />

@@ -13,7 +13,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-
+import { doc, setDoc } from "firebase/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -23,6 +23,7 @@ import {
 import globalStyle from "../config/globalStyle";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import db from "../firebase";
 import { Entypo } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 
@@ -52,11 +53,23 @@ const SignupScreen = () => {
     return unsubscribe;
   }, []);
 
-  const handleSignUp = () => {
-    createUserWithEmailAndPassword(auth, email, password)
+  const createFiles = async (user) => {
+    try {
+      const docRef = await setDoc(doc(db, user.email, "user_information"), {
+        name: name,
+        budget: 1000,
+      });
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
+  const handleSignUp = async () => {
+    await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Registered with:", user.email);
+        createFiles(user);
       })
       .catch((error) => alert(error.message));
   };
@@ -67,7 +80,7 @@ const SignupScreen = () => {
         <View style={styles.header}>
           <Image
             style={globalStyle.imageStyles}
-            source={require("../assets/trackIt.png")}
+            source={require("../assets/dazzle.png")}
           />
         </View>
         <View style={styles.footer}>
