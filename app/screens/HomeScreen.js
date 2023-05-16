@@ -9,6 +9,8 @@ import {
   Animated,
 } from "react-native";
 import { getAuth } from "firebase/auth";
+import { collection, getDocs } from "firebase/firestore";
+import db from "../firebase";
 import globalStyle from "../config/globalStyle";
 import { useNavigation } from "@react-navigation/native";
 import colors from "../config/colors";
@@ -111,26 +113,33 @@ function HomeScreen() {
   const getTotalPrice = async (receipts) => {
     let totalPrice = 0;
     receipts.forEach((receipts) => {
+      console.log(receipts.price);
       totalPrice += parseFloat(receipts.price);
     });
     setTotalSpent(totalPrice);
   };
 
   useEffect(() => {
-    /*(async () => {
+    (async () => {
       const items = [];
       if (receipts.length <= 1) {
-        const querySnapshot = await getDocs(collection(db, user));
+        const querySnapshot = await getDocs(collection(db, email));
         querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const id = doc.id;
-          console.log(doc.id, " => ", doc.data());
-          items.push({ id, ...data });
+          if (doc.id != "user_information") {
+            const data = doc.data();
+            const id = doc.id;
+            console.log(doc.id, " => ", doc.data());
+            items.push({ id, ...data });
+          } else if (doc.id == "user_information") {
+            const data = doc.data();
+            setBuget(data.budget);
+          }
         });
       }
       setReceipts(items);
-    })();*/
-    getTotalPrice(testReceipts);
+    })();
+
+    getTotalPrice(receipts);
   }, []);
 
   const ProgressBar = ({ spent, budget }) => {
@@ -151,7 +160,7 @@ function HomeScreen() {
       <View>
         <View style={styles.container}>
           <View style={styles.progressText}>
-            <Text>{percentSpent}% of budget spent</Text>
+            <Text>${budget}</Text>
           </View>
           <View style={styles.progressBar}>
             <Animated.View
@@ -241,6 +250,8 @@ const styles = StyleSheet.create({
   },
   progressText: {
     marginVertical: 10,
+    marginLeft: "80%",
+    fontSize: 60,
   },
 
   signoutButton: {

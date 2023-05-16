@@ -24,9 +24,9 @@ import { useNavigation } from "@react-navigation/native";
 const Item = ({ item, onPress }) => (
   <TouchableOpacity style={styles.item} onPress={onPress}>
     <View style={styles.itemContent}>
-      <Text style={styles.itemText}>{item.store}</Text>
-      <Text style={styles.itemText}>{item.price}</Text>
       <Text style={styles.itemText}>{item.date}</Text>
+      <Text style={styles.itemText}>{item.store}</Text>
+      <Text style={styles.itemText}>${item.price}</Text>
     </View>
   </TouchableOpacity>
 );
@@ -152,6 +152,7 @@ export default function DataScreen() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Receipts</Text>
       <TouchableOpacity onPress={() => navigation.openDrawer()}>
         <FontAwesome
           name="bars"
@@ -165,11 +166,6 @@ export default function DataScreen() {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
-      <Image
-        source={{
-          uri: "https://firebasestorage.googleapis.com/v0/b/track-it-31a75.appspot.com/o/users%2Fjohndoe%40gmail.com%2F275207E4-1AF5-4DF6-BD2B-C4E2A09B89D0.jpg?alt=media&token=655e7840-2658-4542-9a3a-4952fec12bc1",
-        }}
-      />
     </View>
   );
 }
@@ -180,7 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 30,
-    marginTop: 200,
+    marginTop: 100,
   },
 
   listContainer: {
@@ -197,11 +193,9 @@ const styles = StyleSheet.create({
     borderBottomColor: "black",
   },
   title: {
-    fontSize: 20,
+    fontSize: 50,
     fontWeight: "bold",
     textAlign: "center",
-    padding: 100,
-    marginTop: 20,
     marginBottom: 10,
   },
 
