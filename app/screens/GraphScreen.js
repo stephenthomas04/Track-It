@@ -240,8 +240,24 @@ function annualSpending(arr) {
   }
 }
 
-const monthCheckLogic = true;
-const yearCheckLogic = true;
+const convertedReceipts = convertPriceToDouble(receiptArr); //First Pass In
+
+const selectionSortArr = selectionSortDate(convertedReceipts);
+console.log(selectionSortArr);
+
+const sortedArr = combineData(selectionSortArr);
+console.log(sortedArr);
+
+const monthArr = sortPastMonth(sortedArr);
+console.log(monthArr);
+
+const annualArr = annualSpending(sortedArr);
+console.log("Annual Arr " + annualArr);
+
+const monthCheckLogic = checkNull(monthArr);
+const yearCheckLogic = checkNull(annualArr);
+
+const fullYear = new Date().getFullYear();
 
 const GraphScreen = () => {
   const [receipts, setReceipts] = useState([]);
@@ -266,23 +282,6 @@ const GraphScreen = () => {
       receiptArr = items;
       console.log(receiptArr);
     })();
-    const convertedReceipts = convertPriceToDouble(receiptArr); //First Pass In
-    const selectionSortArr = selectionSortDate(convertedReceipts);
-    console.log(selectionSortArr);
-
-    const sortedArr = combineData(selectionSortArr);
-    console.log("sortedArr:", sortedArr);
-
-    const monthArr = sortPastMonth(sortedArr);
-    console.log(monthArr);
-
-    const annualArr = annualSpending(sortedArr);
-    console.log("Annual Arr " + annualArr);
-
-    // const monthCheckLogic = checkNull(monthArr);
-    //const yearCheckLogic = checkNull(annualArr);
-
-    const fullYear = new Date().getFullYear();
   }, []);
 
   if (monthCheckLogic && yearCheckLogic) {
