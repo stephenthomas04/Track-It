@@ -425,12 +425,12 @@ function CameraScreen() {
               style={styles.formButton}
               onPress={() => openSheet()}
             >
-              <AntDesign name="form" size={30} color="#14AE5C" />
+              <AntDesign name="form" size={30} color="green" />
             </TouchableOpacity>
           </View>
           {isLoading ? (
             <View style={styles.indicatorWrapper}>
-              <ActivityIndicator size="large" color="#00ff00" />
+              <ActivityIndicator size="large" color="green" />
             </View>
           ) : null}
         </View>
