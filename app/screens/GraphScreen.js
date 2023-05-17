@@ -20,207 +20,43 @@ import db from "../firebase";
 const testReceipts = [
   {
     category: "Cloths",
-    day: "2",
-    month: "11",
-    year: "23",
-    date: "11/2/23",
-    id: "yCTOISkTSfSQJnZoAbSt",
-    price: "12.99",
-    store: "Kohls",
-  },
-  {
-    category: "Cloths",
-    day: "2",
-    month: "11",
-    year: "23",
-    date: "11/2/23",
-    id: "yCTOISkTSfSQJnZoAbSt",
-    price: "12.99",
-    store: "Kohls",
-  },
-  {
-    category: "Food",
-    day: "8",
-    month: "12",
-    year: "23",
-    date: "12/8/23",
-    id: "8LXGx7hr974P3T8o4pY",
-    price: "15.99",
-    store: "Chipotle",
-  },
-  {
-    category: "Entertainment",
-    day: "11",
-    month: "04",
-    year: "23",
-    date: "04/11/23",
-    id: "Q2JMOLBF8S7Ku08Cafc",
-    price: "6.99",
-    store: "AMC",
-  },
-  {
-    category: "Personal",
-    day: "11",
-    month: "12",
-    year: "23",
-    date: "12/11/23",
-    id: "WB8IjKQm3uwmd0OR2as",
-    price: "0.99",
-    store: "walmart",
-  },
-  {
-    category: "Food",
+    date: "1/29/2023",
     day: "9",
-    month: "11",
+    id: "eqUWzFQNilLxftPAM1oV",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/track-it-31a75.appspot.com/o/users%2Fvibby%40gmail.com%2F8C3C3422-C3FA-4D2A-92EE-8964ECA49748.jpg?alt=media&token=4c39d1ed-ba13-4d28-bbbf-18490d3622bb",
+    month: "1",
+    price: "26.88",
+    store: "Nike",
     year: "23",
-    date: "11/9/23",
-    id: "YelkygyNsJj3wxB0aMz",
-    price: "11.50",
-    store: "Chipotle",
   },
   {
     category: "Food",
-    day: "11",
-    month: "11",
-    year: "23",
-    date: "1/11/23",
-    id: "jKe0kJWUDCiZt2aZYau",
-    price: "9.99",
-    store: "Chipotle",
-  },
-  {
-    category: "Travel",
+    date: "03/03/2023",
     day: "3",
-    month: "10",
+    id: "n47C4dbLMOrf0un12dDs",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/track-it-31a75.appspot.com/o/users%2Fvibby%40gmail.com%2FA41EE687-20CD-4838-9DAE-1C3CC9972F79.jpg?alt=media&token=15b65af1-1553-44aa-93cd-6545f6a3d351",
+    month: "3",
+    price: "9.82",
+    store: "Chipotle ",
     year: "23",
-    date: "10/3/23",
-    id: "m4tAdv3UofY0kJhXmI9",
-    price: "125.99",
-    store: "Delta",
   },
   {
-    category: "Entertainment",
-    day: "9",
-    month: "11",
+    category: "Groceries ",
+    date: "03/04/23",
+    day: "4",
+    id: "smCkppCAiXJClN87xGDP",
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/track-it-31a75.appspot.com/o/users%2Fvibby%40gmail.com%2F73666491-0322-4339-8C26-537C1DD5267F.jpg?alt=media&token=78b54f53-95d9-480a-9f09-157e46bee94e",
+    month: "3",
+    price: "8.75",
+    store: "Mariano’s ",
     year: "23",
-    date: "9/9/23",
-    id: "nFNITrmLoEE7domhGN1",
-    price: "50.00",
-    store: "Arcade",
-  },
-  {
-    category: "Entertainment",
-    day: "9",
-    month: "11",
-    year: "23",
-    date: "9/11/23",
-    id: "nFNITrmLoEE7domhGN1",
-    price: "50.00",
-    store: "Arcade",
-  },
-  {
-    category: "Cloths",
-    day: "2",
-    month: "11",
-    year: "23",
-    date: "11/2/23",
-    id: "yCTOISkTSfSQJnZoAbSt",
-    price: "12.99",
-    store: "Kohls",
-  },
-  {
-    category: "Cloths",
-    day: "2",
-    month: "11",
-    year: "23",
-    date: "11/2/23",
-    id: "yCTOISkTSfSQJnZoAbSt",
-    price: "12.99",
-    store: "Kohls",
-  },
-  {
-    category: "Food",
-    day: "8",
-    month: "12",
-    year: "23",
-    date: "12/8/23",
-    id: "8LXGx7hr974P3T8o4pY",
-    price: "15.99",
-    store: "Chipotle",
-  },
-  {
-    category: "Entertainment",
-    day: "11",
-    month: "04",
-    year: "23",
-    date: "04/11/23",
-    id: "Q2JMOLBF8S7Ku08Cafc",
-    price: "6.99",
-    store: "AMC",
-  },
-  {
-    category: "Personal",
-    day: "11",
-    month: "12",
-    year: "23",
-    date: "12/11/23",
-    id: "WB8IjKQm3uwmd0OR2as",
-    price: "0.99",
-    store: "Walmart",
-  },
-  {
-    category: "Food",
-    day: "9",
-    month: "11",
-    year: "23",
-    date: "11/9/23",
-    id: "YelkygyNsJj3wxB0aMz",
-    price: "11.50",
-    store: "Chipotle",
-  },
-  {
-    category: "Food",
-    day: "11",
-    month: "11",
-    year: "23",
-    date: "1/11/23",
-    id: "jKe0kJWUDCiZt2aZYau",
-    price: "9.99",
-    store: "Chipotle",
-  },
-  {
-    category: "Travel",
-    day: "3",
-    month: "11",
-    year: "23",
-    date: "11/3/23",
-    id: "m4tAdv3UofY0kJhXmI9",
-    price: "125.99",
-    store: "Delta",
-  },
-  {
-    category: "Entertainment",
-    day: "9",
-    month: "11",
-    year: "23",
-    date: "9/9/23",
-    id: "nFNITrmLoEE7domhGN1",
-    price: "50.00",
-    store: "Arcade",
-  },
-  {
-    category: "Entertainment",
-    day: "9",
-    month: "11",
-    year: "23",
-    date: "11/9/23",
-    id: "nFNITrmLoEE7domhGN1",
-    price: "50.00",
-    store: "Arcade",
   },
 ];
 
-var receiptArr = [];
+let receiptArr = [];
 
 function monthCalculator() {
   let date = new Date().getMonth() + 1;
@@ -404,24 +240,8 @@ function annualSpending(arr) {
   }
 }
 
-const convertedReceipts = convertPriceToDouble(testReceipts); //First Pass In
-
-const selectionSortArr = selectionSortDate(convertedReceipts);
-console.log(selectionSortArr);
-
-const sortedArr = combineData(selectionSortArr);
-console.log(sortedArr);
-
-const monthArr = sortPastMonth(sortedArr);
-console.log(monthArr);
-
-const annualArr = annualSpending(sortedArr);
-console.log("Annual Arr " + annualArr);
-
-const monthCheckLogic = checkNull(monthArr);
-const yearCheckLogic = checkNull(annualArr);
-
-const fullYear = new Date().getFullYear();
+const monthCheckLogic = true;
+const yearCheckLogic = true;
 
 const GraphScreen = () => {
   const [receipts, setReceipts] = useState([]);
@@ -446,6 +266,23 @@ const GraphScreen = () => {
       receiptArr = items;
       console.log(receiptArr);
     })();
+    const convertedReceipts = convertPriceToDouble(receiptArr); //First Pass In
+    const selectionSortArr = selectionSortDate(convertedReceipts);
+    console.log(selectionSortArr);
+
+    const sortedArr = combineData(selectionSortArr);
+    console.log("sortedArr:", sortedArr);
+
+    const monthArr = sortPastMonth(sortedArr);
+    console.log(monthArr);
+
+    const annualArr = annualSpending(sortedArr);
+    console.log("Annual Arr " + annualArr);
+
+    // const monthCheckLogic = checkNull(monthArr);
+    //const yearCheckLogic = checkNull(annualArr);
+
+    const fullYear = new Date().getFullYear();
   }, []);
 
   if (monthCheckLogic && yearCheckLogic) {
