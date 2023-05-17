@@ -22,6 +22,7 @@ import {
 
 import globalStyle from "../config/globalStyle";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as Animatable from "react-native-animatable";
 import { AntDesign } from "@expo/vector-icons";
 import db from "../firebase";
 import { Entypo } from "@expo/vector-icons";
@@ -78,12 +79,13 @@ const SignupScreen = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={styles.signContainer} behavior="padding">
         <View style={styles.header}>
-          <Image
+          <Animatable.Image
+            animation="fadeInDownBig"
             style={globalStyle.imageStyles}
             source={require("../assets/dazzle.png")}
           />
         </View>
-        <View style={styles.footer}>
+        <Animatable.View animation="fadeInUpBig" style={styles.footer}>
           <Text style={globalStyle.subHeading}>Sign Up</Text>
           <View style={globalStyle.inputContainer}>
             <AntDesign
@@ -186,7 +188,7 @@ const SignupScreen = () => {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </Animatable.View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );

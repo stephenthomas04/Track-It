@@ -21,6 +21,7 @@ import {
 } from "firebase/auth";
 
 import globalStyle from "../config/globalStyle";
+import * as Animatable from "react-native-animatable";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -64,13 +65,14 @@ const LoginScreen = (props) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={globalStyle.container} behavior="padding">
         <View style={styles.header}>
-          <Image
+          <Animatable.Image
+            animation="fadeInDownBig"
             style={globalStyle.imageStyles}
             source={require("../assets/dazzle.png")}
           />
         </View>
 
-        <View style={styles.footer}>
+        <Animatable.View animation="fadeInUpBig" style={styles.footer}>
           <Text style={globalStyle.subHeading}>Login</Text>
           <View style={globalStyle.inputContainer}>
             <AntDesign
@@ -150,7 +152,7 @@ const LoginScreen = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </Animatable.View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
