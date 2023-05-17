@@ -17,30 +17,8 @@ import { getAuth } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import db from "../firebase";
 
-useEffect(() => {
-  (async () => {
-    let receiptArr = [];
-    const [receipts, setReceipts] = useState([]);
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const email = auth.currentUser.email;
-    const items = [];
-    if (receipts.length <= 1) {
-      const querySnapshot = await getDocs(collection(db, email));
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        if (doc.id != "user_information") {
-          const data = doc.data();
-          const id = doc.id;
-          items.push({ id, ...data });
-        }
-      });
-    }
-    setReceipts(items);
-    receiptArr = items;
-    console.log("rec" + receiptArr);
-}, []);
-  
+
+
    
 
     
@@ -269,8 +247,8 @@ function annualSpending(arr) {
     return null;
   }
 }
-const x = firebaseCall();
-console.log("x" + x) //First Pass In
+//const x = firebaseCall();
+//console.log("x" + x) //First Pass In
 /*
 const selectionSortArr = selectionSortDate(convertedReceipts);
 console.log(selectionSortArr);
