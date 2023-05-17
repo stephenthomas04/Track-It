@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Dimensions, ScrollView } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import globalStyle from "../config/globalStyle";
 import colors from "../config/colors";
-
+import { async } from "@firebase/util";
 import {
   LineChart,
   BarChart,
@@ -17,6 +17,34 @@ import { getAuth } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import db from "../firebase";
 
+useEffect(() => {
+  (async () => {
+    let receiptArr = [];
+    const [receipts, setReceipts] = useState([]);
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const email = auth.currentUser.email;
+    const items = [];
+    if (receipts.length <= 1) {
+      const querySnapshot = await getDocs(collection(db, email));
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        if (doc.id != "user_information") {
+          const data = doc.data();
+          const id = doc.id;
+          items.push({ id, ...data });
+        }
+      });
+    }
+    setReceipts(items);
+    receiptArr = items;
+    console.log("rec" + receiptArr);
+}, []);
+  
+   
+
+    
+  
 const testReceipts = [
   {
     category: "Cloths",
@@ -56,7 +84,7 @@ const testReceipts = [
   },
 ];
 
-let receiptArr = [];
+
 
 function monthCalculator() {
   let date = new Date().getMonth() + 1;
@@ -210,6 +238,8 @@ function checkNull(arr) {
   }
 }
 
+
+
 function annualSpending(arr) {
   const fullYear = new Date().getFullYear();
   const year = fullYear.toString().slice(-2);
@@ -239,9 +269,9 @@ function annualSpending(arr) {
     return null;
   }
 }
-
-const convertedReceipts = convertPriceToDouble(receiptArr); //First Pass In
-
+const x = firebaseCall();
+console.log("x" + x) //First Pass In
+/*
 const selectionSortArr = selectionSortDate(convertedReceipts);
 console.log(selectionSortArr);
 
@@ -258,33 +288,10 @@ const monthCheckLogic = checkNull(monthArr);
 const yearCheckLogic = checkNull(annualArr);
 
 const fullYear = new Date().getFullYear();
-
+*/
 const GraphScreen = () => {
-  const [receipts, setReceipts] = useState([]);
-  const auth = getAuth();
-  const user = auth.currentUser;
-  const email = auth.currentUser.email;
-  useEffect(() => {
-    (async () => {
-      const items = [];
-      if (receipts.length <= 1) {
-        const querySnapshot = await getDocs(collection(db, email));
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          if (doc.id != "user_information") {
-            const data = doc.data();
-            const id = doc.id;
-            items.push({ id, ...data });
-          }
-        });
-      }
-      setReceipts(items);
-      receiptArr = items;
-      console.log(receiptArr);
-    })();
-  }, []);
-
-  if (monthCheckLogic && yearCheckLogic) {
+ 
+ // if (monthCheckLogic && yearCheckLogic) {
     return (
       <ScrollView style={globalStyle.graphScreen}>
         <Text style={globalStyle.title}>Your Finance Outlook</Text>
@@ -296,10 +303,10 @@ const GraphScreen = () => {
 
         <BarChart
           data={{
-            labels: monthArr.map((receipt) => receipt.date),
+            labels: testReceipts.map((receipt) => receipt.date),
             datasets: [
               {
-                data: monthArr.map((receipt) => receipt.price),
+                data: testReceipts.map((receipt) => receipt.price),
               },
             ],
           }}
@@ -331,14 +338,14 @@ const GraphScreen = () => {
           }}
         />
         <Text style={globalStyle.subHeading}>
-          The Year of {fullYear} so far
+          The Year of fullYear so far
         </Text>
         <LineChart
           data={{
-            labels: annualArr.map((receipt) => receipt.date),
+            labels: testReceipts.map((receipt) => receipt.date),
             datasets: [
               {
-                data: annualArr.map((receipt) => receipt.price),
+                data: testReceipts.map((receipt) => receipt.price),
               },
             ],
           }}
@@ -371,7 +378,7 @@ const GraphScreen = () => {
         />
       </ScrollView>
     );
-  } else if (yearCheckLogic) {
+        /* } else if (yearCheckLogic) {
     return (
       <ScrollView style={globalStyle.graphScreen}>
         <Text style={globalStyle.subHeading}>Your Finance Outlook</Text>
@@ -510,7 +517,7 @@ const GraphScreen = () => {
         }}
       />
     </ScrollView>;
-  }
-};
+      }
+    */};
 
 export default GraphScreen;
