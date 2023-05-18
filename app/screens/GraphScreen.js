@@ -385,7 +385,7 @@ function GraphScreen() {
           <FontAwesome
             name="bars"
             size={25}
-            color="black"
+            color={colors.blackTextColor}
             style={{ marginTop: 60, marginLeft: 20 }}
           />
         </TouchableOpacity>

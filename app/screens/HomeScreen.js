@@ -298,7 +298,7 @@ function HomeScreen() {
           <FontAwesome
             name="bars"
             size={25}
-            color="black"
+            color={colors.blackTextColor}
             style={{ marginTop: -230, marginLeft: 1 }}
           />
         </TouchableOpacity>
@@ -307,7 +307,7 @@ function HomeScreen() {
           <FontAwesome
             name="question-circle"
             size={25}
-            color="black"
+            color={colors.blackTextColor}
             style={{ marginTop: -230, marginLeft: "93%" }}
           />
         </TouchableOpacity>

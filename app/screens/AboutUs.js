@@ -96,7 +96,7 @@ export default function SettingScreen() {
           <FontAwesome
             name="bars"
             size={22}
-            color="black"
+            color={colors.blackTextColor}
             style={{ marginTop: -10, marginLeft: 350 }}
           />
         </TouchableOpacity>

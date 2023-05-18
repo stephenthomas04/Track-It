@@ -545,7 +545,7 @@ function CameraScreen() {
             <FontAwesome
               name="bars"
               size={25}
-              color="black"
+              color={colors.blackTextColor}
               style={{ marginRight: 320, paddingBottom: 12 }}
             />
           </TouchableOpacity>

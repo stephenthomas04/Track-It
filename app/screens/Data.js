@@ -212,7 +212,7 @@ export default function DataScreen() {
         <FontAwesome
           name="bars"
           size={22}
-          color="black"
+          color={colors.blackTextColor}
           style={{ marginTop: -130, marginRight: 310 }}
         />
       </TouchableOpacity>
