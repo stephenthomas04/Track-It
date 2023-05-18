@@ -149,7 +149,7 @@ const SignupScreen = () => {
               placeholder="Email"
               value={email}
               onChangeText={(text) => setEmail(text)}
-              autoCapitalize="false"
+              autoCapitalize="none"
               style={{
                 flexDirection: "row",
                 borderBottomColor: "black",
