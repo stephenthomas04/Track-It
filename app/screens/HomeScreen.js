@@ -157,37 +157,7 @@ function HomeScreen() {
     setTotalSpent(totalPrice);
   };
 
-  const [pieArr, setpieArr] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const getRandomGreenColor = () => {
-      const shades = ["#87D068", "#52C41A", "#389E0D", "#237804", "#135200"];
-      const randomIndex = Math.floor(Math.random() * shades.length);
-      return shades[randomIndex];
-    };
-
-    const combinePricesByCategory = (list) => {
-      const combinedPrices = {};
-
-      list.forEach((item) => {
-        const { category, price } = item;
-
-        if (combinedPrices[category]) {
-          combinedPrices[category] += price;
-        } else {
-          combinedPrices[category] = price;
-        }
-      });
-
-      const result = Object.keys(combinedPrices).map((category) => ({
-        name: category,
-        value: combinedPrices[category],
-        color: colors.primaryDarkGreen,
-      }));
-
-      return result;
-    };
-
     const items = [];
 
     const getData = async () => {
@@ -213,31 +183,10 @@ function HomeScreen() {
       });
       console.log("Total Spent:", totalPrice);
       setTotalSpent(totalPrice);
-      console.log(combinePricesByCategory(items));
-
-      setTimeout(() => {
-        setpieArr(combinePricesByCategory(items));
-        setIsLoading(false);
-      }, 2000);
     };
 
     getData();
-    console.log("Piechart", pieArr);
   }, []);
-
-  console.log("Piechart", pieArr);
-  const MyPieChart = ({ data }) => {
-    return (
-      <View>
-        <PieChart
-          data={data}
-          width={200}
-          height={200}
-          color={colors.primaryDarkGreen}
-        />
-      </View>
-    );
-  };
 
   const ProgressBar = ({ spent, budget }) => {
     const percentSpent = Math.floor((spent / budget) * 100);
@@ -314,7 +263,6 @@ function HomeScreen() {
         <Text>Welcome back {name}!</Text>
         <View>
           <ProgressBar spent={totalSpent} budget={budget} />
-          {!isLoading && <MyPieChart data={pieArr} />}
         </View>
       </View>
       <Overlay
