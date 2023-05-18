@@ -118,6 +118,7 @@ const LoginScreen = (props) => {
               placeholderTextColor={colors.blackTextColor}
               value={email}
               onChangeText={(text) => setEmail(text)}
+              autoCapitalize="false"
               style={{
                 flexDirection: "row",
                 borderBottomColor: colors.blackTextColor,
