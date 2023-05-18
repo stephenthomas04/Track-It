@@ -166,7 +166,7 @@ function HomeScreen() {
     },
   ];
 
-  const [showOverlay, setShowOverlay] = useState(true);
+  const [showOverlay, setShowOverlay] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
@@ -186,10 +186,8 @@ function HomeScreen() {
   };
 
   const handleCloseOverlay = () => {
-    if (currentSlide === slides.length - 1) {
-      setShowOverlay(false);
-      setCurrentSlide(0);
-    }
+    setShowOverlay(false);
+    setCurrentSlide(0);
   };
 
   const handleSignOut = () => {
@@ -308,12 +306,12 @@ function HomeScreen() {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleOpenOverlay()}>
           <FontAwesome
             name="question-circle"
             size={25}
             color="black"
-            style={{ marginTop: -230, marginLeft: 310 }}
+            style={{ marginTop: -230, marginLeft: "93%" }}
           />
         </TouchableOpacity>
         <View>
