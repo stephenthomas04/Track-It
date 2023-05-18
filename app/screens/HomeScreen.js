@@ -302,8 +302,9 @@ function HomeScreen() {
           style={{
             width: 350,
             height: 300,
-            fontSize: 15,
-            padding: 6,
+            fontSize: 20,
+            padding: 15,
+
             marginBottom: -120,
             borderWidth: 2,
             borderRadius: 10,
