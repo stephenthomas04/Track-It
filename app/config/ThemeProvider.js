@@ -20,7 +20,6 @@ const ThemeProvider = ({ children }) => {
     title: {
       color: colors.darkGreenTextColor,
       padding: "5%",
-      fontFamily: "Damascus",
       fontSize: 40,
       marginBottom: "5%",
     },
@@ -98,7 +97,7 @@ const ThemeProvider = ({ children }) => {
       marginBottom: "-17%",
     },
     graphScreen: {
-      backgroundColor: colors.secondaryDarkGreen,
+      backgroundColor: colors.whiteBackgroundColor,
     },
     defaultScreen: {
       backgroundColor: colors.whiteBackgroundColor,

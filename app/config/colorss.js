@@ -14,6 +14,7 @@ const light = {
   overlayColor: "#000000",
   placeholderColor: "#696969",
   cardBackground: "#454545",
+  graphsColor: "#f6f6f6",
 };
 const dark = {
   primaryGreen: "#AFF4C6",
@@ -31,6 +32,7 @@ const dark = {
   overlayColor: "#000000",
   placeholderColor: "#FFFFFFFF",
   cardBackground: "#FFFFFFFF",
+  graphsColor: "#F5F5F5",
 };
 
 export const colorss = { light, dark };
