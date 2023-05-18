@@ -57,6 +57,7 @@ function HomeScreen() {
       borderTopLeftRadius: 30,
       width: "100%",
       borderTopRightRadius: 30,
+      marginTop: -30,
       paddingHorizontal: 20,
       paddingVertical: 30,
     },
@@ -272,7 +273,7 @@ function HomeScreen() {
             name="bars"
             size={25}
             color={colors.blackTextColor}
-            style={{ marginTop: -230, marginLeft: 1 }}
+            style={{ marginTop: -200, marginLeft: 1 }}
           />
         </TouchableOpacity>
 
@@ -281,21 +282,22 @@ function HomeScreen() {
             name="question-circle"
             size={25}
             color={colors.blackTextColor}
-            style={{ marginTop: -230, marginLeft: "93%" }}
+            style={{ marginTop: -200, marginLeft: "93%" }}
           />
         </TouchableOpacity>
 
         <Text
           style={{
             fontSize: 25,
-            marginLeft: 80,
+            marginLeft: 45,
             fontWeight: 500,
+            marginBottom: 20,
             color: colors.blackTextColor,
           }}
         >
           Welcome back {name}!
         </Text>
-        <View>
+        <View style={{ marginBottom: 20 }}>
           <ProgressBar spent={totalSpent} budget={budget} />
         </View>
         <Text
@@ -304,7 +306,6 @@ function HomeScreen() {
             height: 300,
             fontSize: 20,
             padding: 15,
-
             marginBottom: -120,
             borderWidth: 2,
             borderRadius: 10,
