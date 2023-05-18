@@ -42,13 +42,12 @@ function CameraScreen() {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#F5FCFF",
+      backgroundColor: colors.whiteBackgroundColor,
       flexDirection: "column",
     },
     icon: {
       padding: 4,
       borderRadius: 12,
-
       borderColor: colors.primaryDarkGreen,
       marginLeft: "20%",
       marginBottom: "-10%",
@@ -88,7 +87,7 @@ function CameraScreen() {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#ffff",
+      backgroundColor: colors.whiteBackgroundColor,
     },
     previewText: {
       fontSize: 30,
@@ -647,7 +646,7 @@ function CameraScreen() {
               <KeyboardAvoidingView behavior="padding">
                 <Text
                   style={{
-                    color: colors.darkGreenTextColor,
+                    color: "#0E733D",
                     padding: "5%",
                     fontSize: 30,
                     marginLeft: "5%",

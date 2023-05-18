@@ -85,7 +85,7 @@ const ThemeProvider = ({ children }) => {
       fontSize: 16,
     },
     buttonLoginText: {
-      color: colors.whiteBackgroundColor,
+      color: "#FFFFFFFF",
       fontWeight: "700",
       fontSize: 16,
     },

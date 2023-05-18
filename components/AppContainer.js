@@ -103,7 +103,7 @@ function RouteName() {
         }}
       />
       <Drawer.Screen
-        name="GraphScreen"
+        name="Graph Screen"
         component={GraphScreen}
         options={{
           drawerIcon: () => (
@@ -112,7 +112,7 @@ function RouteName() {
         }}
       />
       <Drawer.Screen
-        name="Reciept Scanner"
+        name="Receipt Scanner"
         component={CameraScreen}
         options={{
           drawerIcon: () => (
