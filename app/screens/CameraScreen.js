@@ -65,9 +65,12 @@ function CameraScreen() {
       flexDirection: "row",
       justifyContent: "space-evenly",
       alignItems: "center",
-      marginLeft: "15%",
+      // borderTopEndRadius: 20,
+      // borderTopLeftRadius: 20,
+      backgroundColor: "#272727",
       width: "100%",
-      marginBottom: "4%",
+
+      //marginLeft: "15%",
     },
     cameraButton: {
       width: 80,
@@ -110,7 +113,7 @@ function CameraScreen() {
     submitButton: {
       width: 100,
       height: 60,
-      backgroundColor: colors.primaryButtonGreen,
+      backgroundColor: "#14AE5C",
       borderRadius: "25%",
       justifyContent: "center",
       alignItems: "center",
@@ -570,12 +573,12 @@ function CameraScreen() {
               style={styles.formButton}
               onPress={() => openSheet()}
             >
-              <AntDesign name="form" size={30} color="#14AE5C" />
+              <AntDesign name="form" size={30} color="green" />
             </TouchableOpacity>
           </View>
           {isLoading ? (
             <View style={styles.indicatorWrapper}>
-              <ActivityIndicator size="large" color="#00ff00" />
+              <ActivityIndicator size="large" color="green" />
             </View>
           ) : null}
         </View>
@@ -583,19 +586,47 @@ function CameraScreen() {
         <Camera style={styles.camera} ref={(ref) => setCameraRef(ref)}>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              style={styles.uploadButton}
+              style={{
+                marginLeft: 50,
+                width: 50,
+                height: 50,
+                borderRadius: 5,
+                backgroundColor: "#fff",
+                justifyContent: "center",
+                alignItems: "center",
+                marginBottom: 10,
+              }}
               onPress={() => uploadImage()}
             >
               <AntDesign name="upload" size={24} color="#14AE5C" />
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.cameraButton}
+              style={{
+                marginLeft: 22,
+                width: 90,
+                height: 90,
+                backgroundColor: "#fff",
+                borderRadius: "50%",
+                justifyContent: "center",
+                alignItems: "center",
+                marginBottom: 10,
+              }}
               onPress={() => takePicture()}
             ></TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.backButton}
+              style={{
+                marginLeft: 20,
+                width: 50,
+                height: 50,
+                borderRadius: 5,
+                backgroundColor: "#fff",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: "15%",
+                marginBottom: 10,
+              }}
               onPress={() => backOut()}
             >
               <AntDesign name="arrowright" size={24} color="#14AE5C" />
