@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -11,13 +11,14 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import Constants from 'expo-constants';
-
+import Constants from "expo-constants";
+import { useTheme } from "../config/ThemeProvider";
 
 export default function SettingScreen() {
+  const { colors } = useTheme();
   return (
     <View style={styles.container}>
-      <Text>Settings</Text>
+      <Text style={{ color: colors.blackTextColor }}>Settings</Text>
     </View>
   );
 }
@@ -25,9 +26,7 @@ export default function SettingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
-  
 });
-

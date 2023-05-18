@@ -14,31 +14,34 @@ import Constants from "expo-constants";
 import { collection, getDocs } from "firebase/firestore";
 import db from "../firebase";
 import { getAuth } from "firebase/auth";
-import { Overlay } from "react-native-elements";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
-const Item = ({ item, onPress }) => (
-  <TouchableOpacity style={styles.item} onPress={onPress}>
-    <View style={styles.itemContent}>
-      <Text style={styles.itemText}>{item.date}</Text>
-      <Text style={styles.itemText}>{item.store}</Text>
-      <Text style={styles.itemText}>${item.price}</Text>
-    </View>
-  </TouchableOpacity>
-);
+import { useTheme } from "../config/ThemeProvider";
 
 export default function DataScreen() {
+  const { colors } = useTheme();
   const auth = getAuth();
   const user = auth.currentUser.email;
   const navigation = useNavigation();
   const [showImages, setShowImages] = useState(false);
   const [imageSource, setImageSource] = useState(null);
-
-  const [visible, setVisible] = useState(false);
-
+  const Item = ({ item, onPress }) => (
+    <TouchableOpacity style={styles.item} onPress={onPress}>
+      <View style={styles.itemContent}>
+        <Text style={{ ...styles.itemText, color: colors.blackTextColor }}>
+          {item.date}
+        </Text>
+        <Text style={{ ...styles.itemText, color: colors.blackTextColor }}>
+          {item.store}
+        </Text>
+        <Text style={{ ...styles.itemText, color: colors.blackTextColor }}>
+          ${item.price}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
   const testReceipts = [
     {
       category: "Cloths",
@@ -134,31 +137,15 @@ export default function DataScreen() {
       setReceipts(items);
       // The commented code above works. To test the code a sample array is passed in instead.
       // This will short the amount of calls made to firebase
-      //setReceipts(testReceipts);
+      setReceipts(testReceipts);
     })();
   }, []);
-
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  };
-
-  const downloadFile = async (url) => {
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = "blob";
-    xhr.onload = (event) => {
-      const blob = xhr.response;
-    };
-    xhr.open("GET", url);
-    xhr.send();
-  };
 
   const renderItem = ({ item }) => {
     const storage = getStorage();
     const onPress = async () => {
       try {
         console.log(item.imageUrl);
-        await downloadFile(item.imageUrl);
-        setVisible(!visible);
         setImageSource(item.imageUrl);
       } catch (error) {
         console.error(error);
@@ -166,10 +153,45 @@ export default function DataScreen() {
     };
     return <Item item={item} onPress={onPress} />;
   };
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 30,
+      marginTop: 100,
+    },
+
+    listContainer: {
+      justifyContent: "center",
+      alignItems: "center",
+    },
+
+    itemContent: {
+      flexDirection: "row",
+      justifyContent: "space-evenly",
+      width: "100%",
+      paddingVertical: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.blackTextColor,
+    },
+    title: {
+      fontSize: 50,
+      fontWeight: "bold",
+      textAlign: "center",
+      marginBottom: 10,
+    },
+
+    itemText: {
+      fontSize: 15,
+    },
+  });
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Receipts</Text>
+      <Text style={{ ...styles.title, color: colors.blackTextColor }}>
+        Receipts
+      </Text>
       <TouchableOpacity onPress={() => navigation.openDrawer()}>
         <FontAwesome
           name="bars"
@@ -183,46 +205,6 @@ export default function DataScreen() {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
-      <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-        <Image
-          style={{ height: 600, width: 300 }}
-          source={{ uri: imageSource }}
-        />
-      </Overlay>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 30,
-    marginTop: 100,
-  },
-
-  listContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  itemContent: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "100%",
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
-  },
-  title: {
-    fontSize: 50,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 10,
-  },
-
-  itemText: {
-    fontSize: 15,
-  },
-});

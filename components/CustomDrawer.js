@@ -11,11 +11,12 @@ import { collection, getDocs } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/core";
 import { Drawer, TouchableRipple } from "react-native-paper";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { useTheme } from "../app/config/ThemeProvider";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const CustomDrawer = (props) => {
   const navigation = useNavigation();
-  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-
+  const { colors, isDarkTheme, setIsDarkTheme } = useTheme();
   const auth = getAuth();
   const user = auth.currentUser;
 
@@ -36,7 +37,7 @@ const CustomDrawer = (props) => {
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView
         {...props}
-        contentContainerStyle={{ backgroundColor: "#ffffffff" }}
+        contentContainerStyle={{ backgroundColor: colors.whiteBackgroundColor }}
       >
         <ImageBackground
           source={require("../app/assets/trackIt.png")}
@@ -47,7 +48,13 @@ const CustomDrawer = (props) => {
             marginTop: 10,
           }}
         ></ImageBackground>
-        <View style={{ flex: 1, backgroundColor: "#ffffffff", paddingTop: 10 }}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: colors.whiteBackgroundColor,
+            paddingTop: 10,
+          }}
+        >
           <DrawerItemList {...props} />
         </View>
         <View
@@ -55,7 +62,7 @@ const CustomDrawer = (props) => {
             marginTop: 19,
             padding: 3,
             borderTopWidth: 1,
-            borderTopColor: "#000000",
+            borderTopColor: colors.blackTextColor,
           }}
         >
           <TouchableOpacity
@@ -64,7 +71,9 @@ const CustomDrawer = (props) => {
             }}
           >
             <View style={styles.preference}>
-              <Text style={{ fontSize: 15 }}>Dark Mode</Text>
+              <Text style={{ fontSize: 15, color: colors.blackTextColor }}>
+                Dark Mode
+              </Text>
               <View pointerEvents="none">
                 <Switch value={isDarkTheme} />
               </View>
@@ -74,7 +83,11 @@ const CustomDrawer = (props) => {
       </DrawerContentScrollView>
 
       <View
-        style={{ padding: 30, borderTopWidth: 1, borderTopColor: "#000000" }}
+        style={{
+          padding: 30,
+          borderTopWidth: 1,
+          borderTopColor: colors.blackTextColor,
+        }}
       >
         <TouchableOpacity onPress={handleSignOut}>
           <View
@@ -83,8 +96,20 @@ const CustomDrawer = (props) => {
               alignItems: "center",
             }}
           >
-            <MaterialIcons name="logout" size={22} color="black" />
-            <Text style={{ fontSize: 15, marginLeft: 5 }}>Sign Out</Text>
+            <MaterialIcons
+              name="logout"
+              size={22}
+              color={colors.blackTextColor}
+            />
+            <Text
+              style={{
+                color: colors.blackTextColor,
+                fontSize: 15,
+                marginLeft: 5,
+              }}
+            >
+              Sign Out
+            </Text>
           </View>
         </TouchableOpacity>
       </View>

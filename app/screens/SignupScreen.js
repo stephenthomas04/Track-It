@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import colors from "../config/colors";
+
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -20,15 +20,44 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import globalStyle from "../config/globalStyle";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 import { AntDesign } from "@expo/vector-icons";
 import db from "../firebase";
 import { Entypo } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
-
+import { useTheme } from "../config/ThemeProvider";
 const SignupScreen = () => {
+  const { colors, globalStyle } = useTheme();
+  const styles = StyleSheet.create({
+    icon: {
+      padding: 4,
+      borderRadius: 12,
+      paddingBottom: "3.5%",
+      borderColor: colors.primaryDarkGreen,
+      marginLeft: -15,
+      marginBottom: "-10%",
+    },
+
+    header: {
+      flex: 1,
+      justifyContent: "flex-end",
+      paddingHorizontal: 20,
+      paddingBottom: 50,
+    },
+    footer: {
+      flex: 2.5,
+      backgroundColor: colors.whiteBackgroundColor,
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      paddingHorizontal: 20,
+      paddingVertical: 30,
+    },
+    signContainer: {
+      flex: 1,
+      backgroundColor: colors.darkGreenTextColor,
+    },
+  });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -195,33 +224,3 @@ const SignupScreen = () => {
 };
 
 export default SignupScreen;
-
-const styles = StyleSheet.create({
-  icon: {
-    padding: 4,
-    borderRadius: 12,
-    paddingBottom: "3.5%",
-    borderColor: colors.primaryDarkGreen,
-    marginLeft: -15,
-    marginBottom: "-10%",
-  },
-
-  header: {
-    flex: 1,
-    justifyContent: "flex-end",
-    paddingHorizontal: 20,
-    paddingBottom: 50,
-  },
-  footer: {
-    flex: 2.5,
-    backgroundColor: colors.whiteBackgroundColor,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-  },
-  signContainer: {
-    flex: 1,
-    backgroundColor: colors.darkGreenTextColor,
-  },
-});

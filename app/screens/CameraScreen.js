@@ -14,15 +14,13 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Button,
-  Platform,
   TouchableWithoutFeedback,
   ActivityIndicator,
   Keyboard,
   Alert,
 } from "react-native";
 import { Camera } from "expo-camera";
-import globalStyle from "../config/globalStyle";
-import colors from "../config/colors";
+
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { AntDesign } from "@expo/vector-icons";
 import { collection, addDoc } from "firebase/firestore";
@@ -35,8 +33,155 @@ import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
 import { async } from "@firebase/util";
+import { useTheme } from "../config/ThemeProvider";
 
 function CameraScreen() {
+  const { colors, globalStyle } = useTheme();
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#F5FCFF",
+      flexDirection: "column",
+    },
+    icon: {
+      padding: 4,
+      borderRadius: 12,
+
+      borderColor: colors.primaryDarkGreen,
+      marginLeft: "20%",
+      marginBottom: "-10%",
+    },
+
+    camera: {
+      flex: 1,
+      justifyContent: "flex-end",
+      alignItems: "center",
+      width: "100%",
+    },
+    buttonContainer: {
+      flex: 0.15,
+      flexDirection: "row",
+      justifyContent: "space-evenly",
+      alignItems: "center",
+      marginLeft: "15%",
+      width: "100%",
+      marginBottom: "4%",
+    },
+    cameraButton: {
+      width: 80,
+      height: 80,
+      backgroundColor: "#fff",
+      borderRadius: "50%",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    buttonText: {
+      color: "#000000",
+      fontSize: 18,
+    },
+    preview: {
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#ffff",
+    },
+    previewText: {
+      fontSize: 30,
+      fontWeight: "bold",
+      marginBottom: 20,
+    },
+    previewImage: {
+      width: 320,
+      height: 600,
+      borderRadius: 10,
+    },
+    retakeButton: {
+      width: 100,
+      height: 60,
+      backgroundColor: "#fff",
+      borderRadius: "25%",
+      justifyContent: "center",
+      alignItems: "center",
+      borderWidth: 1,
+    },
+
+    submitButton: {
+      width: 100,
+      height: 60,
+      backgroundColor: colors.primaryButtonGreen,
+      borderRadius: "25%",
+      justifyContent: "center",
+      alignItems: "center",
+      borderWidth: 1,
+    },
+
+    buttonRow: {
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      justifyContent: "space-evenly",
+      width: "100%",
+      marginTop: 30,
+    },
+    uploadButton: {
+      width: 40,
+      height: 40,
+      backgroundColor: "#fff",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    backButton: {
+      width: 40,
+      height: 40,
+      backgroundColor: "#fff",
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: "15%",
+    },
+
+    formButton: {
+      width: 100,
+      height: 60,
+      backgroundColor: "#fff",
+      borderRadius: "25%",
+      justifyContent: "center",
+      alignItems: "center",
+      borderWidth: 1,
+    },
+    input: {
+      height: 40,
+      width: "100%",
+      borderColor: "gray",
+      borderWidth: 1,
+      marginBottom: 20,
+      paddingHorizontal: 10,
+    },
+
+    indicatorWrapper: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "rgba(255, 255, 255, 0.5)",
+    },
+
+    contentContainer: {
+      backgroundColor: "#ffffff",
+      height: "100%",
+    },
+    shadow: {
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 5 },
+      shadowOpacity: 0.5,
+      shadowRadius: 5,
+      elevation: 3,
+    },
+  });
   const [fileText, setFileText] = useState(
     "Nike\n39.99\n$45.99\n1/15/2023\n2045634\nhgdwjeolgrd\n00.99\n$37.72\n$00.00\n&3.99\n$-48.25"
   );
@@ -425,12 +570,12 @@ function CameraScreen() {
               style={styles.formButton}
               onPress={() => openSheet()}
             >
-              <AntDesign name="form" size={30} color="green" />
+              <AntDesign name="form" size={30} color="#14AE5C" />
             </TouchableOpacity>
           </View>
           {isLoading ? (
             <View style={styles.indicatorWrapper}>
-              <ActivityIndicator size="large" color="green" />
+              <ActivityIndicator size="large" color="#00ff00" />
             </View>
           ) : null}
         </View>
@@ -622,151 +767,5 @@ function CameraScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF",
-    flexDirection: "column",
-  },
-  icon: {
-    padding: 4,
-    borderRadius: 12,
-
-    borderColor: colors.primaryDarkGreen,
-    marginLeft: "20%",
-    marginBottom: "-10%",
-  },
-
-  camera: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    width: "100%",
-  },
-  buttonContainer: {
-    flex: 0.15,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    marginLeft: "15%",
-    width: "100%",
-    marginBottom: "4%",
-  },
-  cameraButton: {
-    width: 80,
-    height: 80,
-    backgroundColor: "#fff",
-    borderRadius: "50%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "#000000",
-    fontSize: 18,
-  },
-  preview: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffff",
-  },
-  previewText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  previewImage: {
-    width: 320,
-    height: 600,
-    borderRadius: 10,
-  },
-  retakeButton: {
-    width: 100,
-    height: 60,
-    backgroundColor: "#fff",
-    borderRadius: "25%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-  },
-
-  submitButton: {
-    width: 100,
-    height: 60,
-    backgroundColor: colors.primaryButtonGreen,
-    borderRadius: "25%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-  },
-
-  buttonRow: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    width: "100%",
-    marginTop: 30,
-  },
-  uploadButton: {
-    width: 40,
-    height: 40,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: "15%",
-  },
-
-  formButton: {
-    width: 100,
-    height: 60,
-    backgroundColor: "#fff",
-    borderRadius: "25%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-  },
-  input: {
-    height: 40,
-    width: "100%",
-    borderColor: "gray",
-    borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-
-  indicatorWrapper: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
-  },
-
-  contentContainer: {
-    backgroundColor: "#ffffff",
-    height: "100%",
-  },
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 3,
-  },
-});
 
 export default CameraScreen;

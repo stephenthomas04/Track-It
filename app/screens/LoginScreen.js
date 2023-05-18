@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/core";
-import colors from "../config/colors";
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -20,19 +19,52 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import globalStyle from "../config/globalStyle";
-import * as Animatable from "react-native-animatable";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as Animatable from "react-native-animatable";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { useTheme } from "../config/ThemeProvider";
 
 const LoginScreen = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = getAuth();
-
+  const { colors, globalStyle } = useTheme();
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+  const styles = StyleSheet.create({
+    icon: {
+      padding: 4,
+      borderRadius: 12,
+      paddingBottom: "3.5%",
+      borderColor: colors.primaryDarkGreen,
+      marginLeft: -15,
+      marginBottom: "-10%",
+    },
+
+    header: {
+      flex: 1,
+      justifyContent: "flex-end",
+      paddingHorizontal: 20,
+      paddingBottom: 50,
+    },
+
+    footer: {
+      flex: 2.5,
+      backgroundColor: colors.whiteBackgroundColor,
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      paddingHorizontal: 20,
+      paddingVertical: 30,
+    },
+    shadow: {
+      shadowColor: colors.blackTextColor,
+      shadowOffset: { width: 0, height: 5 },
+      shadowOpacity: 0.5,
+      shadowRadius: 5,
+      elevation: 3,
+    },
+  });
 
   const nav = useNavigation();
   const { navigation } = props;
@@ -83,11 +115,13 @@ const LoginScreen = (props) => {
             />
             <TextInput
               placeholder="Email"
+              placeholderTextColor={colors.blackTextColor}
               value={email}
               onChangeText={(text) => setEmail(text)}
               style={{
                 flexDirection: "row",
-                borderBottomColor: "black",
+                borderBottomColor: colors.blackTextColor,
+                color: colors.blackTextColor,
                 borderBottomWidth: 1,
                 width: "120%",
                 paddingBottom: 5,
@@ -105,11 +139,13 @@ const LoginScreen = (props) => {
             />
             <TextInput
               placeholder="Password"
+              placeholderTextColor={colors.blackTextColor}
               value={password}
               onChangeText={(text) => setPassword(text)}
               style={{
+                color: colors.blackTextColor,
                 flexDirection: "row",
-                borderBottomColor: "black",
+                borderBottomColor: colors.blackTextColor,
                 borderBottomWidth: 1,
                 width: "120%",
                 paddingBottom: 5,
@@ -134,7 +170,13 @@ const LoginScreen = (props) => {
                 marginBottom: "100%",
               }}
             >
-              <Text style={{ fontSize: 15, marginTop: "5%" }}>
+              <Text
+                style={{
+                  fontSize: 15,
+                  marginTop: "5%",
+                  color: colors.blackTextColor,
+                }}
+              >
                 Don't have an account?
               </Text>
               <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
@@ -159,37 +201,3 @@ const LoginScreen = (props) => {
 };
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-  icon: {
-    padding: 4,
-    borderRadius: 12,
-    paddingBottom: "3.5%",
-    borderColor: colors.primaryDarkGreen,
-    marginLeft: -15,
-    marginBottom: "-10%",
-  },
-
-  header: {
-    flex: 1,
-    justifyContent: "flex-end",
-    paddingHorizontal: 20,
-    paddingBottom: 50,
-  },
-
-  footer: {
-    flex: 2.5,
-    backgroundColor: colors.whiteBackgroundColor,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-  },
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 3,
-  },
-});
