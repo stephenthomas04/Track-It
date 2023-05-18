@@ -127,7 +127,6 @@ const SignupScreen = () => {
               placeholder="Name"
               value={name}
               onChangeText={(text) => setName(text)}
-              autoCapitalize="false"
               style={{
                 flexDirection: "row",
                 borderBottomColor: "black",
@@ -150,9 +149,11 @@ const SignupScreen = () => {
               placeholder="Email"
               value={email}
               onChangeText={(text) => setEmail(text)}
+              autoCapitalize="false"
               style={{
                 flexDirection: "row",
                 borderBottomColor: "black",
+
                 borderBottomWidth: 1,
                 width: "120%",
                 paddingBottom: 5,
