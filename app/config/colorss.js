@@ -8,11 +8,12 @@ const light = {
   blackTextColor: "#000",
   greyTextColor: "#98C9A9",
   darkGreenTextColor: "#0E733D",
-  whiteBackgroundColor: "#FFFF",
+  whiteBackgroundColor: "#FFFFFFFF",
   progressBarColor: "#dddddd",
   spendingButton: "#FFFFFF",
   overlayColor: "#000000",
   placeholderColor: "#696969",
+  cardBackground: "#454545",
 };
 const dark = {
   primaryGreen: "#AFF4C6",
@@ -29,6 +30,7 @@ const dark = {
   spendingButton: "#FFFFFF",
   overlayColor: "#000000",
   placeholderColor: "#FFFFFFFF",
+  cardBackground: "#FFFFFFFF",
 };
 
 export const colorss = { light, dark };
