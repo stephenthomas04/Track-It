@@ -213,6 +213,8 @@ function HomeScreen() {
   };
 
   useEffect(() => {
+    var arr = [];
+
     const getData = async () => {
       const items = [];
       if (receipts.length <= 1) {
@@ -221,7 +223,7 @@ function HomeScreen() {
           if (doc.id != "user_information") {
             const data = doc.data();
             const id = doc.id;
-            console.log(doc.id, " => ", doc.data());
+            console.log(items.price);
             items.push({ id, ...data });
           } else if (doc.id == "user_information") {
             const data = doc.data();
@@ -229,10 +231,17 @@ function HomeScreen() {
           }
         });
       }
-      return items;
+      let totalPrice = 0;
+      items.forEach((items) => {
+        console.log(items.price);
+        totalPrice += parseFloat(items.price);
+      });
+      console.log("Total Spent:", totalPrice);
+      setTotalSpent(totalPrice);
+      console.log("Total Spent2:", totalSpent);
     };
 
-    getTotalPrice(getData());
+    getData();
   }, []);
 
   const ProgressBar = ({ spent, budget }) => {
@@ -288,7 +297,7 @@ function HomeScreen() {
   return (
     <View style={styles.main}>
       <Text style={styles.header}>Total Spendings</Text>
-      {totalSpent && <Text style={styles.total}>${totalSpent}</Text>}
+      <Text style={styles.total}>${totalSpent}</Text>
       <View style={styles.footer}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <FontAwesome
