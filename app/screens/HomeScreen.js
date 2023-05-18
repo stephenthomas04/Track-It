@@ -13,6 +13,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { Slider, Overlay } from "react-native-elements";
 import db from "../firebase";
 import { useNavigation } from "@react-navigation/native";
+import { PieChart } from "react-native-chart-kit";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { useTheme } from "../config/ThemeProvider";
@@ -28,6 +29,8 @@ function HomeScreen() {
   const [totalSpent, setTotalSpent] = useState(null);
 
   const [budget, setBuget] = useState(1000);
+  const [name, setName] = useState(1000);
+
   const styles = StyleSheet.create({
     main: {
       flex: 3,
@@ -91,80 +94,6 @@ function HomeScreen() {
       alignItems: "center",
     },
   });
-  const testReceipts = [
-    {
-      category: "Cloths",
-      day: "01",
-      month: "11",
-      year: "23",
-      id: "yCTOISkTSfSQJnZoAbSt",
-      price: "12.99",
-      store: "Kohls",
-    },
-    {
-      category: "Food",
-      day: "01",
-      month: "13",
-      year: "23",
-      id: "8LXGx7hr974P3T8o4pY",
-      price: "15.99",
-      store: "Chipotle",
-    },
-    {
-      category: "Entertainment",
-      day: "03",
-      month: "04",
-      year: "23",
-      id: "Q2JMOLBF8S7Ku08Cafc",
-      price: "6.99",
-      store: "AMC",
-    },
-    {
-      category: "Personal",
-      day: "09",
-      month: "13",
-      year: "23",
-      id: "WB8IjKQm3uwmd0OR2as",
-      price: "0.99",
-      store: "walmart",
-    },
-    {
-      category: "Food",
-      day: "09",
-      month: "13",
-      year: "23",
-      id: "YelkygyNsJj3wxB0aMz",
-      price: "11.50",
-      store: "Chipotle",
-    },
-    {
-      category: "Food",
-      day: "09",
-      month: "14",
-      year: "23",
-      id: "jKe0kJWUDCiZt2aZYau",
-      price: "9.99",
-      store: "Chipotle",
-    },
-    {
-      category: "Travel",
-      day: "09",
-      month: "15",
-      year: "23",
-      id: "m4tAdv3UofY0kJhXmI9",
-      price: "125.99",
-      store: "Delta",
-    },
-    {
-      category: "Entertainment",
-      day: "12",
-      month: "13",
-      year: "23",
-      id: "nFNITrmLoEE7domhGN1",
-      price: "50.00",
-      store: "Arcade",
-    },
-  ];
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -216,33 +145,64 @@ function HomeScreen() {
       .catch((error) => alert(error.message));
   };
 
+  const storeArr = async () => {};
+
   const getTotalPrice = async (receipts) => {
     let totalPrice = 0;
     receipts.forEach((receipts) => {
       console.log(receipts.price);
       totalPrice += parseFloat(receipts.price);
     });
-    console.log("Total Spent:", totalPrice);
+
     setTotalSpent(totalPrice);
-    console.log("Total Spent2:", totalSpent);
   };
 
+  const [pieArr, setpieArr] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    var arr = [];
+    const getRandomGreenColor = () => {
+      const shades = ["#87D068", "#52C41A", "#389E0D", "#237804", "#135200"];
+      const randomIndex = Math.floor(Math.random() * shades.length);
+      return shades[randomIndex];
+    };
+
+    const combinePricesByCategory = (list) => {
+      const combinedPrices = {};
+
+      list.forEach((item) => {
+        const { category, price } = item;
+
+        if (combinedPrices[category]) {
+          combinedPrices[category] += price;
+        } else {
+          combinedPrices[category] = price;
+        }
+      });
+
+      const result = Object.keys(combinedPrices).map((category) => ({
+        name: category,
+        value: combinedPrices[category],
+        color: colors.primaryDarkGreen,
+      }));
+
+      return result;
+    };
+
+    const items = [];
 
     const getData = async () => {
-      const items = [];
       if (receipts.length <= 1) {
         const querySnapshot = await getDocs(collection(db, email));
         querySnapshot.forEach((doc) => {
           if (doc.id != "user_information") {
             const data = doc.data();
             const id = doc.id;
-            console.log(items.price);
+            console.log("cheese", items.price);
             items.push({ id, ...data });
           } else if (doc.id == "user_information") {
             const data = doc.data();
             setBuget(data.budget);
+            setName(data.name);
           }
         });
       }
@@ -253,11 +213,31 @@ function HomeScreen() {
       });
       console.log("Total Spent:", totalPrice);
       setTotalSpent(totalPrice);
-      console.log("Total Spent2:", totalSpent);
+      console.log(combinePricesByCategory(items));
+
+      setTimeout(() => {
+        setpieArr(combinePricesByCategory(items));
+        setIsLoading(false);
+      }, 2000);
     };
 
     getData();
+    console.log("Piechart", pieArr);
   }, []);
+
+  console.log("Piechart", pieArr);
+  const MyPieChart = ({ data }) => {
+    return (
+      <View>
+        <PieChart
+          data={data}
+          width={200}
+          height={200}
+          color={colors.primaryDarkGreen}
+        />
+      </View>
+    );
+  };
 
   const ProgressBar = ({ spent, budget }) => {
     const percentSpent = Math.floor((spent / budget) * 100);
@@ -331,8 +311,10 @@ function HomeScreen() {
             style={{ marginTop: -230, marginLeft: "93%" }}
           />
         </TouchableOpacity>
+        <Text>Welcome back {name}!</Text>
         <View>
           <ProgressBar spent={totalSpent} budget={budget} />
+          {!isLoading && <MyPieChart data={pieArr} />}
         </View>
       </View>
       <Overlay
