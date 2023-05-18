@@ -15,7 +15,7 @@ import { collection, getDocs } from "firebase/firestore";
 import db from "../firebase";
 import { getAuth } from "firebase/auth";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-
+import { Overlay } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "../config/ThemeProvider";
@@ -118,6 +118,7 @@ export default function DataScreen() {
   ];
 
   const [receipts, setReceipts] = useState([]);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -135,17 +136,30 @@ export default function DataScreen() {
         });
       }
       setReceipts(items);
-      // The commented code above works. To test the code a sample array is passed in instead.
-      // This will short the amount of calls made to firebase
-      setReceipts(testReceipts);
     })();
   }, []);
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
+
+  const downloadFile = async (url) => {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "blob";
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open("GET", url);
+    xhr.send();
+  };
 
   const renderItem = ({ item }) => {
     const storage = getStorage();
     const onPress = async () => {
       try {
-        console.log(item.imageUrl);
+        console.log("test", item.imageUrl);
+        await downloadFile(item.imageUrl);
+        setVisible(!visible);
         setImageSource(item.imageUrl);
       } catch (error) {
         console.error(error);
@@ -205,6 +219,12 @@ export default function DataScreen() {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
+      <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+        <Image
+          style={{ height: 600, width: 300 }}
+          source={{ uri: imageSource }}
+        />
+      </Overlay>
     </View>
   );
 }

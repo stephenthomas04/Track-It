@@ -115,6 +115,31 @@ const testReceipts = [
   },
 ];
 
+const getData = async () => {
+  const auth = getAuth();
+  const user = auth.currentUser.email;
+
+  var receiptArr = [];
+
+  (async () => {
+    const items = [];
+    if (receipts.length <= 1) {
+      const querySnapshot = await getDocs(collection(db, user));
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        if (doc.id != "user_information") {
+          const data = doc.data();
+          const id = doc.id;
+          items.push({ id, ...data });
+        }
+      });
+    }
+    receiptArr = items;
+  })();
+  console.log("Receipts List:", receiptArr);
+  return receiptArr;
+};
+
 function monthCalculator() {
   let date = new Date().getMonth() + 1;
 
