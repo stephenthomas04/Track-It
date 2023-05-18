@@ -18,7 +18,7 @@ export default function SettingScreen() {
   const { colors } = useTheme();
   return (
     <View style={styles.container}>
-      <Text style={{ color: colors.blackTextColor }}>Settings</Text>
+      <Text style={{ color: colors.blackTextColor }}>About Us</Text>
     </View>
   );
 }

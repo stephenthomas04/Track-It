@@ -5,7 +5,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import GraphScreen from "../app/screens/GraphScreen";
 import { FontAwesome } from "@expo/vector-icons";
-import SettingScreen from "../app/screens/SettingScreen";
+import AboutUs from "../app/screens/AboutUs";
 import DataScreen from "../app/screens/Data";
 import SignupScreen from "../app/screens/SignupScreen";
 import CameraScreen from "../app/screens/CameraScreen";
@@ -13,6 +13,7 @@ import { Entypo } from "@expo/vector-icons";
 import { getAuth } from "firebase/auth";
 import CustomDrawer from "../components/CustomDrawer";
 import { useTheme } from "../app/config/ThemeProvider";
+import { AntDesign } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -134,11 +135,15 @@ function RouteName() {
         }}
       />
       <Drawer.Screen
-        name="Settings"
-        component={SettingScreen}
+        name="About Us"
+        component={AboutUs}
         options={{
           drawerIcon: () => (
-            <FontAwesome name="gear" size={24} color={colors.blackTextColor} />
+            <AntDesign
+              name="infocirlce"
+              size={24}
+              color={colors.blackTextColor}
+            />
           ),
         }}
       />

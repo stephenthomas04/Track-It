@@ -12,6 +12,7 @@ const light = {
   progressBarColor: "#dddddd",
   spendingButton: "#FFFFFF",
   overlayColor: "#000000",
+  placeholderColor: "#696969",
 };
 const dark = {
   primaryGreen: "#AFF4C6",
@@ -26,7 +27,8 @@ const dark = {
   whiteBackgroundColor: "#454545",
   progressBarColor: "#dddddd",
   spendingButton: "#FFFFFF",
-  overlayColor: "#FFFFFF",
+  overlayColor: "#000000",
+  placeholderColor: "#FFFFFFFF",
 };
 
 export const colorss = { light, dark };

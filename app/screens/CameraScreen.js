@@ -173,7 +173,7 @@ function CameraScreen() {
     },
 
     contentContainer: {
-      backgroundColor: "#ffffff",
+      backgroundColor: colors.whiteBackgroundColor,
       height: "100%",
     },
     shadow: {
@@ -641,12 +641,12 @@ function CameraScreen() {
         enablePanDownToClose={"true"}
       >
         <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
-          <View style={styles.bottomSheet}>
+          <View>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <KeyboardAvoidingView behavior="padding">
                 <Text
                   style={{
-                    color: "#0E733D",
+                    color: colors.darkGreenTextColor,
                     padding: "5%",
                     fontSize: 30,
                     marginLeft: "5%",
@@ -659,7 +659,7 @@ function CameraScreen() {
                 <FontAwesome5
                   name="store"
                   size={18}
-                  color="green"
+                  color={colors.primaryDarkGreen}
                   style={{
                     padding: 4,
                     borderRadius: 12,
@@ -683,13 +683,14 @@ function CameraScreen() {
                   onChangeText={handleInput1Change}
                   value={storeName}
                   placeholder="Store"
+                  placeholderTextColor={colors.placeholderColor}
                   defaultValue={storeName}
                 />
 
                 <MaterialIcons
                   name="attach-money"
                   size={24}
-                  color="green"
+                  color={colors.primaryDarkGreen}
                   style={{
                     padding: 4,
                     borderRadius: 12,
@@ -713,13 +714,14 @@ function CameraScreen() {
                   value={totalPrice}
                   keyboardType="numeric"
                   placeholder="0.00"
+                  placeholderTextColor={colors.placeholderColor}
                   defaultValue={totalPrice}
                 />
 
                 <MaterialIcons
                   name="category"
                   size={20}
-                  color="green"
+                  color={colors.primaryDarkGreen}
                   style={{
                     padding: 4,
                     borderRadius: 12,
@@ -742,12 +744,13 @@ function CameraScreen() {
                   onChangeText={handleInput5Change}
                   value={category}
                   placeholder="Category"
+                  placeholderTextColor={colors.placeholderColor}
                 />
 
                 <MaterialIcons
                   name="date-range"
                   size={20}
-                  color="green"
+                  color={colors.primaryDarkGreen}
                   style={{
                     padding: 4,
                     borderRadius: 12,
@@ -771,6 +774,7 @@ function CameraScreen() {
                   value={date}
                   placeholder="MM/DD/YY"
                   defaultValue={date}
+                  placeholderTextColor={colors.placeholderColor}
                 />
 
                 <TouchableOpacity
