@@ -170,9 +170,26 @@ function HomeScreen() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    { title: "Slide 1", content: "This is the first slide" },
-    { title: "Slide 2", content: "This is the second slide" },
-    { title: "Slide 3", content: "This is the third slide" },
+    {
+      title: "TUTORIAL 1",
+      content:
+        "In the Receipt Scanner screen you can take a picture, upload or manually enter the information of your receipt.",
+    },
+    {
+      title: "TUTORIAL 2",
+      content:
+        "In the Graphs screen you can view the distribution of your money gained from the receipt scanner.",
+    },
+    {
+      title: "TUTORIAL 3",
+      content:
+        "In the Home Screen you can view your total budget and see how close you are to reaching that as well as tips for becoming better at financing and view the news regarding it.",
+    },
+    {
+      title: "TUTORIAL 4",
+      content:
+        "In the Data Screen you can view your scanned reciepts and click on them to view the image of the reciept. Also you can enable dark mode to your choice.",
+    },
   ];
 
   const handleNextSlide = () => {
@@ -321,13 +338,37 @@ function HomeScreen() {
       <Overlay
         isVisible={showOverlay}
         onBackdropPress={handleCloseOverlay}
-        tyle={styles.overlay}
+        style={styles.overlay}
       >
-        <View>
-          <Text>{slides[currentSlide].title}</Text>
-          <Text>{slides[currentSlide].content}</Text>
+        <View
+          style={{
+            width: 300,
+            borderRadius: 20,
+            backgroundColor: colors.whiteBackgroundColor,
+          }}
+        >
+          <Text
+            style={{
+              backgroundColor: colors.whiteBackgroundColor,
+              color: colors.blackTextColor,
+              fontWeight: 700,
+              fontSize: 16,
+            }}
+          >
+            {slides[currentSlide].title}
+          </Text>
+          <Text
+            style={{
+              backgroundColor: colors.whiteBackgroundColor,
+              color: colors.blackTextColor,
+              marginTop: 10,
+              fontSize: 14,
+            }}
+          >
+            {slides[currentSlide].content}
+          </Text>
           <Button
-            title="Next Slide"
+            title="Next Tutorial"
             onPress={handleNextSlide}
             disabled={currentSlide === slides.length - 1}
           />

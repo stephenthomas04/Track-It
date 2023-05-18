@@ -104,7 +104,7 @@ function RouteName() {
         }}
       />
       <Drawer.Screen
-        name="Graph Screen"
+        name="Graphs"
         component={GraphScreen}
         options={{
           drawerIcon: () => (
