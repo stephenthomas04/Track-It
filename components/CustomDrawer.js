@@ -37,12 +37,14 @@ const CustomDrawer = (props) => {
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView
         {...props}
-        contentContainerStyle={{ backgroundColor: colors.whiteBackgroundColor }}
+        contentContainerStyle={{
+          backgroundColor: "#14AE5C",
+        }}
       >
         <ImageBackground
-          source={require("../app/assets/trackIt.png")}
+          source={require("../app/assets/dazzle.png")}
           style={{
-            height: 150,
+            height: 160,
             width: 300,
             marginBottom: 20,
             marginTop: 10,
@@ -55,30 +57,30 @@ const CustomDrawer = (props) => {
             paddingTop: 10,
           }}
         >
-          <DrawerItemList {...props} />
-        </View>
-        <View
-          style={{
-            marginTop: 19,
-            padding: 3,
-            borderTopWidth: 1,
-            borderTopColor: colors.blackTextColor,
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => {
-              toggleTheme();
+          <View>
+            <DrawerItemList {...props} />
+          </View>
+          <View
+            style={{
+              marginTop: 19,
+              padding: 3,
+              borderTopWidth: 1,
+              borderTopColor: colors.blackTextColor,
             }}
           >
-            <View style={styles.preference}>
-              <Text style={{ fontSize: 15, color: colors.blackTextColor }}>
-                Dark Mode
-              </Text>
-              <View pointerEvents="none">
-                <Switch value={isDarkTheme} />
+            <TouchableOpacity
+              onPress={() => {
+                toggleTheme();
+              }}
+            >
+              <View style={styles.preference}>
+                <Text style={{ fontSize: 15 }}>Dark Mode</Text>
+                <View pointerEvents="none">
+                  <Switch value={isDarkTheme} />
+                </View>
               </View>
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </View>
         </View>
       </DrawerContentScrollView>
 
@@ -128,5 +130,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     marginTop: 10,
     paddingHorizontal: 16,
+    backgroundColor: "#ffffffff",
   },
 });

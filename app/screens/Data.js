@@ -19,6 +19,8 @@ import { Overlay } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "../config/ThemeProvider";
+import { color } from "react-native-reanimated";
+import { colorss } from "../config/colorss";
 
 export default function DataScreen() {
   const { colors } = useTheme();
@@ -218,10 +220,15 @@ export default function DataScreen() {
         data={receipts}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        style={{ backgroundColor: "#fff" }}
       />
-      <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+      <Overlay
+        isVisible={visible}
+        onBackdropPress={toggleOverlay}
+        overlayStyle={{ backgroundColor: "#fff", borderRadius: 15 }}
+      >
         <Image
-          style={{ height: 600, width: 300 }}
+          style={{ height: 600, width: 300, borderRadius: 15 }}
           source={{ uri: imageSource }}
         />
       </Overlay>

@@ -10,10 +10,12 @@ const light = {
   darkGreenTextColor: "#0E733D",
   whiteBackgroundColor: "#FFFF",
   progressBarColor: "#dddddd",
+  spendingButton: "#FFFFFF",
+  overlayColor: "#000000",
 };
 const dark = {
   primaryGreen: "#AFF4C6",
-  primaryDarkGreen: "#3ce98d",
+  primaryDarkGreen: "#14AE5C",
   primaryButtonGreen: "#83B494",
   secondaryGreen: "#83B494",
   secondaryDarkGreen: "#A0CFB5",
@@ -23,6 +25,8 @@ const dark = {
   darkGreenTextColor: "#16b25f",
   whiteBackgroundColor: "#454545",
   progressBarColor: "#dddddd",
+  spendingButton: "#FFFFFF",
+  overlayColor: "#FFFFFF",
 };
 
 export const colorss = { light, dark };

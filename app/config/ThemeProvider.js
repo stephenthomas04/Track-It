@@ -95,7 +95,7 @@ const ThemeProvider = ({ children }) => {
       justifyContent: "center",
       alignContent: "center",
       marginLeft: "9%",
-      marginBottom: "-11%",
+      marginBottom: "-17%",
     },
     graphScreen: {
       backgroundColor: colors.secondaryDarkGreen,

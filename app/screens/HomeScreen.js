@@ -33,13 +33,13 @@ function HomeScreen() {
     },
 
     total: {
-      color: colors.whiteBackgroundColor,
+      color: colors.spendingButton,
       marginBottom: "20%",
       fontSize: 70,
     },
 
     header: {
-      color: colors.whiteBackgroundColor,
+      color: colors.spendingButton,
       marginTop: "20%",
       fontSize: 20,
     },
