@@ -220,7 +220,7 @@ export default function DataScreen() {
         data={receipts}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        style={{ backgroundColor: "#fff" }}
+        style={{}}
       />
       <Overlay
         isVisible={visible}
