@@ -282,9 +282,6 @@ function annualSpending(arr) {
   const fullYear = new Date().getFullYear();
   const year = fullYear.toString().slice(-2);
 
- 
-
- 
   const filteredReceipts = arr.filter((receipt) => receipt.year == year);
  
   console.log("filtered reciepts" + filteredReceipts);
@@ -316,7 +313,55 @@ function annualSpending(arr) {
     return arr;
   }
 
+  function checkMonth(arr){
+    let date = 3;
+    let total = 0; // total keeps track of the number of reciepts 
 
+    for(let i = 0; i < arr.length; i++){
+      if(arr[i].month == date){
+        total += 1;
+        console.log("Total in graph total should be greater than one rn " +total)
+      }
+    }
+
+    if(total >= 2){
+      return true;
+    }
+    else{
+      return false;
+    }
+
+  }
+
+  function checkYear(arr){
+    const fullYear = new Date().getFullYear();
+    const year = fullYear.toString().slice(-2);
+    let total = 0;
+
+    
+    for(let i = 0; i < arr.length; i++){
+      if(arr[i].year == year){
+        total += 1;
+        console.log("Total in graph total should be greater than one rn FOR YEAR " +total)
+      }
+    }
+
+    if(total >= 2){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+function checkData(arr){
+  let check = true;
+  if(arr.length >= 1){
+    return check;
+  }else{
+    return !check;
+  }
+  
+}
 
   const firstArr = convertIntoRegularArr(regularArr); //Turning the firebase call into regular arr
   console.log("X + ", firstArr);
@@ -335,17 +380,155 @@ function annualSpending(arr) {
 
   const annualArr = annualSpending(sortedArr);
 
+  const isMonth = checkMonth(monthArr);
+  console.log("Check Month = " + isMonth);
+
+  const isYear = checkYear(annualArr);
+  console.log("Check Year = " , isYear);
+
+  const isData = checkData(sortedArr);
 
 
+if(isYear && isMonth){
+  return(
+  <ScrollView style={globalStyle.graphScreen}>
+  <Text style={styles.title}>The Finance Outlook</Text>
+
+  <Text style={globalStyle.subHeading}>
+    Your outlook for the month of {monthCalculator()}
+  </Text>
+  
+
+  <BarChart
+    data={{
+      labels: monthArr.map((receipt) => receipt.date),
+      datasets: [
+        {
+          data: monthArr.map((receipt) => receipt.price),
+        },
+      ],
+    }}
+    width={Dimensions.get("window").width} // from react-native
+    height={220}
+    yAxisLabel="$"
+    yAxisSuffix=""
+    yAxisInterval={1} // optional, defaults to 1
+    chartConfig={{
+      backgroundColor: colors.whiteBackgroundColor,
+      backgroundGradientFrom: colors.whiteBackgroundColor,
+      backgroundGradientTo: colors.whiteBackgroundColor,
+      decimalPlaces: 0, // optional, defaults to 2dp
+      color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+      style: {
+        borderRadius: 16,
+       
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: colors.darkGreenTextColor,
+      },
+    }}
+    style={{
+      marginVertical: 8,
+      marginBottom: 10,
+      borderRadius: 22,
+    }}
+  />
+  <Text style={globalStyle.subHeading}>
+    The line chart for {monthCalculator()}
+  </Text>
+  <LineChart
+    data={{
+      labels: monthArr.map((receipt) => receipt.date),
+      datasets: [
+        {
+          data: monthArr.map((receipt) => receipt.price),
+        },
+      ],
+    }}
+    width={Dimensions.get("window").width} // from react-native
+    height={220}
+    yAxisLabel="$"
+    yAxisSuffix=""
+    yAxisInterval={1} // optional, defaults to 1
+    chartConfig={{
+      backgroundColor: colors.whiteBackgroundColor,
+      backgroundGradientFrom: colors.whiteBackgroundColor,
+      backgroundGradientTo: colors.whiteBackgroundColor,
+      decimalPlaces: 0, // optional, defaults to 2dp
+      color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+      style: {
+        borderRadius: 16,
+       
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: colors.darkGreenTextColor,
+      },
+    }}
+    style={{
+      marginVertical: 8,
+      marginBottom: 10,
+      borderRadius: 22,
+    }}
+  />
+  <Text style={globalStyle.subHeading}>
+    The Year-To-Date outlook for {fullYear}
+  </Text>
+  <LineChart
+    data={{
+      labels: annualArr.map((receipt) => receipt.date),
+      datasets: [
+        {
+          data: annualArr.map((receipt) => receipt.price),
+        },
+      ],
+    }}
+    width={Dimensions.get("window").width} // from react-native
+    height={220}
+    yAxisLabel="$"
+    yAxisSuffix=""
+    yAxisInterval={1} // optional, defaults to 1
+    chartConfig={{
+      backgroundColor: colors.whiteBackgroundColor,
+      backgroundGradientFrom: colors.whiteBackgroundColor,
+      backgroundGradientTo: colors.whiteBackgroundColor,
+      decimalPlaces: 0, // optional, defaults to 2dp
+      color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+      style: {
+        borderRadius: 16,
+       
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: colors.darkGreenTextColor,
+      },
+    }}
+    style={{
+      marginVertical: 8,
+      marginBottom: 10,
+      borderRadius: 22,
+    }}
+  />
+  
+</ScrollView>
+);}
+else if(isMonth){
   return(
     <ScrollView style={globalStyle.graphScreen}>
     <Text style={styles.title}>The Finance Outlook</Text>
-
+  
     <Text style={globalStyle.subHeading}>
       Your outlook for the month of {monthCalculator()}
     </Text>
     
-
+  
     <BarChart
       data={{
         labels: monthArr.map((receipt) => receipt.date),
@@ -426,6 +609,56 @@ function annualSpending(arr) {
     <Text style={globalStyle.subHeading}>
       The Year-To-Date outlook for {fullYear}
     </Text>
+  </ScrollView>
+  );
+}else if(isYear){
+  return(
+    <ScrollView style={globalStyle.graphScreen}>
+    <Text style={styles.title}>The Finance Outlook</Text>
+  
+    <Text style={globalStyle.subHeading}>
+      The bar chart for {fullYear}
+    </Text>
+    <LineChart
+      data={{
+        labels: annualArr.map((receipt) => receipt.date),
+        datasets: [
+          {
+            data: annualArr.map((receipt) => receipt.price),
+          },
+        ],
+      }}
+      width={Dimensions.get("window").width} // from react-native
+      height={220}
+      yAxisLabel="$"
+      yAxisSuffix=""
+      yAxisInterval={1} // optional, defaults to 1
+      chartConfig={{
+        backgroundColor: colors.whiteBackgroundColor,
+        backgroundGradientFrom: colors.whiteBackgroundColor,
+        backgroundGradientTo: colors.whiteBackgroundColor,
+        decimalPlaces: 0, // optional, defaults to 2dp
+        color: (opacity = 1) => `rgba(131, 180, 148, ${opacity})`,
+        labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+        style: {
+          borderRadius: 16,
+         
+        },
+        propsForDots: {
+          r: "6",
+          strokeWidth: "2",
+          stroke: colors.darkGreenTextColor,
+        },
+      }}
+      style={{
+        marginVertical: 8,
+        marginBottom: 10,
+        borderRadius: 22,
+      }}
+    />
+    <Text style={globalStyle.subHeading}>
+      The Year-To-Date outlook for {fullYear}
+    </Text>
     <LineChart
       data={{
         labels: annualArr.map((receipt) => receipt.date),
@@ -465,7 +698,16 @@ function annualSpending(arr) {
     />
     
   </ScrollView>
+
   );
+}else if(isData){
+  return(<ScrollView style={globalStyle.graphScreen}>
+    <Text style={styles.title}>Add Data to Get Started!!</Text>
+  
+    
+  </ScrollView>);
+}
+  
 
   
 }
