@@ -307,6 +307,15 @@ function HomeScreen() {
             style={{ marginTop: -230, marginLeft: 1 }}
           />
         </TouchableOpacity>
+
+        <TouchableOpacity>
+          <FontAwesome
+            name="question-circle"
+            size={25}
+            color="black"
+            style={{ marginTop: -230, marginLeft: 310 }}
+          />
+        </TouchableOpacity>
         <View>
           <ProgressBar spent={totalSpent} budget={budget} />
         </View>
