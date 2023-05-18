@@ -60,7 +60,7 @@ export default function SettingScreen() {
       width: 300,
       height: 450,
       marginHorizontal: 10,
-      marginTop: 170,
+      marginTop: 110,
       borderRadius: 20,
       overflow: "hidden",
       backgroundColor: colors.cardBackground,
@@ -100,27 +100,7 @@ export default function SettingScreen() {
             style={{ marginTop: -10, marginLeft: 350 }}
           />
         </TouchableOpacity>
-        <Text
-          style={{
-            width: 300,
-            height: 200,
-            fontSize: 15,
-            padding: 6,
-            marginBottom: -120,
-            borderWidth: 2,
-            borderRadius: 10,
-            borderColor: colors.whiteBackgroundColor,
-            backgroundColor: colors.cardBackground,
-            color: colors.whiteBackgroundColor,
-          }}
-        >
-          Track-It is a user-friendly app designed for tracking expenses and
-          receipts. Its receipt scanner simplifies day-to-day expense tracking.
-          The app aims to assist young adults in managing their finances
-          effectively, addressing their lack of financial education.
-          Additionally, Track-It offers dynamic data visualization through
-          graphs and other features.
-        </Text>
+
         <View style={styles.cardContainer}>
           <Image source={item.image} style={styles.cardImage} />
           <Text style={styles.cardTitle}>{item.title}</Text>

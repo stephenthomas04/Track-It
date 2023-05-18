@@ -6,6 +6,7 @@ import {
   View,
   Button,
   ScrollView,
+  Image,
   Animated,
 } from "react-native";
 import { getAuth } from "firebase/auth";
@@ -97,6 +98,29 @@ function HomeScreen() {
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const data = [
+    {
+      id: 1,
+      title: "Stephen Thomas",
+      image: require("../assets/stephen.jpg"),
+      description:
+        "Did all the UI visible in the app including firebase auth, drawer nav, and dark mode.",
+    },
+    {
+      id: 2,
+      title: "Aashman Sharma",
+      image: require("../assets/aashman.jpg"),
+      description:
+        "Implemented the receipt scanner, displaying the data and the scanned images.",
+    },
+    {
+      id: 3,
+      title: "Enguerran Preteseille",
+      image: require("../assets/enguerran.jpg"),
+      description: "Created bar graphs and line graphs.",
+    },
+  ];
 
   const slides = [
     {
@@ -260,10 +284,41 @@ function HomeScreen() {
             style={{ marginTop: -230, marginLeft: "93%" }}
           />
         </TouchableOpacity>
-        <Text>Welcome back {name}!</Text>
+
+        <Text
+          style={{
+            fontSize: 25,
+            marginLeft: 80,
+            fontWeight: 500,
+            color: colors.blackTextColor,
+          }}
+        >
+          Welcome back {name}!
+        </Text>
         <View>
           <ProgressBar spent={totalSpent} budget={budget} />
         </View>
+        <Text
+          style={{
+            width: 350,
+            height: 300,
+            fontSize: 15,
+            padding: 6,
+            marginBottom: -120,
+            borderWidth: 2,
+            borderRadius: 10,
+            borderColor: colors.whiteBackgroundColor,
+            backgroundColor: colors.cardBackground,
+            color: colors.whiteBackgroundColor,
+          }}
+        >
+          Track-It is a user-friendly app designed for tracking expenses and
+          receipts. Its receipt scanner simplifies day-to-day expense tracking.
+          The app aims to assist young adults in managing their finances
+          effectively, addressing their lack of financial education.
+          Additionally, Track-It offers dynamic data visualization through
+          graphs and other features.
+        </Text>
       </View>
       <Overlay
         isVisible={showOverlay}

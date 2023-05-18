@@ -195,7 +195,7 @@ export default function DataScreen() {
       fontSize: 50,
       fontWeight: "bold",
       textAlign: "center",
-      marginBottom: 10,
+      marginBottom: 30,
     },
 
     itemText: {
