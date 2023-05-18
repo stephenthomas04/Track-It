@@ -417,32 +417,34 @@ function CameraScreen() {
       const day = date.substring(3, 5);
       const year = date.substring(6);
 
-      try {
-        setIsLoading(true);
-        const metadata = {
-          customMetadata: {
-            store: storeName,
-            price: totalPrice,
-            category: category,
-            date: date,
-          },
-        };
+      if (photo != null) {
+        try {
+          setIsLoading(true);
+          const metadata = {
+            customMetadata: {
+              store: storeName,
+              price: totalPrice,
+              category: category,
+              date: date,
+            },
+          };
 
-        const filename = photo.substring(photo.lastIndexOf("/") + 1);
-        const path = `users/${user}/${filename}`;
-        const storage = getStorage();
-        const imagesRef = ref(storage, path);
-        const response = await fetch(photo);
-        const blob = await response.blob();
+          const filename = photo.substring(photo.lastIndexOf("/") + 1);
+          const path = `users/${user}/${filename}`;
+          const storage = getStorage();
+          const imagesRef = ref(storage, path);
+          const response = await fetch(photo);
+          const blob = await response.blob();
 
-        await uploadBytes(imagesRef, blob, metadata).then((snapshot) => {});
-        url = await getDownloadURL(ref(imagesRef));
-        console.log("Uploaded a file:", url);
-        setImageURL(url.uri);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      } finally {
-        setIsLoading(false);
+          await uploadBytes(imagesRef, blob, metadata).then((snapshot) => {});
+          url = await getDownloadURL(ref(imagesRef));
+          console.log("Uploaded a file:", url);
+          setImageURL(url.uri);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        } finally {
+          setIsLoading(false);
+        }
       }
 
       try {

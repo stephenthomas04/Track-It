@@ -10,11 +10,13 @@ import {
 } from "react-native";
 import { getAuth } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
+import { Slider, Overlay } from "react-native-elements";
 import db from "../firebase";
 import { useNavigation } from "@react-navigation/native";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { useTheme } from "../config/ThemeProvider";
+import { async } from "@firebase/util";
 function HomeScreen() {
   const navigation = useNavigation();
   const auth = getAuth();
@@ -22,7 +24,9 @@ function HomeScreen() {
   const email = auth.currentUser.email;
   const { colors, globalStyle } = useTheme();
   const [receipts, setReceipts] = useState([]);
-  const [totalSpent, setTotalSpent] = useState();
+
+  const [totalSpent, setTotalSpent] = useState(null);
+
   const [budget, setBuget] = useState(1000);
   const styles = StyleSheet.create({
     main: {
@@ -162,6 +166,32 @@ function HomeScreen() {
     },
   ];
 
+  const [showOverlay, setShowOverlay] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    { title: "Slide 1", content: "This is the first slide" },
+    { title: "Slide 2", content: "This is the second slide" },
+    { title: "Slide 3", content: "This is the third slide" },
+  ];
+
+  const handleNextSlide = () => {
+    if (currentSlide < slides.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
+
+  const handleOpenOverlay = () => {
+    setShowOverlay(true);
+  };
+
+  const handleCloseOverlay = () => {
+    if (currentSlide === slides.length - 1) {
+      setShowOverlay(false);
+      setCurrentSlide(0);
+    }
+  };
+
   const handleSignOut = () => {
     auth
       .signOut()
@@ -177,11 +207,13 @@ function HomeScreen() {
       console.log(receipts.price);
       totalPrice += parseFloat(receipts.price);
     });
+    console.log("Total Spent:", totalPrice);
     setTotalSpent(totalPrice);
+    console.log("Total Spent2:", totalSpent);
   };
 
   useEffect(() => {
-    (async () => {
+    const getData = async () => {
       const items = [];
       if (receipts.length <= 1) {
         const querySnapshot = await getDocs(collection(db, email));
@@ -197,10 +229,10 @@ function HomeScreen() {
           }
         });
       }
-      setReceipts(items);
-    })();
+      return items;
+    };
 
-    getTotalPrice(receipts);
+    getTotalPrice(getData());
   }, []);
 
   const ProgressBar = ({ spent, budget }) => {
@@ -256,7 +288,7 @@ function HomeScreen() {
   return (
     <View style={styles.main}>
       <Text style={styles.header}>Total Spendings</Text>
-      <Text style={styles.total}>${totalSpent}</Text>
+      {totalSpent && <Text style={styles.total}>${totalSpent}</Text>}
       <View style={styles.footer}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <FontAwesome
@@ -267,10 +299,33 @@ function HomeScreen() {
           />
         </TouchableOpacity>
         <View>
-          <ProgressBar spent={500} budget={budget} />
+          <ProgressBar spent={totalSpent} budget={budget} />
         </View>
       </View>
+      <Overlay
+        isVisible={showOverlay}
+        onBackdropPress={handleCloseOverlay}
+        tyle={styles.overlay}
+      >
+        <View>
+          <Text>{slides[currentSlide].title}</Text>
+          <Text>{slides[currentSlide].content}</Text>
+          <Button
+            title="Next Slide"
+            onPress={handleNextSlide}
+            disabled={currentSlide === slides.length - 1}
+          />
+        </View>
+      </Overlay>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  overlay: {
+    width: 150,
+    height: 500,
+  },
+});
+
 export default HomeScreen;
